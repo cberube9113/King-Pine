@@ -1,8 +1,3 @@
-var express = require('express');
-var app = express();
-
-app.get('/', function(req,res) {
-	res.send('Welcome to Twitter\n');
-});
-
-app.listen(1111);
+exports.list = function(req,res) {
+    res.send('This is the main page, probably depracated.\n');
+};
