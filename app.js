@@ -20,6 +20,7 @@ var app = express();
 app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
+  app.set('views');
   app.set('view engine', 'ejs');
   app.use(express.favicon());
   app.use(express.logger('dev'));
@@ -34,9 +35,6 @@ app.configure(function(){
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
-
-app.set('views', /King-Pine/ + '/views');
-app.engine('html', require('ejs').renderFile);
 
 app.get('/', routes.index);
 app.get('/users', user.list);
