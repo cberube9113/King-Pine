@@ -5,7 +5,6 @@
 
 var express = require('express') 
   , routes = require('./routes')
-  , user = require('./routes/user')
   , home = require('./routes/home')
   , connect = require('./routes/connect')
   , discover = require('./routes/discover')
@@ -37,7 +36,6 @@ app.configure('development', function(){
 });
 
 app.get('/', routes.index);
-app.get('/users', user.list);
 app.get('/home', home.list);
 app.get('/connect', connect.list);
 app.get('/discover', discover.list);
