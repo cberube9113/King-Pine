@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var express = require('express')
+var express = require('express') 
   , routes = require('./routes')
   , user = require('./routes/user')
   , home = require('./routes/home')
@@ -11,7 +11,7 @@ var express = require('express')
   , discover = require('./routes/discover')
   , login = require('./routes/login')
   , me = require('./routes/me')
-  , reg = require('./routes/registration')
+  , registration = require('./routes/registration')
   , http = require('http')
   , path = require('path');
 
@@ -34,6 +34,9 @@ app.configure(function(){
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
+
+app.set('views', /King-Pine/ + '/views');
+app.engine('html', require('ejs').renderFile);
 
 app.get('/', routes.index);
 app.get('/users', user.list);
