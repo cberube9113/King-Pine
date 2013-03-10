@@ -1,3 +1,3 @@
 exports.list = function(req,res) {
-    res.send('This is the login page.\n');
+    res.render('login', { title: 'Login' });
 };
