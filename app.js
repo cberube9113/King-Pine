@@ -11,7 +11,7 @@ var express = require('express')
   , discover = require('./routes/discover')
   , login = require('./routes/login')
   , me = require('./routes/me')
-  , registration = require('./routes/registration')
+  , signup = require('./routes/signup')
   , http = require('http')
   , path = require('path');
 
@@ -42,7 +42,7 @@ app.get('/home', home.list);
 app.get('/connect', connect.list);
 app.get('/discover', discover.list);
 app.get('/login', login.list);
-app.get('/registration', registration.list);
+app.get('/signup', signup.list);
 app.get('/me', me.list);
 
 http.createServer(app).listen(app.get('port'), function(){
