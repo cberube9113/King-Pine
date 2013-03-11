@@ -1,8 +1,14 @@
 <% include header %>
-<a href="#">Chirps</a><br>
-<%= numfollowing %><a href="#"> Following</a><br>
-<%= numfollowers %><a href="#"> Followers</a><br>
+
+<%= nchirps %><a href="#">Chirps</a><br>
+<%= following %><a href="#"> Following</a><br>
+<%= followers %><a href="#"> Followers</a><br>
 <h3>Who to Follow</h3><br>
 <h3>Trends</h3><br>
-<h3>Chirps</h3>
+<h3>Chirps</h3><br>
+
+<% for(var i=0;i<chirpdata.length;i++){%>
+<%= chirpdata[i].data%><br>
+<%}%><br>
+
 <% include footer %>

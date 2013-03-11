@@ -1,3 +1,7 @@
+var chirps = require('../lib/chirps.js');
+
 exports.list = function(req,res) {
-    res.render('discover', { title: 'Discover' });
+	var discoveryChirps = chirps.discover();
+    res.render('discover', { title: 'Discover',
+    						discoveryChirps: discoveryChirps });
 };
