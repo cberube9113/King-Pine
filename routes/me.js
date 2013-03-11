@@ -1,3 +1,11 @@
+var follow = require('../lib/follow.js');
+var lookup = require('../lib/idlookup.js');
+
 exports.list = function(req,res) {
-    res.render('me', { title: 'Me' });
+	var subject = lookup.idlookup('rsims');
+	var following = follow.numfollowing(subject);
+	var followers = follow.numfollowers(subject);
+    res.render('me', { title: 'Me',
+    				   numfollowing: following,
+    				   numfollowers: followers});
 };
