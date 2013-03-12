@@ -43,6 +43,10 @@ app.get('/login', login.list);
 app.get('/signup', signup.list);
 app.get('/me', me.list);
 
+app.get('/docs', function(req, res){
+  res.redirect('docs/index.js.html');
+});
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
