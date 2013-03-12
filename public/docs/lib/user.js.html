@@ -19,13 +19,13 @@
     <div id="tree"></div>
     <div id="headings">
       <div class="heading h1">
-        <a href="#user-library">User Library</a>
+        <a href="#user-stub-database">User Stub Database</a>
       </div>
       <div class="heading h2">
-        <a href="#login-function---currently-unused.">Login function - Currently unused.</a>
+        <a href="#login">login</a>
       </div>
       <div class="heading h2">
-        <a href="#return-all-information-about-a-user--based-on-the-searched-for-username.">Return all information about a user, based on the searched for username.</a>
+        <a href="#info">info</a>
       </div>
     </div>
   </div>
@@ -54,10 +54,10 @@
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap" id="user-library">
+<div class="pilwrap" id="user-stub-database">
   <h1>
-    <a href="#user-library" class="pilcrow">&#182;</a>
-    User Library
+    <a href="#user-stub-database" class="pilcrow">&#182;</a>
+    User Stub Database
   </h1>
 </div>
 
@@ -73,14 +73,40 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
 </div>
-<div class="dox">
-  <div class="summary"><p>Users stub database</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
+<p>Stub database for users until real database is implemented</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p><div class="highlight">
+   <em>iddb</em></p>
+
+<blockquote>
+  <ul>
+  <li><strong>id</strong>
+  : Integer value simulating auto-incrementing ID</li>
+  <li><strong>name</strong>
+  : Name of User</li>
+  <li><strong>email</strong>
+  : Email address of user</li>
+  <li><strong>username</strong>
+  : Username of user with ID <strong>id</strong></li>
+  <li><strong>password</strong>
+  : Password for user with ID <strong>id</strong>
+  </div></li>
+  </ul>
+</blockquote>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
 <span class="kd">var</span> <span class="nx">userdb</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Steven Tenaglia&#39;</span><span class="p">,</span>
@@ -110,13 +136,35 @@
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap" id="login-function---currently-unused.">
+<div class="pilwrap" id="login">
   <h2>
-    <a href="#login-function---currently-unused." class="pilcrow">&#182;</a>
-    Login function - Currently unused.
+    <a href="#login" class="pilcrow">&#182;</a>
+    login
   </h2>
 </div>
 
+
+<p>Login function <br />
+Currently unused</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> <em>string</em> Username of user <br />
+&nbsp;&nbsp;<strong>password</strong> <em>string</em> Password of user <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>string</em> 'Y' or 'N' denoting if login was successful
+   </div></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 
@@ -141,13 +189,33 @@
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap" id="return-all-information-about-a-user--based-on-the-searched-for-username.">
+<div class="pilwrap" id="info">
   <h2>
-    <a href="#return-all-information-about-a-user--based-on-the-searched-for-username." class="pilcrow">&#182;</a>
-    Return all information about a user, based on the searched for username.
+    <a href="#info" class="pilcrow">&#182;</a>
+    info
   </h2>
 </div>
 
+
+<p>Return all information about a user based on the queried username</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> <em>string</em> Username of user <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>User</em> User object
+   </div></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 

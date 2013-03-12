@@ -19,7 +19,16 @@
     <div id="tree"></div>
     <div id="headings">
       <div class="heading h1">
-        <a href="#chirps-library">Chirps Library</a>
+        <a href="#chirps-stub-database">Chirps Stub Database</a>
+      </div>
+      <div class="heading h2">
+        <a href="#info">info</a>
+      </div>
+      <div class="heading h2">
+        <a href="#numchirps">numchirps</a>
+      </div>
+      <div class="heading h2">
+        <a href="#discover">discover</a>
       </div>
     </div>
   </div>
@@ -48,10 +57,10 @@
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap" id="chirps-library">
+<div class="pilwrap" id="chirps-stub-database">
   <h1>
-    <a href="#chirps-library" class="pilcrow">&#182;</a>
-    Chirps Library
+    <a href="#chirps-stub-database" class="pilcrow">&#182;</a>
+    Chirps Stub Database
   </h1>
 </div>
 
@@ -67,7 +76,33 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
 </div>
-<p>Stub database</p>
+<p>Stub database for chirps until real database is implemented</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p><div class="highlight">
+   <em>chirpDB</em></p>
+
+<blockquote>
+  <ul>
+  <li><strong>id</strong>
+  : Integer value simulating auto-incrementing ID</li>
+  <li><strong>data</strong>
+  : Text value of chirp</li>
+  <li><strong>uid</strong>
+  : ID of user which made this chirp
+  </div></li>
+  </ul>
+</blockquote>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 <span class="kd">var</span> <span class="nx">chirpDB</span> <span class="o">=</span> <span class="p">[</span>
@@ -98,6 +133,23 @@
 <span class="p">];</span>
 
 
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="info">
+  <h2>
+    <a href="#info" class="pilcrow">&#182;</a>
+    info
+  </h2>
+</div>
+
+
+<p>Returns array of Chirps made by specific user</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
 
 </pre></div>
         </td>
@@ -105,11 +157,17 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
 </div>
-<p>Returns array of Chirps made by specific user.</p>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> <em>string</em> Username of user <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>array</em> Array of chirps
+   </div></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
+
 <span class="nx">exports</span><span class="p">.</span><span class="nx">info</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">userchirps</span> <span class="o">=</span> <span class="p">[];</span>
@@ -120,7 +178,25 @@
   <span class="p">}</span>
   <span class="k">return</span> <span class="nx">userchirps</span><span class="p">;</span>
 <span class="p">}</span>
-  
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="numchirps">
+  <h2>
+    <a href="#numchirps" class="pilcrow">&#182;</a>
+    numchirps
+  </h2>
+</div>
+
+
+<p>Returns the number of chirps for a specific user</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
 
 </pre></div>
         </td>
@@ -128,11 +204,17 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
 </div>
-<p>Returns the number of chirps for a specific user</p>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> <em>string</em> Username of user <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>integer</em> Number of chirps
+   </div>    </p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
+
 <span class="nx">exports</span><span class="p">.</span><span class="nx">numchirps</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -150,17 +232,37 @@
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+<div class="pilwrap" id="discover">
+  <h2>
+    <a href="#discover" class="pilcrow">&#182;</a>
+    discover
+  </h2>
 </div>
-<div class="dox">
-  <div class="summary"><p>Returns the five most recent chirps for the Discover page.</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
+
+
+<p>Returns the five most recent chirps for the Discover page</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>req</strong> Page request <br />
+&nbsp;&nbsp;<strong>req</strong> Page response <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>array</em> Five most recent chirps
+   </div>    </p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
 <span class="nx">exports</span><span class="p">.</span><span class="nx">discover</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">dbLength</span> <span class="o">=</span> <span class="nx">chirpDB</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
   <span class="kd">var</span> <span class="nx">discoveryChirps</span> <span class="o">=</span> <span class="p">[];</span>

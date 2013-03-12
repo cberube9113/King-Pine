@@ -18,6 +18,12 @@
     </div>
     <div id="tree"></div>
     <div id="headings">
+      <div class="heading h1">
+        <a href="#id-username-stub-database">ID-Username Stub Database</a>
+      </div>
+      <div class="heading h2">
+        <a href="#idlookup">idlookup</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -26,21 +32,13 @@
   <tbody>
       <tr>
         <td class="docs">
-          <h1>idlookup.js</h1>
-        </td>
-        <td class="code highlight"></td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+<div class="pilwrap" id="id-username-stub-database">
+  <h1>
+    <a href="#id-username-stub-database" class="pilcrow">&#182;</a>
+    ID-Username Stub Database
+  </h1>
 </div>
-<div class="dox">
-  <div class="summary"><p>*Relational database connecting usernames to IDs.  Made to improve username lookups.</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
+
         </td>
         <td class="code highlight"><div class="highlight"><pre></pre></div>
         </td>
@@ -50,12 +48,32 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
 </div>
-<div class="dox">
-  <div class="summary"><p>ID-Username stub database</p>
-  </div>
-  <div class="body">
-  </div>
+<p>Stub database connecting usernames to IDs before real database is implemented <br />
+Helps with username lookups</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
 </div>
+<p><div class="highlight">
+   <em>iddb</em></p>
+
+<blockquote>
+  <ul>
+  <li><strong>id</strong>
+  : Integer value simulating auto-incrementing ID</li>
+  <li><strong>uname</strong>
+  : Username of user with ID <strong>id</strong>
+  </div></li>
+  </ul>
+</blockquote>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 
@@ -76,15 +94,33 @@
       </tr>
       <tr>
         <td class="docs">
+<div class="pilwrap" id="idlookup">
+  <h2>
+    <a href="#idlookup" class="pilcrow">&#182;</a>
+    idlookup
+  </h2>
+</div>
+
+
+<p>Look up a user's ID</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
 </div>
-<div class="dox">
-  <div class="summary"><p>ID lookup function.</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> <em>string</em> Username of user <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>integer</em> ID of user specified by <strong>username</strong>
+   </div></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 

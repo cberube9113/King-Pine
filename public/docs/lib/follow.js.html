@@ -18,6 +18,15 @@
     </div>
     <div id="tree"></div>
     <div id="headings">
+      <div class="heading h1">
+        <a href="#follow-stub-database">Follow Stub Database</a>
+      </div>
+      <div class="heading h2">
+        <a href="#numfollowing">numfollowing</a>
+      </div>
+      <div class="heading h2">
+        <a href="#numfollowers">numfollowers</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -39,22 +48,19 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lookup</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/idlookup.js&#39;</span><span class="p">);</span>
 
+
 </pre></div>
         </td>
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+<div class="pilwrap" id="follow-stub-database">
+  <h1>
+    <a href="#follow-stub-database" class="pilcrow">&#182;</a>
+    Follow Stub Database
+  </h1>
 </div>
-<div class="dox">
-  <div class="summary"><ul>
-<li>User following relational database and functions.</li>
-</ul>
-  </div>
-  <div class="body">
-  </div>
-</div>
+
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 
@@ -67,19 +73,51 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
 </div>
-<div class="dox">
-  <div class="summary"><p>Follow relation stub database.
-id: The id of the user in the entry.
-fid: The id of the user being followed by the user specified in the id field of that entry.
-Note there is one entry for each follower/following relation,
-If a user is not following any other users, they will not have an entry with their ID listed
-in the id field.</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
+<p>Stub database for follows until real database is implemented</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<blockquote>
+  <p>There is one entry for each follower/following relation.
+  If a user is not following any other users, they will not have an entry with their ID listed
+  in the id field.</p>
+</blockquote>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p><div class="highlight">
+   <em>followdb</em></p>
+
+<blockquote>
+  <ul>
+  <li><strong>id</strong>
+  : Integer value simulating auto-incrementing ID</li>
+  <li><strong>fid</strong>
+  : ID of user being followed by user id specified in <strong>id</strong> field
+  </div></li>
+  </ul>
+</blockquote>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
   <span class="kd">var</span> <span class="nx">followdb</span> <span class="o">=</span> <span class="p">[</span>
   <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
    <span class="nx">fid</span><span class="o">:</span> <span class="mi">1</span><span class="p">},</span>
@@ -95,16 +133,33 @@ in the id field.</p>
       </tr>
       <tr>
         <td class="docs">
+<div class="pilwrap" id="numfollowing">
+  <h2>
+    <a href="#numfollowing" class="pilcrow">&#182;</a>
+    numfollowing
+  </h2>
+</div>
+
+
+<p>Number of users subject is following</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
 </div>
-<div class="dox">
-  <div class="summary"><p>Number of users subject is following.
-username: The username of the user we're looking at.</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> <em>string</em> Username of user <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>integer</em> Number of users <strong>username</strong> is following
+   </div></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 
@@ -125,16 +180,33 @@ username: The username of the user we're looking at.</p>
       </tr>
       <tr>
         <td class="docs">
+<div class="pilwrap" id="numfollowers">
+  <h2>
+    <a href="#numfollowers" class="pilcrow">&#182;</a>
+    numfollowers
+  </h2>
+</div>
+
+
+<p>Number of users following the subject</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
 </div>
-<div class="dox">
-  <div class="summary"><p>Number of users following the subject.
-username: The username of the user we're looking at.</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> <em>string</em> Username of user <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>integer</em> Number of users following <strong>username</strong>
+   </div></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 
