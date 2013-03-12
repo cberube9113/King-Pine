@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>user.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "lib/user.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#user-library">User Library</a>
+      </div>
+      <div class="heading h2">
+        <a href="#login-function---currently-unused.">Login function - Currently unused.</a>
+      </div>
+      <div class="heading h2">
+        <a href="#return-all-information-about-a-user--based-on-the-searched-for-username.">Return all information about a user, based on the searched for username.</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>user.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lookup</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/idlookup.js&#39;</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="user-library">
+  <h1>
+    <a href="#user-library" class="pilcrow">&#182;</a>
+    User Library
+  </h1>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Users stub database</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">userdb</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Steven Tenaglia&#39;</span><span class="p">,</span>
+   <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;stenten@gmail.com&#39;</span><span class="p">,</span>
+   <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;stenaglia&#39;</span><span class="p">,</span>
+     <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;123&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Rob Sims&#39;</span><span class="p">,</span>
+     <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;rsims2013@gmail.com&#39;</span><span class="p">,</span>
+     <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;rsims&#39;</span><span class="p">,</span>
+     <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;123&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Chris Berube&#39;</span><span class="p">,</span>
+     <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;cberube9113@gmail.com&#39;</span><span class="p">,</span>
+     <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;cberube&#39;</span><span class="p">,</span>
+     <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;123&#39;</span><span class="p">},</span>
+    <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> 
+     <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;Katy Boggs&#39;</span><span class="p">,</span>
+     <span class="nx">email</span><span class="o">:</span> <span class="s1">&#39;boggs.katy@gmail.com&#39;</span><span class="p">,</span>
+     <span class="nx">username</span><span class="o">:</span> <span class="s1">&#39;kboggs&#39;</span><span class="p">,</span>
+     <span class="nx">password</span><span class="o">:</span> <span class="s1">&#39;123&#39;</span><span class="p">}</span>
+<span class="p">];</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="login-function---currently-unused.">
+  <h2>
+    <a href="#login-function---currently-unused." class="pilcrow">&#182;</a>
+    Login function - Currently unused.
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">login</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">userdb</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">username</span> <span class="o">===</span> <span class="nx">username</span><span class="p">){</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">password</span> <span class="o">===</span> <span class="nx">password</span><span class="p">){</span>
+        <span class="k">return</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">else</span><span class="p">{</span>
+        <span class="k">return</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">);</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="return-all-information-about-a-user--based-on-the-searched-for-username.">
+  <h2>
+    <a href="#return-all-information-about-a-user--based-on-the-searched-for-username." class="pilcrow">&#182;</a>
+    Return all information about a user, based on the searched for username.
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">info</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+  <span class="nx">c</span> <span class="o">=</span> <span class="nx">userdb</span><span class="p">[</span><span class="nx">id</span><span class="p">];</span>
+  <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
+  <span class="p">}</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>chirps.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "lib/chirps.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#chirps-library">Chirps Library</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>chirps.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lookup</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/idlookup.js&#39;</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="chirps-library">
+  <h1>
+    <a href="#chirps-library" class="pilcrow">&#182;</a>
+    Chirps Library
+  </h1>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Stub database</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">chirpDB</span> <span class="o">=</span> <span class="p">[</span>
+  <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+   <span class="nx">data</span><span class="o">:</span> <span class="s2">&quot;Just chirpin along...&quot;</span><span class="p">,</span>
+   <span class="nx">uid</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nx">timestamp</span><span class="o">:</span> <span class="s1">&#39;2013-03-10_03:14:53&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+   <span class="nx">data</span><span class="o">:</span> <span class="s2">&quot;Having fun programming Chirper!&quot;</span><span class="p">,</span>
+   <span class="nx">uid</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nx">timestamp</span><span class="o">:</span> <span class="s1">&#39;2013-03-10_04:19:20&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+   <span class="nx">data</span><span class="o">:</span> <span class="s2">&quot;Chirpin&#39; all day long.&quot;</span><span class="p">,</span>
+   <span class="nx">uid</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nx">timestamp</span><span class="o">:</span> <span class="s1">&#39;2013-03-10_04:19:21&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+   <span class="nx">data</span><span class="o">:</span> <span class="s2">&quot;Cherpa-doodle-doo!&quot;</span><span class="p">,</span>
+   <span class="nx">uid</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="nx">timestamp</span><span class="o">:</span> <span class="s1">&#39;2013-03-10_04:19:22&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">4</span><span class="p">,</span>
+   <span class="nx">data</span><span class="o">:</span> <span class="s2">&quot;I&#39;m glad this program isn&#39;t called anything else.&quot;</span><span class="p">,</span>
+   <span class="nx">uid</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="nx">timestamp</span><span class="o">:</span> <span class="s1">&#39;2013-03-10_04:19:23&#39;</span><span class="p">},</span>
+  <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+   <span class="nx">data</span><span class="o">:</span> <span class="s2">&quot;Because I&#39;d hate my team if it was.&quot;</span><span class="p">,</span>
+   <span class="nx">uid</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span>
+  <span class="nx">timestamp</span><span class="o">:</span> <span class="s1">&#39;2013-03-10_04:19:24&#39;</span><span class="p">}</span>
+<span class="p">];</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Returns array of Chirps made by specific user.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">info</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">userchirps</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">chirpDB</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">chirpDB</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">uid</span><span class="p">){</span>
+      <span class="nx">userchirps</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chirpDB</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">userchirps</span><span class="p">;</span>
+<span class="p">}</span>
+  
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Returns the number of chirps for a specific user</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">numchirps</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">chirpDB</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">chirpDB</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">uid</span><span class="p">){</span>
+      <span class="nx">c</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>Returns the five most recent chirps for the Discover page.</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">discover</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">dbLength</span> <span class="o">=</span> <span class="nx">chirpDB</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">discoveryChirps</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+      <span class="nx">discoveryChirps</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chirpDB</span><span class="p">[</span><span class="nx">dbLength</span><span class="o">-</span><span class="nx">i</span><span class="p">]);</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">discoveryChirps</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>
