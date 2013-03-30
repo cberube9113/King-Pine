@@ -12,6 +12,7 @@ var express = require('express')
   , me = require('./routes/me')
   , signup = require('./routes/signup')
   , auth = require('./routes/user-sessions')
+  , results = require('./routes/searchresults')
   , http = require('http')
   , path = require('path')
   , flash = require('connect-flash')
@@ -65,6 +66,12 @@ app.post('/new-chirp',function(req,res){
 	chirps.addChirp(data,date);
 	res.redirect('/home');
 });
+
+
+// ## EDIT THIS BEFORE SUBMISSION
+//app.post('/search',function(req,res){
+//	var user = req.body.search;
+//	res.redirect('/searchresults')
 	
 
 app.get('/docs', function(req, res){
