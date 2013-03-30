@@ -8,5 +8,6 @@ exports.list = function(req,res) {
     res.render('home', { title: 'Chirper',
     					 name: u.name,
     					 email: u.email,
-    					 chirps: c  });
+    					 chirps: c,
+    					 user: req.session.user.name   });
 };

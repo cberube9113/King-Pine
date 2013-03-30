@@ -11,5 +11,6 @@ exports.list = function(req,res) {
     				   following: following,
     				   followers: followers,
     				   nchirps: nchirps,
-    				   chirpdata: chirpdata});
+    				   chirpdata: chirpdata,
+    				   user: req.session.user.name});
 };
