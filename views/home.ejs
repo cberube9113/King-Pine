@@ -7,6 +7,10 @@
 <h3>People to Follow</h3><br>
 <h3>Chirps</h3><br>
 
+Chirp something: <form method="post" id="newchirp" action="/new-chirp">
+<input type="text" name="chirp"/></br></br>
+
+
 <% for(var i=0;i<chirps.length;i++){%>
 <%= chirps[i].data%><br>
 <%}%>

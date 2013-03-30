@@ -11,8 +11,12 @@ var express = require('express')
   , login = require('./routes/login')
   , me = require('./routes/me')
   , signup = require('./routes/signup')
+  , auth = require('./routes/user-sessions')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , flash = require('connect-flash')
+  , user = require('./lib/user')
+  , chirps = require('./lib/chirps');
 
 var app = express();
 
@@ -27,6 +31,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
   app.use(express.session());
+  app.use(flash());
   app.use(app.router);
   app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -42,6 +47,25 @@ app.get('/discover', discover.list);
 app.get('/login', login.list);
 app.get('/signup', signup.list);
 app.get('/me', me.list);
+
+app.post('/auth', auth.auth);
+
+app.post('/new-user',function(req,res){
+	var name= req.body.name;
+	var username = req.body.username;
+	var password = req.body.password;
+	var email = req.body.email;
+	user.addUser(name,email,password,username);
+	res.redirect('/');
+});
+
+app.post('/new-chirp',function(req,res){
+	var data=req.body.chirp;
+	var date="Just now."
+	chirps.addChirp(data,date);
+	res.redirect('/home');
+});
+	
 
 app.get('/docs', function(req, res){
   res.redirect('docs/index.js.html');

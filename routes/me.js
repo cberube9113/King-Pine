@@ -1,9 +1,8 @@
 var follow = require('../lib/follow.js');
-var lookup = require('../lib/idlookup.js');
 var chirps = require('../lib/chirps.js');
 
 exports.list = function(req,res) {
-	var subject = 'kboggs'
+	var subject = req.session.user;
 	var following = follow.numfollowing(subject);
 	var followers = follow.numfollowers(subject);
 	var nchirps = chirps.numchirps(subject);
