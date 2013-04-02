@@ -48,6 +48,7 @@ app.get('/discover', discover.list);
 app.get('/login', login.list);
 app.get('/signup', signup.list);
 app.get('/me', me.list);
+app.get('/searchresults', results.list);
 
 app.post('/auth', auth.auth);
 
@@ -61,18 +62,19 @@ app.post('/new-user',function(req,res){
 });
 
 app.post('/new-chirp',function(req,res){
+	var uid=user.idlookup(req.session.user);
 	var data=req.body.chirp;
 	var date="Just now."
-	chirps.addChirp(data,date);
+	chirps.addChirp(data,date,uid);
 	res.redirect('/home');
 });
 
 
-// ## EDIT THIS BEFORE SUBMISSION
-//app.post('/search',function(req,res){
-//	var user = req.body.search;
-//	res.redirect('/searchresults')
-	
+
+app.post('/search',function(req,res){
+	var user = req.body.search;
+	res.redirect('/searchresults')
+});	
 
 app.get('/docs', function(req, res){
   res.redirect('docs/index.js.html');
