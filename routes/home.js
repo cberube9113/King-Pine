@@ -3,11 +3,11 @@ var chirps = require('../lib/chirps.js');
 
 exports.list = function(req,res) {
 	var subject = req.session.user;
-	var u = user.info(subject.username);
-	var c = chirps.info(subject.username);
+	var userdata = user.info(subject.username);
+	var chirpdata = chirps.info(subject);
     res.render('home', { title: 'Chirper',
-    					 name: u.name,
-    					 email: u.email,
-    					 chirps: c,
+    					 name: userdata.name,
+    					 email: userdata.email,
+    					 chirps: chirpdata,
     					 user: req.session.user.name   });
 };
