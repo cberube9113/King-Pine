@@ -2,10 +2,10 @@
 <p><% include navbar %></p>
 
 <% if(isfollowing == true){ %>
-<a>Stop Following</a>
+<a href="/follow/<%= u %>" >Stop Following</a>
 <% } %>
 <% if(isfollowing == false){ %>
-<a>Start Following<a>
+<a href="/follow/<%= u %>" >Start Following<a>
 <% } %><br>
 
 <%= nchirps %><a href="#"> Chirps</a><br>

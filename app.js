@@ -97,7 +97,19 @@ app.get('/:user', function (req,res) {
     				   nchirps: nchirps,
     				   chirpdata: chirpdata,
     				   user: user.info(u).name,
-    				   isfollowing: isfollowing});
+    				   isfollowing: isfollowing,
+    				   u: u});
+})
+
+app.get('/follow/:user',function(req,res){
+	var u = req.params.user;
+	var uid = req.session.user.id;
+	var fid = user.idlookup(u);
+	follow.followdbUpdate(uid,fid);
+	res.redirect('/'+u);
+
+
+
 })
 
 http.createServer(app).listen(app.get('port'), function(){
