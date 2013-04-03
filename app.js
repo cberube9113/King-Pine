@@ -13,6 +13,7 @@ var express = require('express')
   , signup = require('./routes/signup')
   , auth = require('./routes/user-sessions')
   , results = require('./routes/searchresults')
+  , spec = require('./routes/spec')
   , http = require('http')
   , path = require('path')
   , flash = require('connect-flash')
@@ -80,6 +81,10 @@ app.post('/search',function(req,res){
 
 app.get('/docs', function(req, res){
   res.redirect('docs/index.js.html');
+});
+
+app.get('/spec', function(req,res){
+	res.redirect('docs/funcspec.pdf');
 });
 
 // Specific Me page for each username. Result of username searches.

@@ -21,6 +21,7 @@ This section contains the updates made to the project, separated as the individu
 - Added POST for /search action, which is called when a user enters a search query.
 - Added GET for /:user path, which is used in search function.
 - Added GET for /follow/:user path, which is used to follow/unfollow a user.
+- Added GET for /spec, which redirects to the functional spec in docs and displays/downloads the PDF of it.
 
 #### chirps.js
 - Created function (newChirp) to add a new Chirp to the database and its corresponding export function (addChirp).
