@@ -17,7 +17,8 @@ var express = require('express')
   , path = require('path')
   , flash = require('connect-flash')
   , user = require('./lib/user')
-  , chirps = require('./lib/chirps');
+  , chirps = require('./lib/chirps')
+  , follow = require('./lib/follow');
 
 var app = express();
 
@@ -74,12 +75,30 @@ app.post('/new-chirp',function(req,res){
 
 app.post('/search',function(req,res){
 	var user = req.body.search;
-	res.redirect('/searchresults')
+	res.redirect('/'+user)
 });	
 
 app.get('/docs', function(req, res){
   res.redirect('docs/index.js.html');
 });
+
+// Specific Me page for each username. Result of username searches.
+// !! Place this request at the end of the GET/POST requests list !!
+app.get('/:user', function (req,res) {
+	var u = req.params.user;
+	var following = follow.numfollowing(u);
+	var followers = follow.numfollowers(u);
+	var nchirps = chirps.numchirps(u);
+	var chirpdata = chirps.info(u);
+	var isfollowing = follow.isFollowing(req.session.user.username,u);
+   res.render('searchresults', { title: 'Search Results',
+    				   following: following,
+    				   followers: followers,
+    				   nchirps: nchirps,
+    				   chirpdata: chirpdata,
+    				   user: user.info(u).name,
+    				   isfollowing: isfollowing});
+})
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

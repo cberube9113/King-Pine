@@ -1,6 +1,13 @@
 <% include header %>
 <p><% include navbar %></p>
 
+<% if(isfollowing == true){ %>
+<a>Stop Following</a>
+<% } %>
+<% if(isfollowing == false){ %>
+<a>Start Following<a>
+<% } %><br>
+
 <%= nchirps %><a href="#"> Chirps</a><br>
 <%= following %><a href="#"> Following</a><br>
 <%= followers %><a href="#"> Followers</a><br>
