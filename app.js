@@ -62,7 +62,7 @@ app.post('/new-user',function(req,res){
 });
 
 app.post('/new-chirp',function(req,res){
-	var uid=user.idlookup(req.session.user);
+	var uid=user.idlookup(req.session.user.username);
 	var data=req.body.chirp;
 	var date="Just now."
 	chirps.addChirp(data,date,uid);
