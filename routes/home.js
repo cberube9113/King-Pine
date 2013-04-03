@@ -9,5 +9,7 @@ exports.list = function(req,res) {
     					 name: userdata.name,
     					 email: userdata.email,
     					 chirps: chirpdata,
-    					 user: req.session.user.name   });
+    					 user: req.session.user.name,
+    					 message: req.flash('auth')
+    });
 };

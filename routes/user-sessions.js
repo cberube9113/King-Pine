@@ -24,12 +24,13 @@ if(user !== undefined && online[user.uid] !== undefined) {  //If the user is log
 		userlib.login(username,password,function(error,user) {
 			if(error){ //If the login fails, flash a message and go back to login screen.
 				req.flash('auth',error);
-				res.redirect('/login');
+				res.redirect('/');
 			}
 			
 			else{ //If the login succeeds, redirect to main and set the user to logged in.
 				req.session.user = user;
 				online[user.uid] = user;
+				req.flash('auth',user.name + ' was successfully logged in');
 				res.redirect('/home');
 				}
 		})
