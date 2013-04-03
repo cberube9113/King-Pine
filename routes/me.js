@@ -6,7 +6,7 @@ exports.list = function(req,res) {
 	var following = follow.numfollowing(subject);
 	var followers = follow.numfollowers(subject);
 	var nchirps = chirps.numchirps(subject);
-	var chirpdata = chirps.info(subject.username);
+	var chirpdata = chirps.info(subject);
     res.render('me', { title: 'Me',
     				   following: following,
     				   followers: followers,
