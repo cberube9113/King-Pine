@@ -23,8 +23,21 @@
         </div>
       </div>
       <div class="span9">
-        Chirp something: <form method="post" id="newchirp" action="/new-chirp">
-        <input type="text" name="chirp"/></form></br></br>
+        <form method="post" id="newchirp" action="/new-chirp" class="form-inline">
+        
+          <div class="control-group">
+            <label for="username" class="control-label">Chirp Something:</label>
+            <div class="controls">
+              <input type="text" name="chirp">
+            </div>
+          </div>
+        
+          <div class="control-group">
+            <div class="controls">
+              <input type="submit" value="Submit" class="btn btn-primary">
+            </div>
+          </div>
+        </form>
 
 
         <% for(var i=0;i<chirps.length;i++){%>
