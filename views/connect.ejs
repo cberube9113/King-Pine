@@ -1,8 +1,23 @@
 <% include header %>
-<p><% include navbar %></p>
-<a href="#">Interactions</a><br>
-<a href="#">Mentions</a><br>
-<h3>Who to Follow</h3><br>
-<h3>Trends</h3><br>
-<h3>Interactions</h3>
+<div class="row">
+  <div class="span12">
+    <% include navbar %>
+    <div class="row">
+      <div class="span3">
+        <div class="small-box">
+          <a href="#">Interactions</a><br>
+          <a href="#">Mentions</a><br>
+        </div><br />
+        <div class="small-box">
+          <h3>Who to Follow</h3><br>
+        </div><br />
+        <div class="small-box">
+          <h3>Trends</h3><br>
+        </div>
+      </div>
+      <div class="span9">
+        <h3>Interactions</h3>
+      </div>
+    </div>
+  </div>
 <% include footer %>

@@ -1,15 +1,29 @@
 <% include header %>
-<p><% include navbar %></p>
-<a href="#">Chirps</a><br>
-<a href="#">Activity</a><br>
-<a href="#">Who to Follow</a><br>
-<a href="#">Find friends</a><br>
-<h3>Who to Follow</h3><br>
-<h3>Trends</h3><br>
-<h3>Chirps</h3><br>
+<div class="row">
+  <div class="span12">
+    <% include navbar %>
+    <div class="row">
+      <div class="span3">
+        <div class="small-box">
+          <a href="#">Chirps</a><br>
+          <a href="#">Activity</a><br>
+          <a href="#">Who to Follow</a><br>
+          <a href="#">Find friends</a><br>
+        </div><br />
+        <div class="small-box">
+          <h3>Who to Follow</h3><br>
+        </div><br />
+        <div class="small-box">
+          <h3>Trends</h3><br>
+        </div>
+      </div>
+      <div class="span9">
+        <h3>Chirps</h3><br>
 
-<% for(var i=0;i<discoveryChirps.length;i++){%>
-<%= discoveryChirps[i].data%> - <%= discoveryChirps[i].uid%><br>
-<%}%><br>
-
+        <% for(var i=0;i<discoveryChirps.length;i++) { %>
+        <%= discoveryChirps[i].data%> - <%= discoveryChirps[i].uid %><br>
+        <% } %><br>
+      </div>
+    </div>
+  </div>
 <% include footer %>
