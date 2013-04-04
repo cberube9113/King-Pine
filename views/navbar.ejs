@@ -1,16 +1,19 @@
-<div width="100%">
-  <div style="float:left">
-    <a href=home>Home</a>
-    <a href=connect>Connect</a>
-    <a href=discover>Discover</a>
-    <a href=me>Me</a>
-  </div>
-  <div style="float: right">
-    Logged in: <%= user %>
+<div class="navbar">
+  <div class="navbar-inner">
+    <a class="brand" href="/home">Chirper</a>
+    <ul class="nav">
+      <li><a href="/connect">Connect</a></li>
+      <li><a href="/discover">Discover</a></li>
+      <li><a href="/me">Me</a></li>
+    </ul>
+    <div style="float: right; margin-top: 10px; margin-right:10px;">
+      <span class="identifier">Logged in: </span><%= user %>
+    </div>
   </div>
 </div>
 
-<form method="post" id="search" action="/search">
-  <br /><br />
-  <input type="text" name="search" placeholder="Search for User">
+<br /><br />
+<form method="post" id="search" action="/search" class="navbar-search">
+  <input type="text" name="search" placeholder="Search for User" class=".search-query">
 </form>
+<div style="clear:both;"></div>

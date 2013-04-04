@@ -1,21 +1,36 @@
 <% include header %>
-  <% if (message.length > 0) { %>
-    <div class="vcenter alert alert-success"><%= message %></div>
-  <% } %>
-<p><% include navbar %></p>
-<h3>About Me</h3><br>
-<%= name %><br>
-<%= email %><br>
-<h3>Trends</h3><br>
-<h3>People to Follow</h3><br>
-<h3>Chirps</h3><br>
+<div class="row">
+  <div class="span12">
+    <% if (message.length > 0) { %>
+      <div class="vcenter alert alert-success"><%= message %></div>
+    <% } %>
+    <% include navbar %>
+    <div class="row">
+      <div class="span3">
+        <div class="small-box">
+          <h3>About Me</h3>
+          <span class="identifier">Name: </span><%= name %><br>
+          <span class="identifier">Email: </span><%= email %><br>
+        </div><br />
+        <div class="small-box">
+          <h3>Trends</h3><br>
+        </div><br />
+        <div class="small-box">
+          <h3>People to Follow</h3><br>
+        </div><br />
+        <div class="small-box">
+          <h3>Chirps</h3><br>
+        </div>
+      </div>
+      <div class="span9">
+        Chirp something: <form method="post" id="newchirp" action="/new-chirp">
+        <input type="text" name="chirp"/></form></br></br>
 
-Chirp something: <form method="post" id="newchirp" action="/new-chirp">
-<input type="text" name="chirp"/></form></br></br>
 
-
-<% for(var i=0;i<chirps.length;i++){%>
-<%= chirps[i].data%><br>
-<%}%>
-
+        <% for(var i=0;i<chirps.length;i++){%>
+        <%= chirps[i].data%><br>
+        <%}%>
+      </div>
+    </div>
+  </div>
 <% include footer %>
