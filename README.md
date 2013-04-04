@@ -78,3 +78,12 @@ Documentation includes the following directories
 
 + /lib
 + /routes
+
+#### Functional Spec
+
+The Functional Specification can be viewed by visiting the **/spec** directory.
+
+*Ex: localhost:3000/spec*
+
+The Functional Spec includes all the current information about the user experience of our site.
+If your browser supports viewing a PDF, it will display within the browser.  Otherwise it will download it for offline viewing.
