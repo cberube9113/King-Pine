@@ -54,9 +54,15 @@ app.post('/auth', auth.auth);
 app.post('/new-user',function(req,res){
 	var name= req.body.name;
 	var username = req.body.username;
-	var password = req.body.password;
 	var email = req.body.email;
-	user.addUser(name,email,password,username);
+	var password = req.body.password;
+	
+	if (name.length > 0 && username.length > 0 && email.length > 0 && password.length > 0) {
+	  req.flash('authsucc','User ' + name + ' was successfully created. You can now log in as ' + username);
+	  user.addUser(name,email,password,username);
+	} else {
+	  req.flash('auth', 'Please make sure you have filled out all fields of the Join form');
+	}
 	res.redirect('/');
 });
 
