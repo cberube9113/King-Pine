@@ -1,7 +1,8 @@
+//# app.js
 
-/**
- * Module dependencies.
- */
+//## Main server file
+
+//### Module and route dependencies.
 
 var express = require('express') 
   , index = require('./routes/index')
@@ -21,7 +22,8 @@ var express = require('express')
 
 var app = express();
 
-app.configure(function(){
+//### Configuration for app.js
+  app.configure(function(){
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('views');
@@ -41,6 +43,9 @@ app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
+//### GET Commands
+
+//#### Basic GET commands to run the specified route when it is entered in the URL.
 app.get('/', index.index);
 app.get('/home', home.list);
 app.get('/connect', connect.list);
@@ -49,39 +54,7 @@ app.get('/login', login.list);
 app.get('/signup', signup.list);
 app.get('/me', me.list);
 
-app.post('/auth', auth.auth);
-
-app.post('/new-user',function(req,res){
-	var name= req.body.name;
-	var username = req.body.username;
-	var email = req.body.email;
-	var password = req.body.password;
-	
-	if (name.length > 0 && username.length > 0 && email.length > 0 && password.length > 0) {
-	  req.flash('authsucc','User ' + name + ' was successfully created. You can now log in as ' + username);
-	  user.addUser(name,email,password,username);
-	} else {
-	  req.flash('auth', 'Please make sure you have filled out all fields of the Join form');
-	}
-	res.redirect('/');
-});
-
-app.post('/new-chirp',function(req,res){
-	var username = req.session.user.username;
-	var uid = user.idlookup(username);
-	var data=req.body.chirp;
-	var date="Just now."
-	chirps.addChirp(data,date,uid);
-	res.redirect('/home');
-});
-
-
-
-app.post('/search',function(req,res){
-	var user = req.body.search;
-	res.redirect('/'+user)
-});	
-
+//#### GET commands for the documentation and functional spec, redirects to the files themselves.
 app.get('/docs', function(req, res){
   res.redirect('docs/index.js.html');
 });
@@ -90,15 +63,74 @@ app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
 });
 
-// Specific Me page for each username. Result of username searches.
-// !! Place this request at the end of the GET/POST requests list !!
+//### POST Commands
+
+//#### Runs when a user tries to authenticate, redirects to user-sessions and checks for login permission.
+app.post('/auth', auth.auth);
+
+//#### Runs when a new user is created (on the index page).
+app.post('/new-user',function(req,res){
+//Parameters set based on the fields in the form.
+	var name= req.body.name;
+	var username = req.body.username;
+	var email = req.body.email;
+	var password = req.body.password;
+	
+	//Checks if all the fields were filled in when the user tries to submit.
+	if (name.length > 0 && username.length > 0 && email.length > 0 && password.length > 0) {
+	//If they were, adds the user to the database and informs them that they were created.
+	  req.flash('authsucc','User ' + name + ' was successfully created. You can now log in as ' + username); 
+	  user.addUser(name,email,password,username);
+	} else {
+	//Otherwise fails the creation and informs the user to fill in all the fields.
+	  req.flash('auth', 'Please make sure you have filled out all fields of the Join form'); 
+	}
+	res.redirect('/');
+});
+
+//#### Runs when a new chirp is made by a user (via the home page).
+app.post('/new-chirp',function(req,res){
+
+//Parameters set based on currently logged in user.
+	var username = req.session.user.username;
+	var uid = user.idlookup(username);
+//Parameter set based on field in form.
+	var data=req.body.chirp;
+//Parameter to be set based on current date in future.
+	var date="Just now."
+//Runs the addChirp function from the *chirps* library file.
+	chirps.addChirp(data,date,uid);
+//Redirects a user back to home after the chirp has been made.
+	res.redirect('/home');
+});
+
+
+//#### Runs when a user enters a search in the search box and presses *Enter*.
+app.post('/search',function(req,res){
+// Parameter set based on field in form.
+	var user = req.body.search;
+//Redirects user to user page of the value that was just set.
+	res.redirect('/'+user)
+});	
+
+//#### Redirects user to functional spec.
+app.get('/spec', function(req,res){
+	res.redirect('docs/funcspec.pdf');
+});
+
+//### Individual User Pages
+
+//#### Individual page, like Me page, for each user.
+// *This request must be at the bottom of the GET/POST request list.*
 app.get('/:user', function (req,res) {
+//Sets parameters based on the username in the page URL.
 	var u = req.params.user;
 	var following = follow.numfollowing(u);
 	var followers = follow.numfollowers(u);
 	var nchirps = chirps.numchirps(u);
 	var chirpdata = chirps.info(u);
 	var isfollowing = follow.isFollowing(req.session.user.username,u);
+//Renders searchresults page, which is a copy of the Me page but with a modified subject.
    res.render('searchresults', { title: 'Search Results',
     				   following: following,
     				   followers: followers,
@@ -107,19 +139,24 @@ app.get('/:user', function (req,res) {
     				   user: req.session.user.name,
     				   isfollowing: isfollowing,
     				   u: u});
-})
+});
 
+//#### GET request to follow the user that is currently being viewed, called when the "Follow/Unfollow" link is clicked on.
 app.get('/follow/:user',function(req,res){
+//Parameters based on current user and subject.
 	var u = req.params.user;
 	var uid = req.session.user.id;
 	var fid = user.idlookup(u);
+//When called, the request runs the followdbUpdate function and either follows or unfollows the user.
 	follow.followdbUpdate(uid,fid);
+//Once done, redirects back to the user's page.
 	res.redirect('/'+u);
 
 
 
-})
+});
 
+//### Starts server listening on specified port (set in configuration).
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });

@@ -18,6 +18,57 @@
     </div>
     <div id="tree"></div>
     <div id="headings">
+      <div class="heading h1">
+        <a href="#app.js">app.js</a>
+      </div>
+      <div class="heading h2">
+        <a href="#main-server-file">Main server file</a>
+      </div>
+      <div class="heading h3">
+        <a href="#module-and-route-dependencies.">Module and route dependencies.</a>
+      </div>
+      <div class="heading h3">
+        <a href="#configuration-for-app.js">Configuration for app.js</a>
+      </div>
+      <div class="heading h3">
+        <a href="#get-commands">GET Commands</a>
+      </div>
+      <div class="heading h4">
+        <a href="#basic-get-commands-to-run-the-specified-route-when-it-is-entered-in-the-url.">Basic GET commands to run the specified route when it is entered in the URL.</a>
+      </div>
+      <div class="heading h4">
+        <a href="#get-commands-for-the-documentation-and-functional-spec--redirects-to-the-files-themselves.">GET commands for the documentation and functional spec, redirects to the files themselves.</a>
+      </div>
+      <div class="heading h3">
+        <a href="#post-commands">POST Commands</a>
+      </div>
+      <div class="heading h4">
+        <a href="#runs-when-a-user-tries-to-authenticate--redirects-to-user-sessions-and-checks-for-login-permission.">Runs when a user tries to authenticate, redirects to user-sessions and checks for login permission.</a>
+      </div>
+      <div class="heading h4">
+        <a href="#runs-when-a-new-user-is-created--on-the-index-page-.">Runs when a new user is created (on the index page).</a>
+      </div>
+      <div class="heading h4">
+        <a href="#runs-when-a-new-chirp-is-made-by-a-user--via-the-home-page-.">Runs when a new chirp is made by a user (via the home page).</a>
+      </div>
+      <div class="heading h4">
+        <a href="#runs-when-a-user-enters-a-search-in-the-search-box-and-presses-enter.">Runs when a user enters a search in the search box and presses Enter.</a>
+      </div>
+      <div class="heading h4">
+        <a href="#redirects-user-to-functional-spec.">Redirects user to functional spec.</a>
+      </div>
+      <div class="heading h3">
+        <a href="#individual-user-pages">Individual User Pages</a>
+      </div>
+      <div class="heading h4">
+        <a href="#individual-page--like-me-page--for-each-user.">Individual page, like Me page, for each user.</a>
+      </div>
+      <div class="heading h4">
+        <a href="#get-request-to-follow-the-user-that-is-currently-being-viewed--called-when-the--follow-unfollow--link-is-clicked-on.">GET request to follow the user that is currently being viewed, called when the "Follow/Unfollow" link is clicked on.</a>
+      </div>
+      <div class="heading h3">
+        <a href="#starts-server-listening-on-specified-port--set-in-configuration-.">Starts server listening on specified port (set in configuration).</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -26,36 +77,79 @@
   <tbody>
       <tr>
         <td class="docs">
-          <h1>app.js</h1>
+<div class="pilwrap" id="app.js">
+  <h1>
+    <a href="#app.js" class="pilcrow">&#182;</a>
+    app.js
+  </h1>
+</div>
+
         </td>
-        <td class="code highlight"></td>
+        <td class="code highlight"><div class="highlight"><pre></pre></div>
+        </td>
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+<div class="pilwrap" id="main-server-file">
+  <h2>
+    <a href="#main-server-file" class="pilcrow">&#182;</a>
+    Main server file
+  </h2>
 </div>
-<div class="dox">
-  <div class="summary"><p>Module dependencies.</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
+
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)</span> 
-  <span class="p">,</span> <span class="nx">routes</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes&#39;</span><span class="p">)</span>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="module-and-route-dependencies.">
+  <h3>
+    <a href="#module-and-route-dependencies." class="pilcrow">&#182;</a>
+    Module and route dependencies.
+  </h3>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">)</span> 
+  <span class="p">,</span> <span class="nx">index</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/index&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">home</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/home&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">connect</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/connect&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">discover</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/discover&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">login</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/login&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">me</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/me&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">signup</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/signup&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/user-sessions&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span>
-  <span class="p">,</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+  <span class="p">,</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">flash</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;connect-flash&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./lib/user&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">chirps</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./lib/chirps&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">follow</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./lib/follow&#39;</span><span class="p">);</span>
 
 <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
 
-<span class="nx">app</span><span class="p">.</span><span class="nx">configure</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="configuration-for-app.js">
+  <h3>
+    <a href="#configuration-for-app.js" class="pilcrow">&#182;</a>
+    Configuration for app.js
+  </h3>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">configure</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>
   <span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">,</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="mi">3000</span><span class="p">);</span>
   <span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="nx">__dirname</span> <span class="o">+</span> <span class="s1">&#39;/views&#39;</span><span class="p">);</span>
   <span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">);</span>
@@ -66,6 +160,7 @@
   <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">methodOverride</span><span class="p">());</span>
   <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">cookieParser</span><span class="p">(</span><span class="s1">&#39;your secret here&#39;</span><span class="p">));</span>
   <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">session</span><span class="p">());</span>
+  <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">flash</span><span class="p">());</span>
   <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">router</span><span class="p">);</span>
   <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">)));</span>
 <span class="p">});</span>
@@ -74,7 +169,38 @@
   <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="nx">errorHandler</span><span class="p">());</span>
 <span class="p">});</span>
 
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">routes</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="get-commands">
+  <h3>
+    <a href="#get-commands" class="pilcrow">&#182;</a>
+    GET Commands
+  </h3>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="basic-get-commands-to-run-the-specified-route-when-it-is-entered-in-the-url.">
+  <h4>
+    <a href="#basic-get-commands-to-run-the-specified-route-when-it-is-entered-in-the-url." class="pilcrow">&#182;</a>
+    Basic GET commands to run the specified route when it is entered in the URL.
+  </h4>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="nx">index</span><span class="p">.</span><span class="nx">index</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">,</span> <span class="nx">home</span><span class="p">.</span><span class="nx">list</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/connect&#39;</span><span class="p">,</span> <span class="nx">connect</span><span class="p">.</span><span class="nx">list</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/discover&#39;</span><span class="p">,</span> <span class="nx">discover</span><span class="p">.</span><span class="nx">list</span><span class="p">);</span>
@@ -82,10 +208,440 @@
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/signup&#39;</span><span class="p">,</span> <span class="nx">signup</span><span class="p">.</span><span class="nx">list</span><span class="p">);</span>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/me&#39;</span><span class="p">,</span> <span class="nx">me</span><span class="p">.</span><span class="nx">list</span><span class="p">);</span>
 
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="get-commands-for-the-documentation-and-functional-spec--redirects-to-the-files-themselves.">
+  <h4>
+    <a href="#get-commands-for-the-documentation-and-functional-spec--redirects-to-the-files-themselves." class="pilcrow">&#182;</a>
+    GET commands for the documentation and functional spec, redirects to the files themselves.
+  </h4>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
 <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/docs&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
   <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;docs/index.js.html&#39;</span><span class="p">);</span>
 <span class="p">});</span>
 
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/spec&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;docs/funcspec.pdf&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="post-commands">
+  <h3>
+    <a href="#post-commands" class="pilcrow">&#182;</a>
+    POST Commands
+  </h3>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="runs-when-a-user-tries-to-authenticate--redirects-to-user-sessions-and-checks-for-login-permission.">
+  <h4>
+    <a href="#runs-when-a-user-tries-to-authenticate--redirects-to-user-sessions-and-checks-for-login-permission." class="pilcrow">&#182;</a>
+    Runs when a user tries to authenticate, redirects to user-sessions and checks for login permission.
+  </h4>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/auth&#39;</span><span class="p">,</span> <span class="nx">auth</span><span class="p">.</span><span class="nx">auth</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="runs-when-a-new-user-is-created--on-the-index-page-.">
+  <h4>
+    <a href="#runs-when-a-new-user-is-created--on-the-index-page-." class="pilcrow">&#182;</a>
+    Runs when a new user is created (on the index page).
+  </h4>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/new-user&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-11" id="section-11">&#182;</a>
+</div>
+<p>Parameters set based on the fields in the form.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">name</span><span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">email</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">email</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">;</span>
+  
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12">&#182;</a>
+</div>
+<p>Checks if all the fields were filled in when the user tries to submit.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">name</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">username</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">email</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">password</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+</div>
+<p>If they were, adds the user to the database and informs them that they were created.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;authsucc&#39;</span><span class="p">,</span><span class="s1">&#39;User &#39;</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39; was successfully created. You can now log in as &#39;</span> <span class="o">+</span> <span class="nx">username</span><span class="p">);</span> 
+    <span class="nx">user</span><span class="p">.</span><span class="nx">addUser</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">email</span><span class="p">,</span><span class="nx">password</span><span class="p">,</span><span class="nx">username</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+</div>
+<p>Otherwise fails the creation and informs the user to fill in all the fields.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span> <span class="s1">&#39;Please make sure you have filled out all fields of the Join form&#39;</span><span class="p">);</span> 
+  <span class="p">}</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="runs-when-a-new-chirp-is-made-by-a-user--via-the-home-page-.">
+  <h4>
+    <a href="#runs-when-a-new-chirp-is-made-by-a-user--via-the-home-page-." class="pilcrow">&#182;</a>
+    Runs when a new chirp is made by a user (via the home page).
+  </h4>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/new-chirp&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+</div>
+<p>Parameters set based on currently logged in user.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+</div>
+<p>Parameter set based on field in form.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">data</span><span class="o">=</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">chirp</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
+</div>
+<p>Parameter to be set based on current date in future.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">date</span><span class="o">=</span><span class="s2">&quot;Just now.&quot;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+</div>
+<p>Runs the addChirp function from the <em>chirps</em> library file.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">chirps</span><span class="p">.</span><span class="nx">addChirp</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">date</span><span class="p">,</span><span class="nx">uid</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p>Redirects a user back to home after the chirp has been made.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="runs-when-a-user-enters-a-search-in-the-search-box-and-presses-enter.">
+  <h4>
+    <a href="#runs-when-a-user-enters-a-search-in-the-search-box-and-presses-enter." class="pilcrow">&#182;</a>
+    Runs when a user enters a search in the search box and presses <em>Enter</em>.
+  </h4>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/search&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
+</div>
+<p>Parameter set based on field in form.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">search</span><span class="p">;</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
+</div>
+<p>Redirects user to user page of the value that was just set.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nx">user</span><span class="p">)</span>
+<span class="p">});</span> 
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="redirects-user-to-functional-spec.">
+  <h4>
+    <a href="#redirects-user-to-functional-spec." class="pilcrow">&#182;</a>
+    Redirects user to functional spec.
+  </h4>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/spec&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;docs/funcspec.pdf&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="individual-user-pages">
+  <h3>
+    <a href="#individual-user-pages" class="pilcrow">&#182;</a>
+    Individual User Pages
+  </h3>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="individual-page--like-me-page--for-each-user.">
+  <h4>
+    <a href="#individual-page--like-me-page--for-each-user." class="pilcrow">&#182;</a>
+    Individual page, like Me page, for each user.
+  </h4>
+</div>
+
+
+<p><em>This request must be at the bottom of the GET/POST request list.</em></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:user&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-27" id="section-27">&#182;</a>
+</div>
+<p>Sets parameters based on the username in the page URL.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">u</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">following</span> <span class="o">=</span> <span class="nx">follow</span><span class="p">.</span><span class="nx">numfollowing</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">followers</span> <span class="o">=</span> <span class="nx">follow</span><span class="p">.</span><span class="nx">numfollowers</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">nchirps</span> <span class="o">=</span> <span class="nx">chirps</span><span class="p">.</span><span class="nx">numchirps</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">chirpdata</span> <span class="o">=</span> <span class="nx">chirps</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">isfollowing</span> <span class="o">=</span> <span class="nx">follow</span><span class="p">.</span><span class="nx">isFollowing</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span><span class="nx">u</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-28" id="section-28">&#182;</a>
+</div>
+<p>Renders searchresults page, which is a copy of the Me page but with a modified subject.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+   <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;searchresults&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Search Results&#39;</span><span class="p">,</span>
+               <span class="nx">following</span><span class="o">:</span> <span class="nx">following</span><span class="p">,</span>
+               <span class="nx">followers</span><span class="o">:</span> <span class="nx">followers</span><span class="p">,</span>
+               <span class="nx">nchirps</span><span class="o">:</span> <span class="nx">nchirps</span><span class="p">,</span>
+               <span class="nx">chirpdata</span><span class="o">:</span> <span class="nx">chirpdata</span><span class="p">,</span>
+               <span class="nx">user</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+               <span class="nx">isfollowing</span><span class="o">:</span> <span class="nx">isfollowing</span><span class="p">,</span>
+               <span class="nx">u</span><span class="o">:</span> <span class="nx">u</span><span class="p">});</span>
+<span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="get-request-to-follow-the-user-that-is-currently-being-viewed--called-when-the--follow-unfollow--link-is-clicked-on.">
+  <h4>
+    <a href="#get-request-to-follow-the-user-that-is-currently-being-viewed--called-when-the--follow-unfollow--link-is-clicked-on." class="pilcrow">&#182;</a>
+    GET request to follow the user that is currently being viewed, called when the "Follow/Unfollow" link is clicked on.
+  </h4>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/follow/:user&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-30" id="section-30">&#182;</a>
+</div>
+<p>Parameters based on current user and subject.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">u</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">fid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-31" id="section-31">&#182;</a>
+</div>
+<p>When called, the request runs the followdbUpdate function and either follows or unfollows the user.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">follow</span><span class="p">.</span><span class="nx">followdbUpdate</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span><span class="nx">fid</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-32" id="section-32">&#182;</a>
+</div>
+<p>Once done, redirects back to the user's page.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nx">u</span><span class="p">);</span>
+
+
+
+<span class="p">});</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="starts-server-listening-on-specified-port--set-in-configuration-.">
+  <h3>
+    <a href="#starts-server-listening-on-specified-port--set-in-configuration-." class="pilcrow">&#182;</a>
+    Starts server listening on specified port (set in configuration).
+  </h3>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
 <span class="nx">http</span><span class="p">.</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">app</span><span class="p">).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">),</span> <span class="kd">function</span><span class="p">(){</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Express server listening on port &quot;</span> <span class="o">+</span> <span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;port&#39;</span><span class="p">));</span>
 <span class="p">});</span>

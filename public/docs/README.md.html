@@ -28,7 +28,55 @@
         <a href="#chirper-helps-you-keep-tabs-on-what-you-care-about-most">Chirper helps you keep tabs on what you care about most</a>
       </div>
       <div class="heading h3">
+        <a href="#how-to-run">How to Run</a>
+      </div>
+      <div class="heading h3">
+        <a href="#project-assignment-03">Project Assignment 03</a>
+      </div>
+      <div class="heading h4">
+        <a href="#app.js">app.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#chirps.js">chirps.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#follow.js">follow.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#idlookup.js">idlookup.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#user.js">user.js</a>
+      </div>
+      <div class="heading h3">
+        <a href="#connect.js">connect.js</a>
+      </div>
+      <div class="heading h3">
+        <a href="#discover.js">discover.js</a>
+      </div>
+      <div class="heading h3">
+        <a href="#home.js">home.js</a>
+      </div>
+      <div class="heading h3">
+        <a href="#index.js">index.js</a>
+      </div>
+      <div class="heading h3">
+        <a href="#me.js">me.js</a>
+      </div>
+      <div class="heading h3">
+        <a href="#user-sessions.js">user-sessions.js</a>
+      </div>
+      <div class="heading h3">
+        <a href="#navbar.ejs">navbar.ejs</a>
+      </div>
+      <div class="heading h3">
+        <a href="#searchresults.ejs">searchresults.ejs</a>
+      </div>
+      <div class="heading h2">
         <a href="#documentation">Documentation</a>
+      </div>
+      <div class="heading h4">
+        <a href="#functional-spec">Functional Spec</a>
       </div>
     </div>
   </div>
@@ -61,11 +109,220 @@
 
 
 
-<div class="pilwrap" id="documentation">
+<div class="pilwrap" id="how-to-run">
   <h3>
+    <a href="#how-to-run" class="pilcrow">&#182;</a>
+    How to Run
+  </h3>
+</div>
+
+
+<p>Our application can be run by running 'node app.js' in the root directory of the program.
+Note you must have the required modules which are not included in git:
++ connect-flash
++ ejs
++ express</p>
+
+<hr />
+
+
+<div class="pilwrap" id="project-assignment-03">
+  <h3>
+    <a href="#project-assignment-03" class="pilcrow">&#182;</a>
+    Project Assignment 03
+  </h3>
+</div>
+
+
+<p>This section contains the updates made to the project, separated as the individual files.</p>
+
+
+<div class="pilwrap" id="app.js">
+  <h4>
+    <a href="#app.js" class="pilcrow">&#182;</a>
+    app.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Updated route information to match updates to routes and views.</li>
+<li>Added POST for /new-user action, called when a user registers for Chirper.</li>
+<li>Added POST for /new-chirp action, called when a logged in user makes a Chirp.</li>
+<li>Added POST for /search action, which is called when a user enters a search query.</li>
+<li>Added GET for /:user path, which is used in search function.</li>
+<li>Added GET for /follow/:user path, which is used to follow/unfollow a user.</li>
+<li>Added GET for /spec, which redirects to the functional spec in docs and displays/downloads the PDF of it.</li>
+</ul>
+
+
+<div class="pilwrap" id="chirps.js">
+  <h4>
+    <a href="#chirps.js" class="pilcrow">&#182;</a>
+    chirps.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Created function (newChirp) to add a new Chirp to the database and its corresponding export function (addChirp).</li>
+</ul>
+
+
+<div class="pilwrap" id="follow.js">
+  <h4>
+    <a href="#follow.js" class="pilcrow">&#182;</a>
+    follow.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Created function (followdbUpdate) to be implemented by pages where a user can select to follow another user.</li>
+</ul>
+
+
+<div class="pilwrap" id="idlookup.js">
+  <h4>
+    <a href="#idlookup.js" class="pilcrow">&#182;</a>
+    idlookup.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Removed this library, merged its functionality with user.js.</li>
+</ul>
+
+
+<div class="pilwrap" id="user.js">
+  <h4>
+    <a href="#user.js" class="pilcrow">&#182;</a>
+    user.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Created idlookup function based on functionality from idlookup.js, matches a given username with its UID.</li>
+<li>Created usernamelookup function, matching a given UID with its username.</li>
+<li>Edited login function to provide functionality to user-sessions route.</li>
+</ul>
+
+
+<div class="pilwrap" id="connect.js">
+  <h3>
+    <a href="#connect.js" class="pilcrow">&#182;</a>
+    connect.js
+  </h3>
+</div>
+
+
+<ul>
+<li>Updated render parameters to be use the newly added authentication functionality instead of static users.</li>
+</ul>
+
+
+<div class="pilwrap" id="discover.js">
+  <h3>
+    <a href="#discover.js" class="pilcrow">&#182;</a>
+    discover.js
+  </h3>
+</div>
+
+
+<ul>
+<li>Updated render parameters to be use the newly added authentication functionality instead of static users.</li>
+</ul>
+
+
+<div class="pilwrap" id="home.js">
+  <h3>
+    <a href="#home.js" class="pilcrow">&#182;</a>
+    home.js
+  </h3>
+</div>
+
+
+<ul>
+<li>Updated render parameters to be use the newly added authentication functionality instead of static users.</li>
+</ul>
+
+
+<div class="pilwrap" id="index.js">
+  <h3>
+    <a href="#index.js" class="pilcrow">&#182;</a>
+    index.js
+  </h3>
+</div>
+
+
+<ul>
+<li>Updated render parameters to be use the newly added authentication functionality instead of static users.</li>
+</ul>
+
+
+<div class="pilwrap" id="me.js">
+  <h3>
+    <a href="#me.js" class="pilcrow">&#182;</a>
+    me.js
+  </h3>
+</div>
+
+
+<ul>
+<li>Updated render parameters to be use the newly added authentication functionality instead of static users.</li>
+<li>Updated parameters of vars to also become dynamic based on the currently logged in user.</li>
+</ul>
+
+
+<div class="pilwrap" id="user-sessions.js">
+  <h3>
+    <a href="#user-sessions.js" class="pilcrow">&#182;</a>
+    user-sessions.js
+  </h3>
+</div>
+
+
+<ul>
+<li>Created route, to be used for functionality regarding user login and authentication.</li>
+</ul>
+
+
+<div class="pilwrap" id="navbar.ejs">
+  <h3>
+    <a href="#navbar.ejs" class="pilcrow">&#182;</a>
+    navbar.ejs
+  </h3>
+</div>
+
+
+<ul>
+<li>Created view file, navbar that can be easily inserted on any page where appropriate.</li>
+<li>Includes data such as links to other pages, information about the logged in user, and a search box.</li>
+</ul>
+
+
+<div class="pilwrap" id="searchresults.ejs">
+  <h3>
+    <a href="#searchresults.ejs" class="pilcrow">&#182;</a>
+    searchresults.ejs
+  </h3>
+</div>
+
+
+<ul>
+<li>Created view file, displays the user that was searched for.</li>
+<li>In reality is essentially a copy of "Me" page, but with the subject being the searched user.</li>
+<li>In the future, this page will likely be altered/merged with other pages but at the moment stands alone and is working.</li>
+</ul>
+
+
+<div class="pilwrap" id="documentation">
+  <h2>
     <a href="#documentation" class="pilcrow">&#182;</a>
     Documentation
-  </h3>
+  </h2>
 </div>
 
 
@@ -78,7 +335,23 @@
 <ul>
 <li>/lib</li>
 <li>/routes</li>
-</ul></div>
+</ul>
+
+
+<div class="pilwrap" id="functional-spec">
+  <h4>
+    <a href="#functional-spec" class="pilcrow">&#182;</a>
+    Functional Spec
+  </h4>
+</div>
+
+
+<p>The Functional Specification can be viewed by visiting the <strong>/spec</strong> directory.</p>
+
+<p><em>Ex: localhost:3000/spec</em></p>
+
+<p>The Functional Spec includes all the current information about the user experience of our site.
+If your browser supports viewing a PDF, it will display within the browser.  Otherwise it will download it for offline viewing.</p></div>
   </div>
 </body>
 </html>
