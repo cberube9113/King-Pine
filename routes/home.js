@@ -1,6 +1,9 @@
 var user = require('../lib/user.js');
 var chirps = require('../lib/chirps.js');
 
+// ##list
+//Renders home page
+
 exports.list = function(req,res) {
 	var subject = req.session.user;
 	var userdata = user.info(subject.username);
