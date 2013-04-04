@@ -22,10 +22,16 @@
         <a href="#follow-stub-database">Follow Stub Database</a>
       </div>
       <div class="heading h2">
+        <a href="#followdbupdate">followdbUpdate</a>
+      </div>
+      <div class="heading h2">
         <a href="#numfollowing">numfollowing</a>
       </div>
       <div class="heading h2">
         <a href="#numfollowers">numfollowers</a>
+      </div>
+      <div class="heading h2">
+        <a href="#isfollowing">isFollowing</a>
       </div>
     </div>
   </div>
@@ -46,7 +52,7 @@
 </div>
 
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lookup</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/idlookup.js&#39;</span><span class="p">);</span>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/user.js&#39;</span><span class="p">);</span>
 
 
 </pre></div>
@@ -109,7 +115,7 @@
 <blockquote>
   <ul>
   <li><strong>id</strong>
-  : Integer value simulating auto-incrementing ID</li>
+  : User ID of the subject we are looking at.</li>
   <li><strong>fid</strong>
   : ID of user being followed by user id specified in <strong>id</strong> field
   </div></li>
@@ -126,6 +132,71 @@
   <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
    <span class="nx">fid</span><span class="o">:</span> <span class="mi">0</span><span class="p">}</span>
 <span class="p">];</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="followdbupdate">
+  <h2>
+    <a href="#followdbupdate" class="pilcrow">&#182;</a>
+    followdbUpdate
+  </h2>
+</div>
+
+
+<p>Updates the follower database, deleting or adding a relationship.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>This function is called when a user chooses the "follow" option.
+If the user is already following the person, they will stop following them.
+If the user is not following the person, they will start following them.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>uid</strong> <em>var</em> ID of Interacting User <br />
+&nbsp;&nbsp;<strong>fid</strong> <em>var</em> ID of User being interacted with <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>void</em> Adds follower to the <em>followdb</em> virtual database
+   </div></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">followdbUpdate</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span><span class="nx">fid</span><span class="p">){</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">followdb</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">followdb</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">uid</span> <span class="o">&amp;&amp;</span> <span class="nx">followdb</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">fid</span> <span class="o">==</span> <span class="nx">fid</span><span class="p">){</span>
+      <span class="nx">followdb</span><span class="p">.</span><span class="nx">splice</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;Removed &quot;</span><span class="o">+</span><span class="nx">uid</span><span class="o">+</span><span class="s2">&quot; &quot;</span><span class="o">+</span><span class="nx">fid</span><span class="p">)</span>
+      <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+  
+  <span class="nx">followdb</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">id</span><span class="o">:</span><span class="nx">uid</span><span class="p">,</span><span class="nx">fid</span><span class="o">:</span><span class="nx">fid</span><span class="p">});</span>
+<span class="p">}</span>
+
+
 
 
 </pre></div>
@@ -152,7 +223,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
 </div>
 <p><div class="highlight">
 <strong>Params</strong> <br />
@@ -164,7 +235,7 @@
         <td class="code highlight"><div class="highlight"><pre>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">numfollowing</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
-  <span class="kd">var</span> <span class="nx">subjectid</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">subjectid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">followdb</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">subjectid</span> <span class="o">===</span> <span class="nx">followdb</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span><span class="p">){</span>
@@ -199,7 +270,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+  <a class="pilcrow" href="#section-12" id="section-12">&#182;</a>
 </div>
 <p><div class="highlight">
 <strong>Params</strong> <br />
@@ -211,7 +282,7 @@
         <td class="code highlight"><div class="highlight"><pre>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">numfollowers</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
-  <span class="kd">var</span> <span class="nx">subjectid</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">subjectid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">followdb</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">subjectid</span> <span class="o">===</span> <span class="nx">followdb</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">fid</span><span class="p">){</span>
@@ -220,6 +291,54 @@
   <span class="p">}</span>
   <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
 <span class="p">}</span> 
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="isfollowing">
+  <h2>
+    <a href="#isfollowing" class="pilcrow">&#182;</a>
+    isFollowing
+  </h2>
+</div>
+
+
+<p>Is user1 following user2? (Used in search results page.)</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>user1</strong> <em>string</em> Username of the follower <br />
+&nbsp;&nbsp;<strong>user2</strong> <em>string</em> Username of the user being followed <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>boolean</em> True if <strong>user1</strong> is following <strong>user2</strong>, otherwise false
+   </div></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">isFollowing</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">user1</span><span class="p">,</span><span class="nx">user2</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">uid1</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">user1</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">uid2</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">user2</span><span class="p">);</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">followdb</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">followdb</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">uid1</span> <span class="o">&amp;&amp;</span> <span class="nx">followdb</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">fid</span> <span class="o">==</span> <span class="nx">uid2</span><span class="p">){</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;isFollowing TRUE&quot;</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
   
 </pre></div>
         </td>

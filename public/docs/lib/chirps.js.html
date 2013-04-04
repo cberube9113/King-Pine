@@ -30,6 +30,12 @@
       <div class="heading h2">
         <a href="#discover">discover</a>
       </div>
+      <div class="heading h2">
+        <a href="#newchirp">newChirp</a>
+      </div>
+      <div class="heading h2">
+        <a href="#addchirp">addChirp</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -49,7 +55,7 @@
 </div>
 
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lookup</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/idlookup.js&#39;</span><span class="p">);</span>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/user.js&#39;</span><span class="p">);</span>
 
 
 </pre></div>
@@ -169,7 +175,7 @@
         <td class="code highlight"><div class="highlight"><pre>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">info</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
-  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">userchirps</span> <span class="o">=</span> <span class="p">[];</span>
   <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">chirpDB</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">chirpDB</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">uid</span><span class="p">){</span>
@@ -216,7 +222,7 @@
         <td class="code highlight"><div class="highlight"><pre>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">numchirps</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
-  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">chirpDB</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
     <span class="k">if</span><span class="p">(</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">chirpDB</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">uid</span><span class="p">){</span>
@@ -256,7 +262,7 @@
 <p><div class="highlight">
 <strong>Params</strong> <br />
 &nbsp;&nbsp;<strong>req</strong> Page request <br />
-&nbsp;&nbsp;<strong>req</strong> Page response <br />
+&nbsp;&nbsp;<strong>res</strong> Page response <br />
 <strong>Returns</strong> <br />
 &nbsp;&nbsp;<em>array</em> Five most recent chirps
    </div>    </p>
@@ -270,6 +276,84 @@
       <span class="nx">discoveryChirps</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">chirpDB</span><span class="p">[</span><span class="nx">dbLength</span><span class="o">-</span><span class="nx">i</span><span class="p">]);</span>
   <span class="p">}</span>
   <span class="k">return</span> <span class="nx">discoveryChirps</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="newchirp">
+  <h2>
+    <a href="#newchirp" class="pilcrow">&#182;</a>
+    newChirp
+  </h2>
+</div>
+
+
+<p>Adds a new chirp to the database
+   <div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>data</strong> Content of chirp <br />
+&nbsp;&nbsp;<strong>date</strong> Date <br />
+&nbsp;&nbsp;<strong>uid</strong> User id <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>Object</em> Chirp object
+   </div>    </p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="kd">function</span> <span class="nx">newChirp</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">date</span><span class="p">,</span><span class="nx">uid</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">chirp</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">id</span><span class="o">:</span> <span class="nx">chirpDB</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="nx">data</span><span class="p">,</span>
+    <span class="nx">timestamp</span><span class="o">:</span> <span class="nx">date</span><span class="p">,</span>
+    <span class="nx">uid</span><span class="o">:</span> <span class="nx">uid</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">chirp</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="addchirp">
+  <h2>
+    <a href="#addchirp" class="pilcrow">&#182;</a>
+    addChirp
+  </h2>
+</div>
+
+
+<p>Export function to allow implementation of <em>newChirp</em> function
+   <div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>data</strong> Content of chirp <br />
+&nbsp;&nbsp;<strong>date</strong> Date <br />
+&nbsp;&nbsp;<strong>uid</strong> User id <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>void</em> Adds Chirp to the <em>chirpDB</em> virtual database
+   </div>    </p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+</div>
+<p>Export function to implement the newChirp function.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">addChirp</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">date</span><span class="p">,</span><span class="nx">uid</span><span class="p">){</span>
+  <span class="nx">chirpDB</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newChirp</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">date</span><span class="p">,</span><span class="nx">uid</span><span class="p">));</span>
 <span class="p">}</span>
 </pre></div>
         </td>

@@ -1,6 +1,9 @@
 var follow = require('../lib/follow.js');
 var chirps = require('../lib/chirps.js');
 
+// ##list
+//Renders me page
+
 exports.list = function(req,res) {
 	var subject = req.session.user;
 	var following = follow.numfollowing(subject);

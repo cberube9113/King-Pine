@@ -18,8 +18,17 @@
     </div>
     <div id="tree"></div>
     <div id="headings">
+      <div class="heading h2">
+        <a href="#newuser">newUser</a>
+      </div>
+      <div class="heading h2">
+        <a href="#adduser">addUser</a>
+      </div>
       <div class="heading h1">
         <a href="#user-stub-database">User Stub Database</a>
+      </div>
+      <div class="heading h2">
+        <a href="#idlookup">idLookup</a>
       </div>
       <div class="heading h2">
         <a href="#login">login</a>
@@ -35,18 +44,67 @@
   <tbody>
       <tr>
         <td class="docs">
-          <h1>user.js</h1>
+<div class="pilwrap" id="newuser">
+  <h2>
+    <a href="#newuser" class="pilcrow">&#182;</a>
+    newUser
+  </h2>
+</div>
+
+
+<p>Function to add a new user to database. <br />
+May be implemented in the future with real database.
+   <div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>n</strong> User's name <br />
+&nbsp;&nbsp;<strong>e</strong> User's email <br />
+&nbsp;&nbsp;<strong>p</strong> User's password <br />
+&nbsp;&nbsp;<strong>u</strong> User's username <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>Object</em> User object
+   </div>    </p>
         </td>
-        <td class="code highlight"></td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">function</span> <span class="nx">newUser</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="nx">e</span><span class="p">,</span><span class="nx">p</span><span class="p">,</span><span class="nx">u</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">id</span><span class="o">:</span> <span class="nx">userdb</span><span class="p">.</span><span class="nx">length</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="nx">n</span><span class="p">,</span>
+    <span class="nx">email</span><span class="o">:</span> <span class="nx">e</span><span class="p">,</span>
+    <span class="nx">password</span><span class="o">:</span> <span class="nx">p</span><span class="p">,</span>
+    <span class="nx">username</span><span class="o">:</span> <span class="nx">u</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">user</span><span class="p">;</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+<div class="pilwrap" id="adduser">
+  <h2>
+    <a href="#adduser" class="pilcrow">&#182;</a>
+    addUser
+  </h2>
 </div>
 
+
+<p>Export function to allow implementation of <em>newUser</em> function
+   <div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>n</strong> User's name <br />
+&nbsp;&nbsp;<strong>e</strong> User's email <br />
+&nbsp;&nbsp;<strong>p</strong> User's password <br />
+&nbsp;&nbsp;<strong>u</strong> User's username <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>void</em> Adds User to the <em>userdb</em> virtual database
+   </div>    </p>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">lookup</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/idlookup.js&#39;</span><span class="p">);</span>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">addUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="nx">e</span><span class="p">,</span><span class="nx">p</span><span class="p">,</span><span class="nx">u</span><span class="p">){</span>
+    <span class="nx">userdb</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">newUser</span><span class="p">(</span><span class="nx">n</span><span class="p">,</span><span class="nx">e</span><span class="p">,</span><span class="nx">p</span><span class="p">,</span><span class="nx">u</span><span class="p">));</span>
+<span class="p">}</span>
 
 
 </pre></div>
@@ -71,7 +129,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
 </div>
 <p>Stub database for users until real database is implemented</p>
         </td>
@@ -84,7 +142,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
 </div>
 <p><div class="highlight">
    <em>iddb</em></p>
@@ -136,6 +194,42 @@
       </tr>
       <tr>
         <td class="docs">
+<div class="pilwrap" id="idlookup">
+  <h2>
+    <a href="#idlookup" class="pilcrow">&#182;</a>
+    idLookup
+  </h2>
+</div>
+
+
+<p>Resolves uid value given username. <br />
+   <div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> User's username <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>integer</em> User's id (uid)
+   </div>    </p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">idlookup</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
+  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+  <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">userdb</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">userdb</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">username</span> <span class="o">===</span> <span class="nx">username</span><span class="p">){</span>
+      <span class="nx">id</span> <span class="o">=</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  
+  <span class="k">return</span> <span class="nx">id</span><span class="p">;</span>
+<span class="p">}</span>
+  
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
 <div class="pilwrap" id="login">
   <h2>
     <a href="#login" class="pilcrow">&#182;</a>
@@ -144,8 +238,7 @@
 </div>
 
 
-<p>Login function <br />
-Currently unused</p>
+<p>Login function  </p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 
@@ -156,7 +249,7 @@ Currently unused</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
 </div>
 <p><div class="highlight">
 <strong>Params</strong> <br />
@@ -167,21 +260,25 @@ Currently unused</p>
    </div></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-
-<span class="nx">exports</span><span class="p">.</span><span class="nx">login</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">){</span>
+  
+  
+  
+<span class="nx">exports</span><span class="p">.</span><span class="nx">login</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">len</span> <span class="o">=</span> <span class="nx">userdb</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
   <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">len</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">u</span> <span class="o">=</span> <span class="nx">userdb</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
     <span class="k">if</span> <span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">username</span> <span class="o">===</span> <span class="nx">username</span><span class="p">){</span>
       <span class="k">if</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">password</span> <span class="o">===</span> <span class="nx">password</span><span class="p">){</span>
-        <span class="k">return</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">);</span>
+        <span class="nx">cb</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">u</span><span class="p">);</span>
       <span class="p">}</span>
       <span class="k">else</span><span class="p">{</span>
-        <span class="k">return</span><span class="p">(</span><span class="s1">&#39;N&#39;</span><span class="p">);</span>
+        <span class="nx">cb</span><span class="p">(</span><span class="s1">&#39;Password is incorrect.&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
       <span class="p">}</span>
+      <span class="k">return</span><span class="p">;</span>
     <span class="p">}</span>
   <span class="p">}</span>
-  <span class="k">return</span><span class="p">(</span><span class="s1">&#39;Error&#39;</span><span class="p">);</span>
-<span class="p">}</span>
+  <span class="nx">cb</span><span class="p">(</span><span class="s1">&#39;User not found!&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
+<span class="p">};</span>
 
 
 </pre></div>
@@ -208,7 +305,7 @@ Currently unused</p>
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
 </div>
 <p><div class="highlight">
 <strong>Params</strong> <br />
@@ -221,7 +318,7 @@ Currently unused</p>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">info</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">){</span>
   <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">lookup</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
   <span class="nx">c</span> <span class="o">=</span> <span class="nx">userdb</span><span class="p">[</span><span class="nx">id</span><span class="p">];</span>
   <span class="k">return</span> <span class="nx">c</span><span class="p">;</span>
   <span class="p">}</span>

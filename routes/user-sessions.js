@@ -1,9 +1,9 @@
 var userlib = require('../lib/user');
 
-// Logged in Database
+//Logged in Database
 var online = {};
 
-// ## Authentication Function
+//##Authentication Function
 
 exports.auth = function(req,res){
 	var user = req.session.user;
