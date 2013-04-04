@@ -12,7 +12,6 @@ var express = require('express')
   , me = require('./routes/me')
   , signup = require('./routes/signup')
   , auth = require('./routes/user-sessions')
-  , results = require('./routes/searchresults')
   , http = require('http')
   , path = require('path')
   , flash = require('connect-flash')
@@ -49,7 +48,6 @@ app.get('/discover', discover.list);
 app.get('/login', login.list);
 app.get('/signup', signup.list);
 app.get('/me', me.list);
-app.get('/searchresults', results.list);
 
 app.post('/auth', auth.auth);
 
@@ -100,7 +98,7 @@ app.get('/:user', function (req,res) {
     				   followers: followers,
     				   nchirps: nchirps,
     				   chirpdata: chirpdata,
-    				   user: user.info(u).name,
+    				   user: req.session.user.name,
     				   isfollowing: isfollowing,
     				   u: u});
 })
