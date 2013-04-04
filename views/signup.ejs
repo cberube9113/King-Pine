@@ -1,17 +1,38 @@
 <% include header %>
 
-<h1>Join Chirper today.</h1>
+<h2>Join Chirper today.</h2>
 
-<form method="post" id="signup" action="/new-user">
-<label for="fullname">Full Name</label><br>
-<input type="text" name="name"><br><br>
-<label for="email">Email</label><br>
-<input type="email" name="email"><br><br>
-<label for="password">Password</label><br>
-<input type="password" name="password"><br><br>
-<label for="username">Username</label><br>
-<input type="text" name="username"><br><br>
-<input type="submit" value="Submit">
-</form>
+<div class="form-box">
+  <form method="post" id="signup" action="/new-user" class="form-inline">
+    <div class="control-group">
+      <label for="fullname" class="control-label">Full Name</label>
+      <div class="controls">
+        <input type="text" name="name">
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label for="username" class="control-label">Username</label>
+      <div class="controls">
+        <input type="text" name="username">
+      </div>
+    </div>
+    
+    <div class="control-group">
+      <label for="email" class="control-label">Email</label>
+      <div class="controls">
+        <input type="email" name="email">
+      </div>
+    </div>
+  
+    <div class="control-group">  
+      <label for="password" class="control-label">Password</label>
+      <div class="controls">
+        <input type="password" name="password">
+        <input type="submit" value="Submit" class="btn">
+      </div>
+    </div>
+  </form>
+</div>
 
 <% include footer %>

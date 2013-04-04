@@ -1,4 +1,22 @@
 <% include header %>
-  <% include login %>
-  <% include signup %>
+<div class="row">
+  <div class="span12">
+    <% if (message.length > 0) { %>
+      <div class="vcenter alert alert-error"><%= message %></div>
+    <% } %>
+    <div class="row">
+      <div class="span8">
+        <div style="height:567px; display:table; margin-left:auto; margin-right:auto">
+          <div style="display:table-cell; vertical-align:middle; text-align:center;">
+            <h1>Welcome to Chirper!</h1><h3>Start Chirping today!</h3>
+          </div>
+        </div>
+      </div>
+      <div class="span4">
+        <% include login %>
+        <br />
+        <% include signup %>
+      </div>
+    </div>
+  </div>
 <% include footer %>

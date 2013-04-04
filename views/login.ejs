@@ -1,13 +1,24 @@
 <% include header %>
-<%= message %>
-<h1>Sign in to Chirper!</h1>
 
-<form method="post" id="authenticate" action="/auth">
-<label for="username">Username</label><br>
-<input type="text" name="username"><br><br>
-<label for="password">Password</label><br>
-<input type="password" name="password"><br><br>
-<input type="submit" value="Submit">
-</form>
+<h2>Sign in to Chirper!</h2>
+
+<div class="form-box">
+  <form method="post" id="authenticate" action="/auth" class="form-inline">
+    <div class="control-group">
+      <label for="username" class="control-label">Username</label>
+      <div class="controls">
+        <input type="text" name="username">
+      </div>
+    </div>
+  
+    <div class="control-group">  
+      <label for="password" class="control-label">Password</label>
+      <div class="controls">
+        <input type="password" name="password">
+        <input type="submit" value="Submit" class="btn btn-primary">
+      </div>
+    </div>
+  </form>
+</div>
 
 <% include footer %>
