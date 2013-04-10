@@ -5,14 +5,21 @@ var chirps = require('../lib/chirps.js');
 //Renders home page
 
 exports.list = function(req,res) {
-	var subject = req.session.user;
-	var userdata = user.info(subject.username);
-	var chirpdata = chirps.info(subject.username);
-    res.render('home', { title: 'Chirper',
-    					 name: userdata.name,
-    					 email: userdata.email,
-    					 chirps: chirpdata,
-    					 user: req.session.user.name,
-    					 message: req.flash('auth')
-    });
+	if(req.session.user != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
+		var subject = req.session.user;
+		var userdata = user.info(subject.username);
+		var chirpdata = chirps.info(subject.username);
+    	res.render('home', { title: 'Chirper',
+    						 name: userdata.name,
+    						 email: userdata.email,
+    						 chirps: chirpdata,
+    						 user: req.session.user.name,
+    						 message: req.flash('auth')
+    	});
+    }
+    
+    else{ //If there isn't a user logged in, redirect to /index with a message.
+    	req.flash('auth', 'You need to be logged in to do that!');
+    	res.redirect('/');
+    }
 };

@@ -39,34 +39,38 @@ This section contains the updates made to the project, separated as the individu
 - Created usernamelookup function, matching a given UID with its username.
 - Edited login function to provide functionality to user-sessions route.
 
-### connect.js
+#### connect.js
 - Updated render parameters to be use the newly added authentication functionality instead of static users.
 
-### discover.js
+#### discover.js
 - Updated render parameters to be use the newly added authentication functionality instead of static users.
 
-### home.js
+#### home.js
 - Updated render parameters to be use the newly added authentication functionality instead of static users.
 
-### index.js
+#### index.js
 - Updated render parameters to be use the newly added authentication functionality instead of static users.
 
-### me.js
+#### me.js
 - Updated render parameters to be use the newly added authentication functionality instead of static users.
 - Updated parameters of vars to also become dynamic based on the currently logged in user.
 
-### user-sessions.js
+#### user-sessions.js
 - Created route, to be used for functionality regarding user login and authentication.
 
-### navbar.ejs
+#### navbar.ejs
 - Created view file, navbar that can be easily inserted on any page where appropriate.
 - Includes data such as links to other pages, information about the logged in user, and a search box.
 
-### searchresults.ejs
+#### searchresults.ejs
 - Created view file, displays the user that was searched for.
 - In reality is essentially a copy of "Me" page, but with the subject being the searched user.
 - In the future, this page will likely be altered/merged with other pages but at the moment stands alone and is working.
 
+
+### Ongoing Updates
+- Updated navbar to display "Log In or Sign Up" instead of a user on search page if nobody logged in.
+	- This also fixes the search results page breaking if nobody is logged in.
 
 ## Documentation
 

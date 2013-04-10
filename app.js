@@ -121,40 +121,41 @@ app.get('/spec', function(req,res){
 //### Individual User Pages
 
 //#### Individual page, like Me page, for each user.
-// *This request must be at the bottom of the GET/POST request list.*
+// *This request must be below all other one-directory routes.*
 app.get('/:user', function (req,res) {
-//Sets parameters based on the username in the page URL.
-	var u = req.params.user;
-	var following = follow.numfollowing(u);
-	var followers = follow.numfollowers(u);
-	var nchirps = chirps.numchirps(u);
-	var chirpdata = chirps.info(u);
-	var isfollowing = follow.isFollowing(req.session.user.username,u);
-//Renders searchresults page, which is a copy of the Me page but with a modified subject.
-   res.render('searchresults', { title: 'Search Results',
-    				   following: following,
-    				   followers: followers,
-    				   nchirps: nchirps,
-    				   chirpdata: chirpdata,
-    				   user: req.session.user.name,
-    				   isfollowing: isfollowing,
-    				   u: u});
+
+if(user.exists(req.params.user) == 1){ //If the user exists in the database, load their page.
+	//Sets parameters based on the username in the page URL.
+		var u = req.params.user;
+		var following = follow.numfollowing(u);
+		var followers = follow.numfollowers(u);
+		var nchirps = chirps.numchirps(u);
+		var chirpdata = chirps.info(u);
+		if(req.session.user != undefined){ //If there is a user logged in
+		var name = req.session.user.name;
+		var isfollowing = follow.isFollowing(req.session.user.username, u);
+		}
+		else{ //If there is not a user logged in
+		var name = undefined;
+		var isfollowing = undefined;
+		}
+	//Renders searchresults page, which is a copy of the Me page but with a modified subject.
+   	res.render('searchresults', { title: 'Search Results',
+    							   following: following,
+    							   followers: followers,
+    							   nchirps: nchirps,
+    							   chirpdata: chirpdata,
+    							   user: name,
+    							   isfollowing: isfollowing,
+    							   u: u});
+    }
+
+else{ //If the user does not exist, inform the searcher and give them an opportunity to create it.
+	req.flash('error','That user doesn\'t exist.  Would you like to create that user?');
+	res.redirect('/signup');
+	}
 });
 
-//#### GET request to follow the user that is currently being viewed, called when the "Follow/Unfollow" link is clicked on.
-app.get('/follow/:user',function(req,res){
-//Parameters based on current user and subject.
-	var u = req.params.user;
-	var uid = req.session.user.id;
-	var fid = user.idlookup(u);
-//When called, the request runs the followdbUpdate function and either follows or unfollows the user.
-	follow.followdbUpdate(uid,fid);
-//Once done, redirects back to the user's page.
-	res.redirect('/'+u);
-
-
-
-});
 
 //### Starts server listening on specified port (set in configuration).
 http.createServer(app).listen(app.get('port'), function(){

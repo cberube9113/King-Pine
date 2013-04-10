@@ -7,7 +7,13 @@
       <li><a href="/me">Me</a></li>
     </ul>
     <div style="float: right; margin-top: 10px; margin-right:10px;">
+    <% if(user != undefined){ %>
       <span class="identifier">Logged in: </span><%= user %>
+    <% } %>
+    
+    <% if(user == undefined){ %>
+      <span class="identifier"><a href='/'>Log In or Sign Up!</a></span>
+    <% } %>
     </div>
   </div>
 </div>

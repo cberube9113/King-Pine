@@ -1,16 +1,19 @@
 <% include header %>
 <p><% include navbar %></p>
 
+<% if(user != undefined){ %>
 <% if(isfollowing == true){ %>
 <a href="/follow/<%= u %>" >Stop Following</a>
 <% } %>
 <% if(isfollowing == false){ %>
 <a href="/follow/<%= u %>" >Start Following<a>
 <% } %><br>
+<% } %>
 
 <%= nchirps %><a href="#"> Chirps</a><br>
 <%= following %><a href="#"> Following</a><br>
 <%= followers %><a href="#"> Followers</a><br>
+
 <h3>Who to Follow</h3><br>
 <h3>Trends</h3><br>
 <h3>Chirps</h3><br>
@@ -18,5 +21,6 @@
 <% for(var i=0;i<chirpdata.length;i++) { %>
   <%= chirpdata[i].data%><br>
 <% } %><br>
+
 
 <% include footer %>
