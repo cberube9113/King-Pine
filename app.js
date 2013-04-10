@@ -124,37 +124,47 @@ app.get('/spec', function(req,res){
 // *This request must be below all other one-directory routes.*
 app.get('/:user', function (req,res) {
 
-if(user.exists(req.params.user) == 1){ //If the user exists in the database, load their page.
-	//Sets parameters based on the username in the page URL.
-		var u = req.params.user;
-		var following = follow.numfollowing(u);
-		var followers = follow.numfollowers(u);
-		var nchirps = chirps.numchirps(u);
-		var chirpdata = chirps.info(u);
-		if(req.session.user != undefined){ //If there is a user logged in
-		var name = req.session.user.name;
-		var isfollowing = follow.isFollowing(req.session.user.username, u);
+	if(user.exists(req.params.user) == 1){ //If the user exists in the database, load their page.
+		//Sets parameters based on the username in the page URL.
+			var u = req.params.user;
+			var following = follow.numfollowing(u);
+			var followers = follow.numfollowers(u);
+			var nchirps = chirps.numchirps(u);
+			var chirpdata = chirps.info(u);
+			if(req.session.user != undefined){ //If there is a user logged in
+			var name = req.session.user.name;
+			var isfollowing = follow.isFollowing(req.session.user.username, u);
+			}
+			else{ //If there is not a user logged in
+			var name = undefined;
+			var isfollowing = undefined;
+			}
+		//Renders searchresults page, which is a copy of the Me page but with a modified subject.
+		res.render('searchresults', { title: 'Search Results',
+									   following: following,
+									   followers: followers,
+									   nchirps: nchirps,
+									   chirpdata: chirpdata,
+									   user: name,
+									   isfollowing: isfollowing,
+									   u: u});
 		}
-		else{ //If there is not a user logged in
-		var name = undefined;
-		var isfollowing = undefined;
-		}
-	//Renders searchresults page, which is a copy of the Me page but with a modified subject.
-   	res.render('searchresults', { title: 'Search Results',
-    							   following: following,
-    							   followers: followers,
-    							   nchirps: nchirps,
-    							   chirpdata: chirpdata,
-    							   user: name,
-    							   isfollowing: isfollowing,
-    							   u: u});
-    }
 
-else{ //If the user does not exist, inform the searcher and give them an opportunity to create it.
-	req.flash('error','That user doesn\'t exist.  Would you like to create that user?');
-	res.redirect('/signup');
-	}
+	else{ //If the user does not exist, inform the searcher and give them an opportunity to create it.
+		req.flash('error','That user doesn\'t exist.  Would you like to create that user?');
+		res.redirect('/signup');
+		}
 });
+
+// ### Logic to render the 404 page if anything unexpected is visited.
+ //*THIS MUST BE THE VERY LAST CODE BEFORE THE SERVER IS STARTED*
+ 
+app.use(function(req, res, next){
+  res.render('404', { title: '404'
+  					});
+});
+
+
 
 
 //### Starts server listening on specified port (set in configuration).

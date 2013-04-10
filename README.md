@@ -71,6 +71,8 @@ This section contains the updates made to the project, separated as the individu
 ### Ongoing Updates
 - Updated navbar to display "Log In or Sign Up" instead of a user on search page if nobody logged in.
 	- This also fixes the search results page breaking if nobody is logged in.
+- Updated logic to deal with searching for users that don't exist by flashing error messages.
+- Created 404 page.
 
 ## Documentation
 
