@@ -156,6 +156,14 @@ app.get('/:user', function (req,res) {
 		}
 });
 
+app.get('/follow/:user',function(req,res){
+	var u = req.params.user;
+	var uid = req.session.user.id;
+	var fid = user.idlookup(u);
+	follow.followdbUpdate(uid,fid);
+	res.redirect('/'+u);
+});
+
 // ### Logic to render the 404 page if anything unexpected is visited.
  //*THIS MUST BE THE VERY LAST CODE BEFORE THE SERVER IS STARTED*
  
