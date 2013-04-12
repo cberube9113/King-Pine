@@ -68,6 +68,9 @@ app.get('/spec', function(req,res){
 //#### Runs when a user tries to authenticate, redirects to user-sessions and checks for login permission.
 app.post('/auth', auth.auth);
 
+//#### Runs when a user tries to logout, redirects to user-sessions and runs logout command.
+app.get('/logout', auth.logout);
+
 //#### Runs when a new user is created (on the index page).
 app.post('/new-user',function(req,res){
 //Parameters set based on the fields in the form.

@@ -36,3 +36,21 @@ if(user !== undefined && online[user.uid] !== undefined) {  //If the user is log
 		})
 	}
 }
+
+//## Logout Function
+
+exports.logout = function(req,res){
+	//Check if user is actually logged in  This *should* always be true.
+	var user = req.session.user;
+	if(user !== undefined && online[user.uid] !== undefined) { //The user is logged in
+		online = {}; //Delete the user from the online datbase.
+		req.session.user = undefined; // Set the session to be undefined, all checks read this as nobody logged in.
+		req.flash('auth','Successfully logged out.  Log in to continue.');
+		res.redirect('/');
+	}
+	
+	else{
+		res.send('How the hell did you get here?');
+	}	
+
+}

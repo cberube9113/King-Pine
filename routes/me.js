@@ -9,7 +9,7 @@ exports.list = function(req,res) {
 		var subject = req.session.user;
 		var following = follow.numfollowing(subject);
 		var followers = follow.numfollowers(subject);
-		var nchirps = chirps.numchirps(subject);
+		var nchirps = chirps.numchirps(subject.username);
 		var chirpdata = chirps.info(subject.username);
    		res.render('me', { title: 'Me',
     				   following: following,
