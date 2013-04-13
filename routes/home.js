@@ -19,7 +19,7 @@ exports.list = function(req,res) {
     }
     
     else{ //If there isn't a user logged in, redirect to /index with a message.
-    	req.flash('auth', 'You need to be logged in to do that!');
+    	
     	res.redirect('/');
     }
 };
