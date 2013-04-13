@@ -1,5 +1,6 @@
 <% include header %>
-
+<div class="row">
+  <div class="span12">
     <% include navbar %>
     <div class="row">
       <div class="span3">
@@ -15,7 +16,10 @@
           <h3>People to Follow</h3><br>
         </div><br />
         <div class="small-box">
-          <h3>Chirps</h3><br>
+          <h3>Chirps</h3>
+           <% for(var i=0;i<chirps.length;i++){%>
+        <%= chirps[i].data%><br>
+        <%}%> <br>
         </div>
       </div>
       <div class="span9">
@@ -36,9 +40,7 @@
         </form>
 
 
-        <% for(var i=0;i<chirps.length;i++){%>
-        <%= chirps[i].data%><br>
-        <%}%>
+       
       </div>
     </div>
   </div>
