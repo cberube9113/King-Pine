@@ -45,7 +45,7 @@ exports.logout = function(req,res){
 	if(user !== undefined && online[user.uid] !== undefined) { //The user is logged in
 		online = {}; //Delete the user from the online datbase.
 		req.session.user = undefined; // Set the session to be undefined, all checks read this as nobody logged in.
-		req.flash('auth','Successfully logged out.  Log in to continue.');
+		req.flash('authsucc','Successfully logged out.  Log in to continue.');
 		res.redirect('/');
 	}
 	
