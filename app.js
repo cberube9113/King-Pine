@@ -18,7 +18,8 @@ var express = require('express')
   , flash = require('connect-flash')
   , user = require('./lib/user')
   , chirps = require('./lib/chirps')
-  , follow = require('./lib/follow');
+  , follow = require('./lib/follow')
+  , Sequelize = require('sequelize');
 
 var app = express();
 
