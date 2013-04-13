@@ -7,14 +7,14 @@
       <li><a href="/me">Me</a></li>
     </ul>
     <div style="float: right; margin-top: 10px; margin-right:10px;">
-    <% if(user != undefined) { %>
-      <span class="identifier">Logged in: </span><%= user %>
-        <input type="button" class="btn" value="Log Out" style="margin-top: -5px;" />
-    <% } %>
+      <% if(user != undefined) { %>
+        <span class="identifier">Logged in: </span><%= user %>
+          <input type="button" class="btn" id="logout_btn" value="Log Out" style="margin-top: -5px;" />
+      <% } %>
     
-    <% if(user == undefined){ %>
-      <span class="identifier"><form><input type="submit" class="btn" value="Sign Up or Log In!" onClick="parent.location='/'"></form></span>
-    <% } %>
+      <% if(user == undefined) { %>
+        <input type="submit" class="btn" id="login_btn" value="Sign Up or Log In!" style="margin-top: -5px;" />
+      <% } %>
     </div>
   </div>
 </div>
@@ -25,7 +25,11 @@
 <div style="clear:both;"></div>
 
 <script type="text/javascript">
-  $(".btn").click(function() {
+  $("#logout_btn").click(function() {
     window.location = "/logout";
+  });
+
+    $("#login_btn").click(function() {
+    window.location = "/";
   });
 </script>
