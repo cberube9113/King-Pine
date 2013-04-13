@@ -50,8 +50,8 @@ app.get('/', index.index);
 app.get('/home', home.list);
 app.get('/connect', connect.list);
 app.get('/discover', discover.list);
-app.get('/login', login.list);
-app.get('/signup', signup.list);
+app.get('/login', index.index);
+app.get('/signup', index.index);
 app.get('/me', me.list);
 
 //#### GET commands for the documentation and functional spec, redirects to the files themselves.
@@ -154,8 +154,8 @@ app.get('/:user', function (req,res) {
 		}
 
 	else{ //If the user does not exist, inform the searcher and give them an opportunity to create it.
-		req.flash('error','That user doesn\'t exist.  Would you like to create that user?');
-		res.redirect('/signup');
+		req.flash('auth','That user doesn\'t exist.  Would you like to create that user?');
+		res.redirect('/');
 		}
 });
 
