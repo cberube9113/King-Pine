@@ -7,8 +7,8 @@ var chirps = require('../lib/chirps.js');
 exports.list = function(req,res) {
 	if(req.session.user != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
 		var subject = req.session.user;
-		var following = follow.numfollowing(subject);
-		var followers = follow.numfollowers(subject);
+		var following = follow.numfollowing(subject.username);
+		var followers = follow.numfollowers(subject.username);
 		var nchirps = chirps.numchirps(subject.username);
 		var chirpdata = chirps.info(subject.username);
    		res.render('me', { title: 'Me',

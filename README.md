@@ -69,6 +69,7 @@ This section contains the updates made to the project, separated as the individu
 
 
 ### Ongoing Updates
+#### This section contains updates that do not correspond to a specific project, but are added to create additional functionality or to fix problems listed by the graders.
 - Updated navbar to display "Log In or Sign Up" instead of a user on search page if nobody logged in.
 	- This also fixes the search results page breaking if nobody is logged in.
 - Updated logic to deal with searching for users that don't exist by flashing error messages.
