@@ -7,9 +7,9 @@
       <li><a href="/me">Me</a></li>
     </ul>
     <div style="float: right; margin-top: 10px; margin-right:10px;">
-    <% if(user != undefined){ %>
+    <% if(user != undefined) { %>
       <span class="identifier">Logged in: </span><%= user %>
-      <form><input type="submit" class="btn" value="Log Out" onClick="parent.location='/logout'"</form>
+        <input type="button" class="btn" value="Log Out" style="margin-top: -5px;" />
     <% } %>
     
     <% if(user == undefined){ %>
@@ -23,3 +23,9 @@
   <input type="text" name="search" placeholder="Search for User" class=".search-query">
 </form>
 <div style="clear:both;"></div>
+
+<script type="text/javascript">
+  $(".btn").click(function() {
+    window.location = "/logout";
+  });
+</script>
