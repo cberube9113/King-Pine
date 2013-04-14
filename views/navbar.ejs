@@ -19,9 +19,13 @@
   </div>
 </div>
 
-<form method="post" id="search" action="/search" class="navbar-search">
-  <input type="text" name="search" placeholder="Search for User" class=".search-query">
-</form>
+<div>
+  <input type="text" name="search" placeholder="Search for User" class=".search-query" id="user_search_box" autocomplete="off">
+  <div class="autocomplete" id="user_autocomplete_box">
+    <ul>
+    </ul>
+  </div>
+</div>
 <div style="clear:both;"></div>
 
 <script type="text/javascript">
@@ -29,7 +33,9 @@
     window.location = "/logout";
   });
 
-    $("#login_btn").click(function() {
+  $("#login_btn").click(function() {
     window.location = "/";
   });
+
+
 </script>

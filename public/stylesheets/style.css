@@ -51,3 +51,29 @@ a {
 .identifier {
   font-weight: bold;  
 }
+
+.autocomplete {
+  position: absolute;
+  background-color: white;
+  margin-top: -10px;
+  border-radius: 4px;
+  border: solid;
+  border-width: 1px;
+  width: 220px;
+  list-style-type: none;
+  display: none;
+}
+
+.autocomplete li {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+}
+
+.autocomplete li:hover {
+  background-color: #EDFAFA;
+}
+
+li.selected {
+  background-color: #EDFAFA;
+}

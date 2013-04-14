@@ -109,13 +109,8 @@ app.post('/new-chirp',function(req,res){
 });
 
 
-//#### Runs when a user enters a search in the search box and presses *Enter*.
-app.post('/search',function(req,res){
-// Parameter set based on field in form.
-	var user = req.body.search;
-//Redirects user to user page of the value that was just set.
-	res.redirect('/'+user)
-});	
+//#### Runs when a user enters a search in the search box
+app.get('/search/:query', user.autocomplete);
 
 //#### Redirects user to functional spec.
 app.get('/spec', function(req,res){
