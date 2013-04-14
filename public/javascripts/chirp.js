@@ -46,7 +46,26 @@ function publisher() {
 	return obj;
 }
 
-function myChirps() {
+// The chirp input text area object that corresponds with the text area
+// defined by the view:
+function chirpTextArea() {
+  var obj = Object.create(publisher());
+  obj.elm = $('#chirpTextArea');
+
+  // Returns the text contained in the textarea:
+  obj.getText = function () {
+    return obj.elm.val();
+  };
+
+  // Removes the text from the text area:
+  obj.clearText = function () {
+    obj.elm.val('');
+  };
+
+  return obj;
+}
+
+function chirpPostButton() {
 	var obj = Object.create(publisher());
 	obj.elm = $('#chirp-post-button');
 	
