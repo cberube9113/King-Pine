@@ -64,13 +64,13 @@ a {
   display: none;
 }
 
-.autocomplete li {
+.autocomplete li, p {
   padding-top: 10px;
   padding-bottom: 10px;
   padding-left: 5px;
 }
 
-.autocomplete li:hover {
+.hover {
   background-color: #EDFAFA;
 }
 

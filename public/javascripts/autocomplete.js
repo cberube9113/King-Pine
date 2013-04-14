@@ -7,11 +7,13 @@ $(function() {
       var liSelected = $(".selected");
 
     if(event.which === 40) {
+      removeHover();
       navDown(li, liSelected);
       return;
     }
 
     if(event.which === 38) {
+      removeHover();
       navUp(li, liSelected);
       return;
     }
@@ -36,8 +38,21 @@ $(function() {
             autocompleteBox.append("<li data-username=" + data[i+1] + " class=\"clickable\">" + data[i] + "</li>");
           }
 
+          if (data.length == 0) {
+            autocompleteBox.append("<p>No Results</p>")
+          };
+
           $(".clickable").click(function() {
             window.location = "/" + this.getAttribute("data-username");
+          });
+
+          var listItems = $(".autocomplete li");
+
+          listItems.hover(function() {
+            listItems.each(function() {
+              $(this).removeClass("selected");
+            });
+            $(this).toggleClass("hover");
           });
 
         }); // end AJAX get
@@ -73,4 +88,10 @@ function navUp(li, liSelected) {
   } else {
     liSelected = li.last().addClass('selected');
   }
+}
+
+function removeHover() {
+  $(".autocomplete li").each(function() {
+    $(this).removeClass("hover");
+  });
 }
