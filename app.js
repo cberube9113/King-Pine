@@ -23,6 +23,7 @@ var express = require('express')
 
 var app = express();
 
+
 //### Configuration for app.js
   app.configure(function(){
   app.set('port', process.env.PORT || 3000);
@@ -62,6 +63,11 @@ app.get('/docs', function(req, res){
 
 app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
+});
+
+//#### Test page for Sockets, DELETE SOON.
+app.get('/test', function(req,res){
+	res.render('chirptest');
 });
 
 //### POST Commands
@@ -177,9 +183,19 @@ app.use(function(req, res, next){
 });
 
 
+//Create server.
+var server = http.createServer(app);
 
+//WebSockets/Socket.IO
+var io = require('socket.io', {'log level': 0}).listen(server);
+var chirpApp = require('./routes/chirp-socket');
+
+io.sockets.on('connection', function(socket){
+	chirpApp.init(socket);
+});
+	
 
 //### Starts server listening on specified port (set in configuration).
-http.createServer(app).listen(app.get('port'), function(){
+server.listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
