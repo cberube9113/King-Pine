@@ -10,6 +10,19 @@ Note you must have the required modules which are not included in git:
 + connect-flash
 + ejs
 + express
++ socket.io
++ sequelize
+
+Run 'npm install' in the root directory to install the above modules.
+
+- - -
+
+### Project Assignment 04
+In this update we added:
+
+1. A suggestions dropdown in the search box powered by AJAX
+2. Posting of chirps in the home page without a reload, powered by socket.IO.
+3. Other miscelaneous bugfixes and code cleanup. 
 
 - - -
 
