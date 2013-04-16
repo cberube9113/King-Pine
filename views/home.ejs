@@ -52,11 +52,23 @@
 <script type="text/javascript">
   var socket = io.connect('http://localhost');
 
-  $("#chirp_submit_btn").click(function() {
+  function sendChirp() {
     var chirpData = $("#chirp_box").val();
     var d = new Date();
 
     socket.emit('chirp', { chirp: chirpData, timestamp: d.getTime(), userid: <%= userid %> });
+
+    $("#chirp_box").val("");
+  }
+
+  $("#chirp_submit_btn").click(function() {
+    sendChirp();
+  });
+
+  $("#chirp_box").keypress(function(event) {
+    if(event.which == 13) {
+      sendChirp();
+    }
   });
 
   function generateChirp(chirp) {
