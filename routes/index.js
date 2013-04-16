@@ -11,11 +11,13 @@ exports.index = function(req, res){
 		var userdata = user.info(subject.username);
 		var chirpdata = chirps.info(subject.username);
     	res.render('home', { title: 'Chirper',
-    						 name: userdata.name,
-    						 email: userdata.email,
-    						 chirps: chirpdata,
-    						 user: req.session.user.name,
-    						 message: req.flash('auth')
+                             name: userdata.name,
+                             email: userdata.email,
+                             chirps: chirpdata,
+                             user: req.session.user.name,
+                             userid: req.session.user.id,
+                             username: userdata.username,
+                             message: req.flash('auth')
     	});
     }
     

@@ -14,6 +14,8 @@ exports.list = function(req,res) {
     						 email: userdata.email,
     						 chirps: chirpdata,
     						 user: req.session.user.name,
+                             userid: req.session.user.id,
+                             username: userdata.username,
     						 message: req.flash('auth')
     	});
     }

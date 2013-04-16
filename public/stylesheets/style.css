@@ -77,3 +77,33 @@ a {
 li.selected {
   background-color: #EDFAFA;
 }
+
+.chirper {
+  position:relative;
+  padding:15px;
+  margin:15px 0 0.5em;
+  color:#333;
+  background:#eee;
+  /* css3 */
+  -webkit-border-radius:10px;
+  -moz-border-radius:10px;
+  border-radius:10px;
+}
+
+.chirper p {font-size:24px; line-height:1.25em;}
+
+/* creates the triangle */
+.chirper:after {
+  content:"";
+  position:absolute;
+  top:-30px;
+  left:50px;
+  border:15px solid transparent;
+  border-bottom-color:#eee;
+    /* reduce the damage in FF3.0 */
+    display:block; 
+    width:0;
+}
+
+/* display of quote author (alternatively use a class on the element following the blockquote) */
+.chirper + p {padding-left:15px; font:14px Arial, sans-serif;}

@@ -1,4 +1,7 @@
 <% include header %>
+
+<script src="/socket.io/socket.io.js"></script>
+
 <div class="row">
   <div class="span12">
     <% include navbar %>
@@ -15,33 +18,66 @@
         <div class="small-box">
           <h3>People to Follow</h3><br>
         </div><br />
-        <div class="small-box">
-          <h3>Chirps</h3>
-           <% for(var i=0;i<chirps.length;i++){%>
-        <%= chirps[i].data%><br>
-        <%}%> <br>
-        </div>
       </div>
       <div class="span9">
-        <form method="post" id="newchirp" action="/new-chirp" class="form-inline">
-        
-          <div class="control-group">
-            <label for="username" class="control-label">Chirp Something:</label>
-            <div class="controls">
-              <input type="text" name="chirp">
-            </div>
+     
+        <div class="control-group">
+          <label for="chirp" class="control-label">Chirp Something:</label>
+          <div class="controls">
+            <input type="text" name="chirp" id="chirp_box">
           </div>
-        
-          <div class="control-group">
-            <div class="controls">
-              <input type="submit" value="Submit" class="btn btn-primary">
-            </div>
+        </div>
+      
+        <div class="control-group">
+          <div class="controls">
+            <input type="button" value="Submit" class="btn btn-primary" id="chirp_submit_btn">
           </div>
-        </form>
+        </div>
 
-
+        <div id="chirp_view">
+          <h3>Chirps</h3>
+          <% for(var i = 0; i < chirps.length; i++) { %>
+            <br /><span><span class="identifier"><%= name %></span> @<%= username %></span>
+            <div class="chirper">
+              <p><%= chirps[i].data %></p>
+            </div>
+          <% } %>
+        </div>
        
       </div>
     </div>
   </div>
+</div>
+
+<script type="text/javascript">
+  var socket = io.connect('http://localhost');
+
+  $("#chirp_submit_btn").click(function() {
+    var chirpData = $("#chirp_box").val();
+    var d = new Date();
+
+    socket.emit('chirp', { chirp: chirpData, timestamp: d.getTime(), userid: <%= userid %> });
+  });
+
+  function generateChirp(chirp) {
+    html = "<br /><span><span class=\"identifier\">" + "<%= name %>" + "</span> @"; 
+    html += "<%= username %>" + "</span>";
+    html += "<div class=\"chirper\">";
+    html += "<p>" + chirp + "</p>";
+    html += "</div>";
+
+    return html;
+  }
+
+  function addChirpToView(chirp) {
+    var chirpView = $("#chirp_view");
+
+    chirpView.append(generateChirp(chirp));
+  }
+
+    socket.on('updateView', function (data) {
+      addChirpToView(data["chirp"]);
+  });
+</script>
+
 <% include footer %>
