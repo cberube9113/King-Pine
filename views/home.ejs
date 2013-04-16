@@ -34,8 +34,8 @@
           </div>
         </div>
 
+        <h3>Chirps</h3>
         <div id="chirp_view">
-          <h3>Chirps</h3>
           <% for(var i = 0; i < chirps.length; i++) { %>
             <br /><span><span class="identifier"><%= chirps[i].name %></span> @<%= chirps[i].username %></span>
             <div class="chirper">
@@ -101,7 +101,7 @@
   function addChirpToView(chirp) {
     var chirpView = $("#chirp_view");
 
-    chirpView.append(generateChirp(chirp));
+    chirpView.prepend(generateChirp(chirp));
   }
 
     socket.on('updateView', function (data) {
