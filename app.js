@@ -65,11 +65,6 @@ app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
 });
 
-//#### Test page for Sockets, DELETE SOON.
-app.get('/test', function(req,res){
-	res.render('chirptest');
-});
-
 //### POST Commands
 
 //#### Runs when a user tries to authenticate, redirects to user-sessions and checks for login permission.
