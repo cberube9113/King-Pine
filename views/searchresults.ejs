@@ -1,37 +1,43 @@
 <% include header %>
+
 <div class="row">
-	<div class="span12">
-		<% include navbar %>
-			<div class="row">
-				<div class="span3">
-					<div class="small-box">
-						<% if(user != undefined){ %>
-						<% if(isfollowing == true){ %>
-						<a href="/follow/<%= u %>" >Stop Following</a>
-						<% } %>
-						<% if(isfollowing == false){ %>
-						<a href="/follow/<%= u %>" >Start Following<a>
-						<% } %><br>
-						<% } %>
-						<span class="badge badge-important"><%= nchirps %></span><a href="#"> Chirps</a><br>
-          				<span class="badge badge-important"><%= following %></span><a href="#"> Following</a><br>
-         				<span class="badge badge-important"><%= followers %></span><a href="#"> Followers</a><br>
-					</div><br />
+  <div class="span12">
+    <% include navbar %>
+    <div class="row">
+      <div class="span3">
+        <div class="small-box">
+	         <% if(user != undefined){ %>
+				<% if(isfollowing == true) { %>
+					<a href="/follow/<%= u %>" >Stop Following</a>
+				<% } %>
+				<% if(isfollowing == false) { %>
+					<a href="/follow/<%= u %>" >Start Following<a>
+				<% } %><br>
+			<% } %>
+			<span class="badge badge-important"><%= nchirps %></span><a href="#"> Chirps</a><br>
+			<span class="badge badge-important"><%= following %></span><a href="#"> Following</a><br>
+			<span class="badge badge-important"><%= followers %></span><a href="#"> Followers</a><br>
+        </div><br />
+        <div class="small-box">
+          <h3>Who to Follow</h3><br>
+        </div><br />
+        <div class="small-box">
+          <h3>Trends</h3><br>
+        </div><br />
+      </div>
+      <div class="span9">
 
-<div class="small-box">
-<h3>Who to Follow</h3><br>
-</div><br />
-<div class="small-box">
-<h3>Trends</h3><br>
-</div><br />
-<div class="small-box">
-<h3>Chirps</h3>
-<% for(var i=0;i<chirpdata.length;i++) { %>
-  <%= chirpdata[i].data%><br>
-<% } %><br>
-</div><br />
-
-
-
-
-<% include footer %>
+        <div id="chirp_view">
+          <h3>Chirps</h3>
+          <% for(var i = 0; i < chirpdata.length; i++) { %>
+            <br /><span><span class="identifier"><%= nameOfSearchedUser %></span> @<%= u %></span>
+            <div class="chirper">
+              <p><%= chirpdata[i].data %></p>
+            </div>
+          <% } %>
+        </div>
+       
+      </div>
+    </div>
+  </div>
+</div>
