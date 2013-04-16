@@ -127,6 +127,7 @@ app.get('/:user', function (req,res) {
 	if(user.exists(req.params.user) == 1){ //If the user exists in the database, load their page.
 		//Sets parameters based on the username in the page URL.
 			var u = req.params.user;
+			var nameOfSearchedUser = user.nameFromUsername(req.params.user);
 			var following = follow.numfollowing(u);
 			var followers = follow.numfollowers(u);
 			var nchirps = chirps.numchirps(u);
@@ -147,7 +148,9 @@ app.get('/:user', function (req,res) {
 									   chirpdata: chirpdata,
 									   user: name,
 									   isfollowing: isfollowing,
-									   u: u});
+									   u: u,
+									   nameOfSearchedUser: nameOfSearchedUser
+									});
 		}
 
 	else{ //If the user does not exist, inform the searcher and give them an opportunity to create it.
