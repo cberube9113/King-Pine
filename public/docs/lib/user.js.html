@@ -28,7 +28,7 @@
         <a href="#user-stub-database">User Stub Database</a>
       </div>
       <div class="heading h2">
-        <a href="#exits">exits</a>
+        <a href="#exists">exists</a>
       </div>
       <div class="heading h2">
         <a href="#namefromusername">nameFromUsername</a>
@@ -218,22 +218,21 @@ May be implemented in the future with real database.
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap" id="exits">
+<div class="pilwrap" id="exists">
   <h2>
-    <a href="#exits" class="pilcrow">&#182;</a>
-    exits
+    <a href="#exists" class="pilcrow">&#182;</a>
+    exists
   </h2>
 </div>
 
 
-<p>Checks that a user exists in the database.</p>
-
-<div class="highlight">
-**Params**
-&nbsp;&nbsp;**username** The username we're checking.
-**Returns**
-0 if user does not exist, 1 if user exists.
-</div>
+<p>Checks that a user exists in the database. <br />
+   <div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> User's username <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>integer</em> 0 if user does not exist, 1 if user exists
+   </div>  </p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 
@@ -262,14 +261,13 @@ May be implemented in the future with real database.
 </div>
 
 
-<p>As the name suggests, given a username, this function looks up the corresponding real name.</p>
-
-<div class="highlight">
-**Params**
-&nbsp;&nbsp;**username** The username we're checking.
-**Returns**
-&nbsp;&nbsp;**name** The real name of the user.
-</div>
+<p>Given a username, this function looks up the corresponding real name.
+  <div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> User's name <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<strong>string</strong> Real name of the user
+  </div></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
 
