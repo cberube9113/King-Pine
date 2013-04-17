@@ -35,16 +35,55 @@
 <div class="pilwrap">
   <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
 </div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/user.js&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">chirps</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/chirps.js&#39;</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
 <div class="dox">
-  <div class="summary"><p>GET home page.</p>
+  <div class="summary"><p>GET home page.  Index of not logged in, Home if logged in.</p>
   </div>
   <div class="body">
   </div>
 </div>
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="nx">exports</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
-  <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Express&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">),</span> <span class="nx">messagesucc</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;authsucc&#39;</span><span class="p">)</span> <span class="p">});</span>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">index</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">){</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span> <span class="c1">//If req.session.user is a value other than undefined, there is a user logged in.</span>
+    <span class="kd">var</span> <span class="nx">subject</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">userdata</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">subject</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">chirpdata</span> <span class="o">=</span> <span class="nx">chirps</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">subject</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Chirper&#39;</span><span class="p">,</span>
+                             <span class="nx">name</span><span class="o">:</span> <span class="nx">userdata</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+                             <span class="nx">email</span><span class="o">:</span> <span class="nx">userdata</span><span class="p">.</span><span class="nx">email</span><span class="p">,</span>
+                             <span class="nx">chirps</span><span class="o">:</span> <span class="nx">chirpdata</span><span class="p">,</span>
+                             <span class="nx">user</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
+                             <span class="nx">userid</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+                             <span class="nx">username</span><span class="o">:</span> <span class="nx">userdata</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span>
+                             <span class="nx">message</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">)</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+    
+    <span class="k">else</span><span class="p">{</span> <span class="c1">//If there isn&#39;t a user logged in, redirect to /index with a message.</span>
+      <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Chirper&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">),</span> <span class="nx">messagesucc</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;authsucc&#39;</span><span class="p">)</span> <span class="p">});</span>
+    <span class="p">}</span>
+  
 <span class="p">};</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">logout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">destroy</span><span class="p">();</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Chirper&#39;</span> <span class="p">});</span>
+<span class="p">}</span>
 </pre></div>
         </td>
       </tr>

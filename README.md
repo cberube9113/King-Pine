@@ -18,11 +18,58 @@ Run 'npm install' in the root directory to install the above modules.
 - - -
 
 ### Project Assignment 04
-In this update we added:
+This section contains the update we made to the project, separated as the individual files.
 
 1. A suggestions dropdown in the search box powered by AJAX
 2. Posting of chirps in the home page without a reload, powered by socket.IO.
-3. Other miscelaneous bugfixes and code cleanup. 
+3. Other miscellaneous bugfixes and code cleanup.
+
+Note that node_modules has been updated.  Be sure to run 'npm install' again to get the latest packages in order to run.
+
+#### app.js
+- Updated the way the server is started to also start a socket listening.
+- Changed some routing around.  /login and /signup are no longer accessible alone.  This was done as a bug fix.
+	- They can still be accessed and will redirect to the index, as a user-experience consideration.
+
+#### chirps.js
+- Began to create functions to return arrays of chirps based on page requirements, such as friends-only or limited to number.
+- This allows us to follow the concept of Socket/IO as not needing GET and POST requests, with the data instead coming from the encapsulated functions.
+
+#### user.js
+- Created autocomplete function which manages the return values of the new AJAX implementation.
+- Created unlookup (username lookup) function which serves as the opposite of idLookup.  This was originally removed but has use now.
+
+#### chirp-socket.js
+- Created this file, which contains the export function to initialize and run a listening socket for the Socket/IO part of the project.
+
+#### discover.js
+- Minor updates: Function names to match changes made in chirps.js
+
+#### home.js
+- Updated the way data is passed to render the home.ejs view with new formatting.
+
+#### index.js
+- Created logout function.
+
+#### me.js
+- Minor updates: Made sure everything lined up with the new way we're going about presenting chirps, based on updates to chirps.js.
+
+#### user-sessions.js
+- Created different logout function.  We will determine how to implement one, the other, or a combination in time.
+
+#### All main views
+- Updated formatting for an updated interface.
+
+#### home.ejs
+- Added connection for the socket, and the code for it listening for an event on the textbook that chirps are submitted through.
+- Renamed the labels in the HTML of the text box to match with that of the socket.
+
+#### navbar.ejs
+- Added buttons to log in or log out.
+- Added calls to run the AJAX search box.
+
+#### public/javascripts/autocomplete.js
+- Created file, which is the backbone for the logic behind the AJAX search box.
 
 - - -
 

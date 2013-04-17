@@ -31,6 +31,48 @@
         <a href="#how-to-run">How to Run</a>
       </div>
       <div class="heading h3">
+        <a href="#project-assignment-04">Project Assignment 04</a>
+      </div>
+      <div class="heading h4">
+        <a href="#app.js">app.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#chirps.js">chirps.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#user.js">user.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#chirp-socket.js">chirp-socket.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#discover.js">discover.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#home.js">home.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#index.js">index.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#me.js">me.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#user-sessions.js">user-sessions.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#all-main-views">All main views</a>
+      </div>
+      <div class="heading h4">
+        <a href="#home.ejs">home.ejs</a>
+      </div>
+      <div class="heading h4">
+        <a href="#navbar.ejs">navbar.ejs</a>
+      </div>
+      <div class="heading h4">
+        <a href="#public-javascripts-autocomplete.js">public/javascripts/autocomplete.js</a>
+      </div>
+      <div class="heading h3">
         <a href="#project-assignment-03">Project Assignment 03</a>
       </div>
       <div class="heading h4">
@@ -48,29 +90,35 @@
       <div class="heading h4">
         <a href="#user.js">user.js</a>
       </div>
-      <div class="heading h3">
+      <div class="heading h4">
         <a href="#connect.js">connect.js</a>
       </div>
-      <div class="heading h3">
+      <div class="heading h4">
         <a href="#discover.js">discover.js</a>
       </div>
-      <div class="heading h3">
+      <div class="heading h4">
         <a href="#home.js">home.js</a>
       </div>
-      <div class="heading h3">
+      <div class="heading h4">
         <a href="#index.js">index.js</a>
       </div>
-      <div class="heading h3">
+      <div class="heading h4">
         <a href="#me.js">me.js</a>
       </div>
-      <div class="heading h3">
+      <div class="heading h4">
         <a href="#user-sessions.js">user-sessions.js</a>
       </div>
-      <div class="heading h3">
+      <div class="heading h4">
         <a href="#navbar.ejs">navbar.ejs</a>
       </div>
-      <div class="heading h3">
+      <div class="heading h4">
         <a href="#searchresults.ejs">searchresults.ejs</a>
+      </div>
+      <div class="heading h3">
+        <a href="#ongoing-updates">Ongoing Updates</a>
+      </div>
+      <div class="heading h4">
+        <a href="#this-section-contains-updates-that-do-not-correspond-to-a-specific-project--but-are-added-to-create-additional-functionality-or-to-fix-problems-listed-by-the-graders.">This section contains updates that do not correspond to a specific project, but are added to create additional functionality or to fix problems listed by the graders.</a>
       </div>
       <div class="heading h2">
         <a href="#documentation">Documentation</a>
@@ -121,7 +169,207 @@
 Note you must have the required modules which are not included in git:
 + connect-flash
 + ejs
-+ express</p>
++ express
++ socket.io
++ sequelize</p>
+
+<p>Run 'npm install' in the root directory to install the above modules.</p>
+
+<hr />
+
+
+<div class="pilwrap" id="project-assignment-04">
+  <h3>
+    <a href="#project-assignment-04" class="pilcrow">&#182;</a>
+    Project Assignment 04
+  </h3>
+</div>
+
+
+<p>This section contains the update we made to the project, separated as the individual files.</p>
+
+<ol>
+<li>A suggestions dropdown in the search box powered by AJAX</li>
+<li>Posting of chirps in the home page without a reload, powered by socket.IO.</li>
+<li>Other miscellaneous bugfixes and code cleanup.</li>
+</ol>
+
+<p>Note that node_modules has been updated.  Be sure to run 'npm install' again to get the latest packages in order to run.</p>
+
+
+<div class="pilwrap" id="app.js">
+  <h4>
+    <a href="#app.js" class="pilcrow">&#182;</a>
+    app.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Updated the way the server is started to also start a socket listening.</li>
+<li>Changed some routing around.  /login and /signup are no longer accessible alone.  This was done as a bug fix.
+<ul><li>They can still be accessed and will redirect to the index, as a user-experience consideration.</li></ul></li>
+</ul>
+
+
+<div class="pilwrap" id="chirps.js">
+  <h4>
+    <a href="#chirps.js" class="pilcrow">&#182;</a>
+    chirps.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Began to create functions to return arrays of chirps based on page requirements, such as friends-only or limited to number.</li>
+<li>This allows us to follow the concept of Socket/IO as not needing GET and POST requests, with the data instead coming from the encapsulated functions.</li>
+</ul>
+
+
+<div class="pilwrap" id="user.js">
+  <h4>
+    <a href="#user.js" class="pilcrow">&#182;</a>
+    user.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Created autocomplete function which manages the return values of the new AJAX implementation.</li>
+<li>Created unlookup (username lookup) function which serves as the opposite of idLookup.  This was originally removed but has use now.</li>
+</ul>
+
+
+<div class="pilwrap" id="chirp-socket.js">
+  <h4>
+    <a href="#chirp-socket.js" class="pilcrow">&#182;</a>
+    chirp-socket.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Created this file, which contains the export function to initialize and run a listening socket for the Socket/IO part of the project.</li>
+</ul>
+
+
+<div class="pilwrap" id="discover.js">
+  <h4>
+    <a href="#discover.js" class="pilcrow">&#182;</a>
+    discover.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Minor updates: Function names to match changes made in chirps.js</li>
+</ul>
+
+
+<div class="pilwrap" id="home.js">
+  <h4>
+    <a href="#home.js" class="pilcrow">&#182;</a>
+    home.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Updated the way data is passed to render the home.ejs view with new formatting.</li>
+</ul>
+
+
+<div class="pilwrap" id="index.js">
+  <h4>
+    <a href="#index.js" class="pilcrow">&#182;</a>
+    index.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Created logout function.</li>
+</ul>
+
+
+<div class="pilwrap" id="me.js">
+  <h4>
+    <a href="#me.js" class="pilcrow">&#182;</a>
+    me.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Minor updates: Made sure everything lined up with the new way we're going about presenting chirps, based on updates to chirps.js.</li>
+</ul>
+
+
+<div class="pilwrap" id="user-sessions.js">
+  <h4>
+    <a href="#user-sessions.js" class="pilcrow">&#182;</a>
+    user-sessions.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Created different logout function.  We will determine how to implement one, the other, or a combination in time.</li>
+</ul>
+
+
+<div class="pilwrap" id="all-main-views">
+  <h4>
+    <a href="#all-main-views" class="pilcrow">&#182;</a>
+    All main views
+  </h4>
+</div>
+
+
+<ul>
+<li>Updated formatting for an updated interface.</li>
+</ul>
+
+
+<div class="pilwrap" id="home.ejs">
+  <h4>
+    <a href="#home.ejs" class="pilcrow">&#182;</a>
+    home.ejs
+  </h4>
+</div>
+
+
+<ul>
+<li>Added connection for the socket, and the code for it listening for an event on the textbook that chirps are submitted through.</li>
+<li>Renamed the labels in the HTML of the text box to match with that of the socket.</li>
+</ul>
+
+
+<div class="pilwrap" id="navbar.ejs">
+  <h4>
+    <a href="#navbar.ejs" class="pilcrow">&#182;</a>
+    navbar.ejs
+  </h4>
+</div>
+
+
+<ul>
+<li>Added buttons to log in or log out.</li>
+<li>Added calls to run the AJAX search box.</li>
+</ul>
+
+
+<div class="pilwrap" id="public-javascripts-autocomplete.js">
+  <h4>
+    <a href="#public-javascripts-autocomplete.js" class="pilcrow">&#182;</a>
+    public/javascripts/autocomplete.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Created file, which is the backbone for the logic behind the AJAX search box.</li>
+</ul>
 
 <hr />
 
@@ -211,10 +459,10 @@ Note you must have the required modules which are not included in git:
 
 
 <div class="pilwrap" id="connect.js">
-  <h3>
+  <h4>
     <a href="#connect.js" class="pilcrow">&#182;</a>
     connect.js
-  </h3>
+  </h4>
 </div>
 
 
@@ -224,10 +472,10 @@ Note you must have the required modules which are not included in git:
 
 
 <div class="pilwrap" id="discover.js">
-  <h3>
+  <h4>
     <a href="#discover.js" class="pilcrow">&#182;</a>
     discover.js
-  </h3>
+  </h4>
 </div>
 
 
@@ -237,10 +485,10 @@ Note you must have the required modules which are not included in git:
 
 
 <div class="pilwrap" id="home.js">
-  <h3>
+  <h4>
     <a href="#home.js" class="pilcrow">&#182;</a>
     home.js
-  </h3>
+  </h4>
 </div>
 
 
@@ -250,10 +498,10 @@ Note you must have the required modules which are not included in git:
 
 
 <div class="pilwrap" id="index.js">
-  <h3>
+  <h4>
     <a href="#index.js" class="pilcrow">&#182;</a>
     index.js
-  </h3>
+  </h4>
 </div>
 
 
@@ -263,10 +511,10 @@ Note you must have the required modules which are not included in git:
 
 
 <div class="pilwrap" id="me.js">
-  <h3>
+  <h4>
     <a href="#me.js" class="pilcrow">&#182;</a>
     me.js
-  </h3>
+  </h4>
 </div>
 
 
@@ -277,10 +525,10 @@ Note you must have the required modules which are not included in git:
 
 
 <div class="pilwrap" id="user-sessions.js">
-  <h3>
+  <h4>
     <a href="#user-sessions.js" class="pilcrow">&#182;</a>
     user-sessions.js
-  </h3>
+  </h4>
 </div>
 
 
@@ -290,10 +538,10 @@ Note you must have the required modules which are not included in git:
 
 
 <div class="pilwrap" id="navbar.ejs">
-  <h3>
+  <h4>
     <a href="#navbar.ejs" class="pilcrow">&#182;</a>
     navbar.ejs
-  </h3>
+  </h4>
 </div>
 
 
@@ -304,10 +552,10 @@ Note you must have the required modules which are not included in git:
 
 
 <div class="pilwrap" id="searchresults.ejs">
-  <h3>
+  <h4>
     <a href="#searchresults.ejs" class="pilcrow">&#182;</a>
     searchresults.ejs
-  </h3>
+  </h4>
 </div>
 
 
@@ -315,6 +563,31 @@ Note you must have the required modules which are not included in git:
 <li>Created view file, displays the user that was searched for.</li>
 <li>In reality is essentially a copy of "Me" page, but with the subject being the searched user.</li>
 <li>In the future, this page will likely be altered/merged with other pages but at the moment stands alone and is working.</li>
+</ul>
+
+
+<div class="pilwrap" id="ongoing-updates">
+  <h3>
+    <a href="#ongoing-updates" class="pilcrow">&#182;</a>
+    Ongoing Updates
+  </h3>
+</div>
+
+
+
+<div class="pilwrap" id="this-section-contains-updates-that-do-not-correspond-to-a-specific-project--but-are-added-to-create-additional-functionality-or-to-fix-problems-listed-by-the-graders.">
+  <h4>
+    <a href="#this-section-contains-updates-that-do-not-correspond-to-a-specific-project--but-are-added-to-create-additional-functionality-or-to-fix-problems-listed-by-the-graders." class="pilcrow">&#182;</a>
+    This section contains updates that do not correspond to a specific project, but are added to create additional functionality or to fix problems listed by the graders.
+  </h4>
+</div>
+
+
+<ul>
+<li>Updated navbar to display "Log In or Sign Up" instead of a user on search page if nobody logged in.
+<ul><li>This also fixes the search results page breaking if nobody is logged in.</li></ul></li>
+<li>Updated logic to deal with searching for users that don't exist by flashing error messages.</li>
+<li>Created 404 page.</li>
 </ul>
 
 

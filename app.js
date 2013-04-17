@@ -167,8 +167,8 @@ app.get('/follow/:user',function(req,res){
 	res.redirect('/'+u);
 });
 
-// ### Logic to render the 404 page if anything unexpected is visited.
- //*THIS MUST BE THE VERY LAST CODE BEFORE THE SERVER IS STARTED*
+// ### Logic to render the 404 page if anything unexpected is visited.  
+// THIS MUST BE THE VERY LAST CODE BEFORE THE SERVER IS STARTED  
  
 app.use(function(req, res, next){
   res.render('404', { title: '404'

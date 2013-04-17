@@ -21,6 +21,9 @@
       <div class="heading h2">
         <a href="#authentication-function">Authentication Function</a>
       </div>
+      <div class="heading h2">
+        <a href="#logout-function">Logout Function</a>
+      </div>
     </div>
   </div>
   <div id="sidebar-toggle"></div>
@@ -124,6 +127,49 @@
         <span class="p">}</span>
     <span class="p">})</span>
   <span class="p">}</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="logout-function">
+  <h2>
+    <a href="#logout-function" class="pilcrow">&#182;</a>
+    Logout Function
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">logout</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Check if user is actually logged in  This <em>should</em> always be true.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">user</span> <span class="o">!==</span> <span class="kc">undefined</span> <span class="o">&amp;&amp;</span> <span class="nx">online</span><span class="p">[</span><span class="nx">user</span><span class="p">.</span><span class="nx">uid</span><span class="p">]</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//The user is logged in</span>
+    <span class="nx">online</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">//Delete the user from the online datbase.</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span> <span class="c1">// Set the session to be undefined, all checks read this as nobody logged in.</span>
+    <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;authsucc&#39;</span><span class="p">,</span><span class="s1">&#39;Successfully logged out.  Log in to continue.&#39;</span><span class="p">);</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+  
+  <span class="k">else</span><span class="p">{</span>
+    <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="s1">&#39;How the hell did you get here?&#39;</span><span class="p">);</span>
+  <span class="p">}</span> 
+
 <span class="p">}</span>
 </pre></div>
         </td>

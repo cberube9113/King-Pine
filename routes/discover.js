@@ -5,7 +5,7 @@ var chirps = require('../lib/chirps.js');
 
 exports.list = function(req,res) {
 	if(req.session.user != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
-		var discoveryChirps = chirps.discover();
+		var discoveryChirps = chirps.discoveryChirps();
   	  	res.render('discover', { title: 'Discover'
     							, discoveryChirps: discoveryChirps
     							, user: req.session.user.name  });

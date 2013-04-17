@@ -20,9 +20,14 @@
       <div class="span9">
         <h3>Chirps</h3><br>
 
-        <% for(var i=0;i<discoveryChirps.length;i++) { %>
-        <%= discoveryChirps[i].data%> - <%= discoveryChirps[i].uid %><br>
-        <% } %><br>
+        <div id="chirp_view">
+          <% for(var i = 0; i < discoveryChirps.length; i++) { %>
+            <br /><span><span class="identifier"><%= discoveryChirps[i].name %></span> @<%= discoveryChirps[i].username %></span>
+            <div class="chirper">
+              <p><%= discoveryChirps[i].data %></p>
+            </div>
+          <% } %>
+        </div>
       </div>
     </div>
   </div>
