@@ -62,7 +62,12 @@
     // Send the chirp data to the server
     // First argument is the name given to the emit. The server-side routes/chirp-socket.js responds to emits with this name within 'init'.
     // Second argument is an object containing the chirp text, its timestamp, and the userid of the user who chirped. This is passed to the callback in 'init'.
-    socket.emit('chirp', { chirp: chirpData, timestamp: d.getTime(), userid: <%= userid %> });
+
+    if (chirpData.length > 0) {
+      socket.emit('chirp', { chirp: chirpData, timestamp: d.getTime(), userid: <%= userid %> });
+    } else {
+      alert("You must provide content for your chirp!");
+    }
 
 	 // Clear the textarea now that the chirp has been submitted.
     $("#chirp_box").val("");
