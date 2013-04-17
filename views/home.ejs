@@ -37,7 +37,7 @@
         <h3>Chirps</h3>
         <div id="chirp_view">
           <% for(var i = 0; i < chirps.length; i++) { %>
-            <br /><span><span class="identifier"><%= chirps[i].name %></span> @<%= chirps[i].username %></span>
+            <br /><span><span class="identifier"><%= chirps[i].name %></span> <a href="/<%= chirps[i].username %>">@<%= chirps[i].username %></a></span>
             <div class="chirper">
               <p><%= chirps[i].data %></p>
             </div>
