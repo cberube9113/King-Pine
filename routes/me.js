@@ -16,7 +16,9 @@ exports.list = function(req,res) {
     				   followers: followers,
     				   nchirps: nchirps,
     				   chirpdata: chirpdata,
-    				   user: req.session.user.name});
+    				   user: req.session.user.name,
+                       username: req.session.user.username
+                    });
     }
     
     else{ //If there isn't a user logged in, redirect to /index with a message.
