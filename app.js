@@ -19,7 +19,8 @@ var express = require('express')
   , user = require('./lib/user')
   , chirps = require('./lib/chirps')
   , follow = require('./lib/follow')
-  , Sequelize = require('sequelize');
+  , Sequelize = require('sequelize')
+  , test = require('./routes/test');
 
 var app = express();
 
@@ -116,6 +117,10 @@ app.get('/search/:query', user.autocomplete);
 //#### Redirects user to functional spec.
 app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
+});
+
+app.get('/test', function (req,res){
+	test.insert_user();
 });
 
 //### Individual User Pages
