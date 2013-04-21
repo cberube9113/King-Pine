@@ -119,8 +119,17 @@ app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
 });
 
-app.get('/test', function (req,res){
-	test.insert_user();
+
+// *******TEST ROUTES*******
+// *******REMOVE THESE BEFORE PUBLISHING*******
+app.get('/test2', function(req,res){
+	test.createRob();
+	res.send('Created.');
+});
+
+app.get('/test3', function(req,res){
+	test.delRob();
+	res.send('Deleted.');
 });
 
 //### Individual User Pages
