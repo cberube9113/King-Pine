@@ -19,6 +19,7 @@ var express = require('express')
   , user = require('./lib/user')
   , chirps = require('./lib/chirps')
   , follow = require('./lib/follow')
+  , sql = require('./lib/sql.js')
   , Sequelize = require('sequelize')
   , test = require('./routes/test');
 
@@ -112,7 +113,7 @@ app.post('/new-chirp',function(req,res){
 
 
 //#### Runs when a user enters a search in the search box
-app.get('/search/:query', user.autocomplete);
+app.get('/search/:query', sql.autocomplete);
 
 //#### Redirects user to functional spec.
 app.get('/spec', function(req,res){

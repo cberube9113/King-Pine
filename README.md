@@ -17,6 +17,19 @@ Run 'npm install' in the root directory to install the above modules.
 
 - - -
 
+### Project Assignment 05
+This section contains the updates we made to the project, separated as the individual files.
+
+1. Implement a functioning sqlite3 database in place of the faux-database we created with the lib files.
+2. Implement our "new feature" - Hashtag searching and ordering.
+3. Other miscellaneous bugfixes and code cleanup.
+
+#### user.js
+- Fixed a bug that only allowed searching in lower case.
+
+
+
+
 ### Project Assignment 04
 This section contains the update we made to the project, separated as the individual files.
 
