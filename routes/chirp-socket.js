@@ -7,10 +7,10 @@ addLocalChirp = function(data, date, uid){
 	chirps.addChirp(data, date, uid);
 }
 
-exports.init = function(socket) {
+exports.init = function(socket, io) {
 	socket.on('chirp', function(data) {
 		console.log('Received post: ' + JSON.stringify(data));
 		addLocalChirp(data["chirp"], data["timestamp"], data["userid"]);
-		socket.emit('updateView', data);
+		io.sockets.emit('updateView', data);
 	});
 };
