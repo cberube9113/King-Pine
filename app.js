@@ -199,7 +199,7 @@ var io = require('socket.io', {'log level': 0}).listen(server);
 var chirpApp = require('./routes/chirp-socket');
 
 io.sockets.on('connection', function(socket){
-	chirpApp.init(socket);
+	chirpApp.init(socket, io);
 });
 	
 

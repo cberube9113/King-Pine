@@ -8,10 +8,10 @@ addLocalChirp = function(data, uid, date){
 	sql.addChirp(data, uid, date);
 }
 
-exports.init = function(socket) {
+exports.init = function(socket, io) {
 	socket.on('chirp', function(data) {
 		console.log('Received post: ' + JSON.stringify(data));
 		addLocalChirp(data["chirp"], data["userid"], data["timestamp"]);
-		socket.emit('updateView', data);
+		io.sockets.emit('updateView', data);
 	});
 };
