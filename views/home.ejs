@@ -20,6 +20,9 @@
         </div><br />
       </div>
       <div class="span9">
+
+        <div id="svg-div" style="position:absolute;left:0;top:0;width:100%;height:100%;z-index:10;background-color:rgba(0,0,0,0.8);display:none;">
+        </div>
      
         <div class="control-group">
           <label for="chirp" class="control-label">Chirp Something:</label>
@@ -107,6 +110,10 @@
     var chirpView = $("#chirp_view");
 
     chirpView.prepend(generateChirp(chirp));
+
+    if (chirp.toLowerCase() == "I have friends!".toLowerCase()) {
+      FireworkDisplay.launchText();
+    }
   }
 
     socket.on('updateView', function (data) {
