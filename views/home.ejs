@@ -109,8 +109,8 @@
     chirpView.prepend(generateChirp(chirp));
   }
 
-    socket.on('updateView', function (data) {
-      addChirpToView(data["chirp"]);
+  socket.on('updateView', function (data) {
+    addChirpToView(data["chirp"]);
   });
 </script>
 
