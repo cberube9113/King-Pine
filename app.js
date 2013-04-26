@@ -20,8 +20,7 @@ var express = require('express')
   , chirps = require('./lib/chirps')
   , follow = require('./lib/follow')
   , sql = require('./lib/sql.js')
-  , Sequelize = require('sequelize')
-  , test = require('./routes/test'); //***MAKE SURE THIS IS DELETED BEFORE PUBLISHING***
+  , Sequelize = require('sequelize');
 
 var app = express();
 
@@ -118,16 +117,6 @@ app.get('/search/:query', sql.autocomplete);
 //#### Redirects user to functional spec.
 app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
-});
-
-
-// *******TEST ROUTES*******
-// *******REMOVE THESE BEFORE PUBLISHING*******
-app.get('/test2', test.getAll);
-
-app.get('/test3', function(req,res){
-	test.createRob();
-	res.send('Created.');
 });
 
 //### Individual User Pages
