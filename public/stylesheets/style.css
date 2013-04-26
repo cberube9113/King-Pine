@@ -45,6 +45,10 @@ a {
   padding: 4px;
 }
 
+.shadow {
+  text-shadow: 0 0 10px #FFFFFF;
+}
+
 .vcenter {
   text-align: center;
 }
@@ -108,3 +112,9 @@ li.selected {
 
 /* display of quote author (alternatively use a class on the element following the blockquote) */
 .chirper + p {padding-left:15px; font:14px Arial, sans-serif;}
+
+.pill-badge {
+  float: left;
+  margin-top: 5px;
+  margin-right: 4px;
+}
