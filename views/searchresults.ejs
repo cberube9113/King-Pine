@@ -6,18 +6,20 @@
     <div class="row">
       <div class="span3">
         <div class="small-box">
+        <div class="shadow">
+        <ul class="nav nav-pills nav-stacked">
 	         <% if(user != undefined && user != nameOfSearchedUser){ %>
 				<% if(isfollowing == true) { %>
-					<a href="/follow/<%= u %>" >Stop Following</a>
+					<li><a href="/follow/<%= u %>" >Stop Following</a></li>
 				<% } %>
 				<% if(isfollowing == false) { %>
-					<a href="/follow/<%= u %>" >Start Following<a>
-				<% } %><br>
+					<li><a href="/follow/<%= u %>" >Start Following<a></li>
+				<% } %>
 			<% } %>
-			<span class="badge badge-important"><%= nchirps %></span><a href="#"> Chirps</a><br>
-			<span class="badge badge-important"><%= following %></span><a href="#"> Following</a><br>
-			<span class="badge badge-important"><%= followers %></span><a href="#"> Followers</a><br>
-        </div><br />
+			<li><span class="badge badge-important"><%= nchirps %></span><a href="#"> Chirps</a></li>
+			<li><span class="badge badge-important"><%= following %></span><a href="#"> Following</a></li>
+			<li><span class="badge badge-important"><%= followers %></span><a href="#"> Followers</a></li>
+        </ul></div></div><br />
         <div class="small-box">
           <h3>Who to Follow</h3><br>
         </div><br />
