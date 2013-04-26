@@ -31,11 +31,7 @@ exports.list = function(req,res) {
                              username: userdata.username,
     						 message: req.flash('auth')
     	   });
-	   }
-		
-		
-		
-		});
+	   });
 	
     }
     
