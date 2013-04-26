@@ -5,21 +5,22 @@
     <% include navbar %>
     <div class="row">
       <div class="span3">
-        <div class="small-box">
-        <div class="shadow">
-        <ul class="nav nav-pills nav-stacked">
-	         <% if(user != undefined && user != nameOfSearchedUser){ %>
-				<% if(isfollowing == true) { %>
-					<li><a href="/follow/<%= u %>" >Stop Following</a></li>
-				<% } %>
-				<% if(isfollowing == false) { %>
-					<li><a href="/follow/<%= u %>" >Start Following<a></li>
-				<% } %>
-			<% } %>
-			<li><span class="badge badge-important pill-badge"><%= nchirps %></span><a href="#"> Chirps</a></li>
-			<li><span class="badge badge-important pill-badge"><%= following %></span><a href="#"> Following</a></li>
-			<li><span class="badge badge-important pill-badge"><%= followers %></span><a href="#"> Followers</a></li>
-        </ul></div></div><br />
+        <div class="small-box shadow">
+          <ul class="nav nav-pills nav-stacked">
+            <% if(user != undefined && user != nameOfSearchedUser) { %>
+              <% if(isfollowing == true) { %>
+                <li><a href="/follow/<%= u %>" >Stop Following</a></li>
+              <% } %>
+              <% if(isfollowing == false) { %>
+                <li><a href="/follow/<%= u %>" >Start Following</a></li>
+              <% } %>
+            <% } %>
+            <li><span class="badge badge-important pill-badge"><%= nchirps %></span><a href="#"> Chirps</a></li>
+            <li><span class="badge badge-important pill-badge"><%= following %></span><a href="#"> Following</a></li>
+            <li><span class="badge badge-important pill-badge"><%= followers %></span><a href="#"> Followers</a></li>
+          </ul>
+        </div><br />
+        
         <div class="small-box">
           <h3>Who to Follow</h3><br>
         </div><br />
