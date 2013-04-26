@@ -21,7 +21,7 @@ var express = require('express')
   , follow = require('./lib/follow')
   , sql = require('./lib/sql.js')
   , Sequelize = require('sequelize')
-  , test = require('./routes/test');
+  , test = require('./routes/test'); //***MAKE SURE THIS IS DELETED BEFORE PUBLISHING***
 
 var app = express();
 
@@ -123,14 +123,11 @@ app.get('/spec', function(req,res){
 
 // *******TEST ROUTES*******
 // *******REMOVE THESE BEFORE PUBLISHING*******
-app.get('/test2', function(req,res){
-	test.createRob();
-	res.send('Created.');
-});
+app.get('/test2', test.getAll);
 
 app.get('/test3', function(req,res){
-	test.delRob();
-	res.send('Deleted.');
+	test.createRob();
+	res.send('Created.');
 });
 
 //### Individual User Pages
