@@ -45,6 +45,14 @@ a {
   padding: 4px;
 }
 
+.shadow {
+  text-shadow: 0 0 10px #FFFFFF;
+}
+
+.me-shadow{
+  white-space: nowrap;
+}
+
 .vcenter {
   text-align: center;
 }
