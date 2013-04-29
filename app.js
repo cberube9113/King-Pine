@@ -20,7 +20,8 @@ var express = require('express')
   , chirps = require('./lib/chirps')
   , follow = require('./lib/follow')
   , sql = require('./lib/sql.js')
-  , Sequelize = require('sequelize');
+  , Sequelize = require('sequelize')
+  , test = require('./routes/test');
 
 var app = express();
 
@@ -118,6 +119,9 @@ app.get('/search/:query', sql.autocomplete);
 app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
 });
+
+app.get('/test', test.numfollowing);
+
 
 //### Individual User Pages
 
