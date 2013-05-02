@@ -120,7 +120,7 @@ app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
 });
 
-app.get('/test', test.numfollowing);
+app.get('/test', test.test);
 
 
 //### Individual User Pages
