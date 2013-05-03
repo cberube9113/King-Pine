@@ -1,4 +1,5 @@
 var userlib = require('../lib/user');
+var sql = require('../lib/sql.js');
 
 //Logged in Database
 var online = {};
@@ -22,7 +23,7 @@ if(user !== undefined && online[user.uid] !== undefined) {  //If the user is log
 		var password = req.body.password;
 		
 		//Perform a lookup.
-		userlib.login(username,password,function(error,user) {
+		sql.login(username,password,function(error,user) {
 
 			if(error){ //If the login fails, flash a message and go back to login screen.
 				req.flash('auth',error);

@@ -1,12 +1,24 @@
 var follow = require('../lib/follow.js');
 var chirps = require('../lib/chirps.js');
+var sql = require('../lib/sql.js');
 
 // ##list
 //Renders me page
 
 exports.list = function(req,res) {
-	if(req.session.user != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
-		var subject = req.session.user;
+    var session = req.session.user;
+	if(session != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
+		var locals = {};
+        locals.title = 'Me';
+        locals.user = session.name;
+        locals.username = session.username;
+
+        
+
+
+
+
+        var subject = req.session.user;
 		var following = follow.numfollowing(subject.username);
 		var followers = follow.numfollowers(subject.username);
 		var nchirps = chirps.numchirps(subject.username);
