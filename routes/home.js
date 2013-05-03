@@ -9,17 +9,18 @@ var async = require('async');
 
 exports.list = function(req,res) {
 	if(req.session.user != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
-        var locals = {};
+        var locals = {}; // Object that we will pass to the views in the res.render command. Build it as we go.
         locals.title = 'Chirper';
         locals.message = req.flash('auth');
 
+        // Some variables we'll instantiate as we pull data from the databse....
         var username = req.session.user.username;
-        var userid;
-        var following; // Array of those you're following, where the fid attribute of the objects is the only element.
-        var count;
-        var dbInput;
+        var userid; // Userid of the currently logged in user
+        var count; // Number of people the current user is following
+        var dbInput; // SQLite command that will select the chirps we want for the homepage
 
         async.series([
+            // Retrieve the data of the currently logged-in user
             function(callback){
                 sql.getUser(username, function(err, user){ // Callback; 'user' is an object returned from the database.
                     console.log('got here 1.5');
@@ -35,58 +36,57 @@ exports.list = function(req,res) {
                     console.log('got here 2');
                     callback();
 
-                })}
+                });
+            },
 
-                , function(callback){
-                    console.log('Calling getNumFollowing...');
-                    sql.getNumFollowing(0, function(err, countObject){
-                        console.log(countObject);
-                        count = countObject.count;
-                        console.log(count);
-                        callback();
-                    });}
+            // Find the number of users you're following
+            function(callback){
+                console.log('Calling getNumFollowing...');
+                sql.getNumFollowing(0, function(err, countObject){
+                    console.log(countObject);
+                    count = countObject.count;
+                    console.log(count);
+                    callback();
+                });
+            },
 
+            // Pull an object containing all the chirps we want for the home page
+            function(callback){
+                sql.getFollowing(userid, function(err, fArray){ // fArray is an array of objects for each person you're following. The 'fid' property is the object's fid.
 
+                    console.log(fArray);
 
-                    , function(callback){
-                        sql.getFollowing(userid, function(err, fArray){
+                    // Pull chirps whose uid is the current user's uid. Also pull...
+                    dbInput = 'SELECT * FROM chirps WHERE uid IN (' + userid + ',';
+                    console.log(dbInput);
 
-                            console.log(fArray);
+                    // ... Also pull chirps whose uid is a user you're following.
+                    fArray.forEach(function(value){
+                        dbInput = dbInput + value.fid + ',';
+                    });
 
-                            dbInput = 'SELECT * FROM chirps WHERE uid IN (' + userid + ',';
-                                console.log(dbInput);
+                    console.log(dbInput);
 
-                                fArray.forEach(function(value){
-                                    dbInput = dbInput + value.fid + ',';
-                                });
+                    dbInput = dbInput.slice(0,-1); // Remove the last character, i.e. the comma
+                    console.log(dbInput);
 
-                                console.log(dbInput);
+                    dbInput = dbInput + ') ORDER BY timestamp DESC LIMIT 5'; // Most recent first, choose first (most recent) five
 
-                        dbInput = dbInput.slice(0,-1); // Remove the last character, i.e. the comma
-                        console.log(dbInput);
+                    console.log(dbInput);
 
-                        dbInput = dbInput + ') ORDER BY timestamp DESC';
+                    sql.homeChirps(dbInput, function(err, Chirps){
+                        console.log(Chirps);
+                        locals.chirps = Chirps;
+                        res.render('home', locals);
+                    });
 
-                        console.log(dbInput);
+                    callback();
+                });
+            }],
 
-                        sql.homeChirps(dbInput, function(err, Chirps){
-                            console.log(Chirps);
-                            locals.chirps = Chirps;
-                            res.render('home', locals);
-                        });
-
-
-                        callback();
-
-                    })}
-
-
-
-
-
-            ], function(err){ // Callback function after all parallel calls have completed.
+            function(err){ // Callback function after all serial calls have completed.
                 if(err){
-                    console.log('ERROr!');
+                    console.log('ERROR!');
                 }           
             });
 // ===========================================================================
