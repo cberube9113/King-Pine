@@ -1,4 +1,3 @@
-var userlib = require('../lib/user');
 var sql = require('../lib/sql.js');
 
 //Logged in Database
