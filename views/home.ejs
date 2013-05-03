@@ -37,7 +37,7 @@
         <h3>Chirps</h3>
         <div id="chirp_view">
           <% for(var i = 0; i < chirps.length; i++) { %>
-            <br /><span><span class="identifier"><%= chirps[i].name %></span> <a href="/<%= chirps[i].username %>">@<%= chirps[i].username %></a> <%= chirps[i].timestamp %></span>
+            <br /><span><span class="identifier"><%= chirps[i].name %></span> <a href="/<%= chirps[i].username %>">@<%= chirps[i].username %></a> <%= new Date(chirps[i].timestamp).toString().slice(0, -18) %></span>
             <div class="chirper">
               <p><%= chirps[i].data %></p>
             </div>
@@ -92,8 +92,8 @@
   // **Returns**  
   // &nbsp;&nbsp;*String* HTML string containing the new chirp, to be appended to the view.
   function generateChirp(chirp) {
-    html = "<br /><span><span class=\"identifier\">" + "<%= name %>" + "</span> @"; 
-    html += "<%= username %>" + "</span>";
+    html = "<br /><span><span class=\"identifier\">" + "<%= name %>" + "</span> <a href=\"/<%= username %>\">@";
+    html += "<%= username %></a> " + new Date(Date.now()).toString().slice(0, -18) + "</span>";
     html += "<div class=\"chirper\">";
     html += "<p>" + chirp + "</p>";
     html += "</div>";
