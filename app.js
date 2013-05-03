@@ -14,12 +14,12 @@ var express = require('express')
   , signup = require('./routes/signup')
   , auth = require('./routes/user-sessions')
   , search = require('./routes/search')
+  , follow = require('./routes/follow')
   , http = require('http')
   , path = require('path')
   , flash = require('connect-flash')
   , user = require('./lib/user')
   , chirps = require('./lib/chirps')
-  , follow = require('./lib/follow')
   , sql = require('./lib/sql.js')
   , Sequelize = require('sequelize')
   , test = require('./routes/test');
@@ -130,13 +130,7 @@ app.get('/test', test.test);
 // *This request must be below all other one-directory routes.*
 app.get('/:user', search.list);
 
-app.get('/follow/:user',function(req,res){
-	var u = req.params.user;
-	var uid = req.session.user.id;
-	var fid = user.idlookup(u);
-	follow.followdbUpdate(uid,fid);
-	res.redirect('/'+u);
-});
+app.get('/follow/:user', follow.list);
 
 // ### Logic to render the 404 page if anything unexpected is visited.  
 // THIS MUST BE THE VERY LAST CODE BEFORE THE SERVER IS STARTED  
