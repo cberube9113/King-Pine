@@ -26,7 +26,7 @@ This section contains the updates we made to the project, separated as the indiv
 3. Other miscellaneous bugfixes and code cleanup.
 
 #### 326.sqlite.db
-- Created four new tables in an SQLite database:
+- Created four new tables in an SQLite database:  
 	chirps(id integer primary key, data text, uid integer, timestamp integer, username text, name text)
 	follow(uid int, fid int)
 	hashtag(data string, id integer, foreign key(id) references chirps(id))
