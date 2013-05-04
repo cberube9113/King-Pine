@@ -20,7 +20,6 @@ exports.list = function (req,res) {
 		// Does the searched for user exist?
 		function(callback){
 			sql.doesUserExist(searchedUsername, function(err, resultBoolean){
-				//console.log(resultBoolean['EXISTS (SELECT 1 FROM users WHERE username=?)']);
 				if(resultBoolean['EXISTS (SELECT 1 FROM users WHERE username=?)'] == 0){
 					req.flash('auth','That user doesn\'t exist.  Would you like to create that user?');
 					res.redirect('/');
@@ -33,7 +32,6 @@ exports.list = function (req,res) {
 		// 
 		function(callback){
 			sql.getUser(searchedUsername, function(err, user){
-				console.log(user);
 				locals.u = user.username;
 				locals.nameOfSearchedUser = user.name;
 				searchedUser = user;
@@ -47,10 +45,7 @@ exports.list = function (req,res) {
 				locals.user = session.name;
 
 				sql.isFollowing(session.uid, searchedUser.uid, function(err, resultBoolean){
-					console.log(resultBoolean);
-					locals.isfollowing = resultBoolean['EXISTS (SELECT 1 FROM follow WHERE uid=? AND fid=?)'];
-					console.log(locals.isfollowing);
-					
+					locals.isfollowing = resultBoolean['EXISTS (SELECT 1 FROM follow WHERE uid=? AND fid=?)'];					
 				});
 			}
 			callback();

@@ -12,7 +12,6 @@ exports.list = function(req,res){
 		// Set fid
 		function(callback){
 			sql.getUser(u, function(err, user){
-				console.log(user);
 				fid = user.uid;
 				callback();
 			})
@@ -20,11 +19,8 @@ exports.list = function(req,res){
 
 		// See if uid is following fid
 		function(callback){
-			console.log('Got 1');
 			sql.isFollowing(uid, fid, function(err, resultBoolean){
-				console.log('got 2');
 				isfollowing = resultBoolean['EXISTS (SELECT 1 FROM follow WHERE uid=? AND fid=?)'];
-				console.log(isfollowing);
 				callback();
 			})
 		},
@@ -33,7 +29,6 @@ exports.list = function(req,res){
 		function(callback){
 			if(isfollowing == 0){
 				sql.addFollow(uid, fid, function(err){
-					console.log('Ran addFollow!');
 					if(err){
 						console.log('SQLite error in addFollow!');
 					}
@@ -42,7 +37,6 @@ exports.list = function(req,res){
 			}
 			else{
 				sql.delFollow(uid, fid, function(err){
-					console.log('Ran delFollow!');
 					if(err){
 						console.log('SQLite error in addFollow!');
 					}

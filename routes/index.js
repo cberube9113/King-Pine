@@ -21,7 +21,6 @@ exports.index = function(req, res){
             // Retrieve the data of the currently logged-in user
             function(callback){
                 sql.getUser(username, function(err, user){ // Callback; 'user' is an object returned from the database.
-                    console.log('got here 1.5');
 
                     locals.name = user.name;
                     locals.email = user.email;
@@ -30,8 +29,7 @@ exports.index = function(req, res){
                     locals.username = user.username;
 
                     userid = user.uid;
-                    console.log(userid);
-                    console.log('got here 2');
+
                     callback();
 
                 });
@@ -39,11 +37,8 @@ exports.index = function(req, res){
 
             // Find the number of users you're following
             function(callback){
-                console.log('Calling getNumFollowing...');
                 sql.getNumFollowing(0, function(err, countObject){
-                    console.log(countObject);
                     count = countObject.count;
-                    console.log(count);
                     callback();
                 });
             },
@@ -52,28 +47,19 @@ exports.index = function(req, res){
             function(callback){
                 sql.getFollowing(userid, function(err, fArray){ // fArray is an array of objects for each person you're following. The 'fid' property is the object's fid.
 
-                    console.log(fArray);
-
                     // Pull chirps whose uid is the current user's uid. Also pull...
                     dbInput = 'SELECT * FROM chirps WHERE uid IN (' + userid + ',';
-                    console.log(dbInput);
 
                     // ... Also pull chirps whose uid is a user you're following.
                     fArray.forEach(function(value){
                         dbInput = dbInput + value.fid + ',';
                     });
 
-                    console.log(dbInput);
-
                     dbInput = dbInput.slice(0,-1); // Remove the last character, i.e. the comma
-                    console.log(dbInput);
 
                     dbInput = dbInput + ') ORDER BY timestamp DESC LIMIT 5'; // Most recent first, choose first (most recent) five
 
-                    console.log(dbInput);
-
                     sql.homeChirps(dbInput, function(err, Chirps){
-                        console.log(Chirps);
                         locals.chirps = Chirps;
                         res.render('home', locals);
                     });
