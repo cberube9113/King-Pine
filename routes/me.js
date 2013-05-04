@@ -56,26 +56,6 @@ exports.list = function(req,res) {
             }
 
             );
-
-        
-
-
-
-/*
-        var subject = req.session.user;
-		var following = follow.numfollowing(subject.username);
-		var followers = follow.numfollowers(subject.username);
-		var nchirps = chirps.numchirps(subject.username);
-		var chirpdata = chirps.info(subject.username);
-   		res.render('me', { title: 'Me',
-    				   following: following,
-    				   followers: followers,
-    				   nchirps: nchirps,
-    				   chirpdata: chirpdata,
-    				   user: req.session.user.name,
-                       username: req.session.user.username
-                    });
-*/
     }
     
     else{ //If there isn't a user logged in, redirect to /index with a message.

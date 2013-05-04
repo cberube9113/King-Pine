@@ -6,12 +6,11 @@ var sql = require('../lib/sql.js');
 
 exports.list = function(req,res) {
 	if(req.session.user != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
-		//var discoveryChirps = chirps.discoveryChirps();
-		var locals = {};
+		var locals = {}; // To be fed into the view  
 		locals.title = 'Discover';
 		locals.user = req.session.user.name;
 
-		sql.discoveryChirps(function(err, chirps){
+		sql.discoveryChirps(function(err, chirps){ // 'chirps' is an array of appropriate chirp objects  
 			locals.discoveryChirps = chirps;
 			res.render('discover', locals);
 		});

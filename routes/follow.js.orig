@@ -19,7 +19,11 @@ exports.list = function(req,res){
 
 		// See if uid is following fid
 		function(callback){
+<<<<<<< Updated upstream
+			sql.isFollowing(uid, fid, function(err, resultBoolean){
+=======
 			sql.isFollowing(uid, fid, function(err, resultBoolean){ // resultBoolean has one property which is either 0 or 1  
+>>>>>>> Stashed changes
 				isfollowing = resultBoolean['EXISTS (SELECT 1 FROM follow WHERE uid=? AND fid=?)'];
 				callback();
 			})

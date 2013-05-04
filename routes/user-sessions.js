@@ -22,7 +22,7 @@ if(user !== undefined && online[user.uid] !== undefined) {  //If the user is log
 		var password = req.body.password;
 		
 		//Perform a lookup.
-		sql.login(username,password,function(error,user) {
+		sql.login(username,password,function(error,user) { // 'user' is the userobject if the login is successful  
 
 			if(error){ //If the login fails, flash a message and go back to login screen.
 				req.flash('auth',error);

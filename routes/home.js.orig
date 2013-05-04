@@ -20,13 +20,21 @@ exports.list = function(req,res) {
             // Retrieve the data of the currently logged-in user
             function(callback){
                 sql.getUser(username, function(err, user){ // Callback; 'user' is an object returned from the database.
+<<<<<<< Updated upstream
+
+=======
+>>>>>>> Stashed changes
                     locals.name = user.name;
                     locals.email = user.email;
                     locals.user = user.name;
                     locals.userid = user.uid;
                     locals.username = user.username;
 
+<<<<<<< Updated upstream
+                    userid = user.uid;
+=======
                     userid = user.uid; // To be used later in getFollowing
+>>>>>>> Stashed changes
                     callback();
 
                 });
@@ -34,7 +42,11 @@ exports.list = function(req,res) {
 
             // Find the number of users you're following
             function(callback){
+<<<<<<< Updated upstream
+                sql.getNumFollowing(0, function(err, countObject){
+=======
                 sql.getNumFollowing(0, function(err, countObject){ // countObject is an object with one property: the count  
+>>>>>>> Stashed changes
                     count = countObject.count;
                     callback();
                 });
@@ -56,7 +68,12 @@ exports.list = function(req,res) {
 
                     dbInput = dbInput + ') ORDER BY timestamp DESC LIMIT 5'; // Most recent first, choose first (most recent) five
 
+<<<<<<< Updated upstream
+
+                    sql.homeChirps(dbInput, function(err, Chirps){
+=======
                     sql.homeChirps(dbInput, function(err, Chirps){ // Chirps is the array of chirps to show on the home page  
+>>>>>>> Stashed changes
                         locals.chirps = Chirps;
                         res.render('home', locals);
                     });

@@ -6,7 +6,7 @@ var async = require('async');
  */
 
 exports.index = function(req, res){
-	if(req.session.user != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
+    if(req.session.user != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
         var locals = {}; // Object that we will pass to the views in the res.render command. Build it as we go.
         locals.title = 'Chirper';
         locals.message = req.flash('auth');
@@ -21,15 +21,13 @@ exports.index = function(req, res){
             // Retrieve the data of the currently logged-in user
             function(callback){
                 sql.getUser(username, function(err, user){ // Callback; 'user' is an object returned from the database.
-
                     locals.name = user.name;
                     locals.email = user.email;
                     locals.user = user.name;
                     locals.userid = user.uid;
                     locals.username = user.username;
 
-                    userid = user.uid;
-
+                    userid = user.uid; // To be used later in getFollowing
                     callback();
 
                 });
@@ -37,7 +35,7 @@ exports.index = function(req, res){
 
             // Find the number of users you're following
             function(callback){
-                sql.getNumFollowing(0, function(err, countObject){
+                sql.getNumFollowing(0, function(err, countObject){ // countObject is an object with one property: the count  
                     count = countObject.count;
                     callback();
                 });
@@ -59,7 +57,7 @@ exports.index = function(req, res){
 
                     dbInput = dbInput + ') ORDER BY timestamp DESC LIMIT 5'; // Most recent first, choose first (most recent) five
 
-                    sql.homeChirps(dbInput, function(err, Chirps){
+                    sql.homeChirps(dbInput, function(err, Chirps){ // Chirps is the array of chirps to show on the home page  
                         locals.chirps = Chirps;
                         res.render('home', locals);
                     });
@@ -73,28 +71,7 @@ exports.index = function(req, res){
                     console.log('ERROR!');
                 }           
             });
-}
-
-
-
-
-/*
-    if(req.session.user != undefined){ //If req.session.user is a value other than undefined, there is a user logged in.
-		var subject = req.session.user;
-		var userdata = user.info(subject.username);
-		var chirpdata = chirps.info(subject.username);
-    	res.render('home', { title: 'Chirper',
-                             name: userdata.name,
-                             email: userdata.email,
-                             chirps: chirpdata,
-                             user: req.session.user.name,
-                             userid: req.session.user.id,
-                             username: userdata.username,
-                             message: req.flash('auth')
-    	});
     }
-    
-    */
 
     else{ //If there isn't a user logged in, redirect to /index with a message.
     	res.render('index', { title: 'Chirper', message: req.flash('auth'), messagesucc: req.flash('authsucc') });

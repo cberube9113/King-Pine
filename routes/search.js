@@ -29,7 +29,6 @@ exports.list = function (req,res) {
 		},
 
 		// If we're here, the user is logged in.
-		// 
 		function(callback){
 			sql.getUser(searchedUsername, function(err, user){
 				locals.u = user.username;
@@ -82,9 +81,6 @@ exports.list = function (req,res) {
 				callback();
 			})
 		}
-
-
-
 		],
 
 
@@ -98,45 +94,3 @@ exports.list = function (req,res) {
 		}
 	);
 }
-
-/*
-	// See if the user exists
-	sql.doesUserExist(req.params.user, function(err, resultBoolean){
-		console.log(resultBoolean['EXISTS (SELECT 1 FROM users WHERE username=?)']);
-	});
-
-	if(userlib.exists(req.params.user) == 1){ //If the user exists in the database, load their page.
-		//Sets parameters based on the username in the page URL.
-			var u = req.params.user;
-			var nameOfSearchedUser = userlib.nameFromUsername(req.params.user);
-			var following = follow.numfollowing(u);
-			var followers = follow.numfollowers(u);
-			var nchirps = chirps.numchirps(u);
-			var chirpdata = chirps.info(u);
-			if(req.session.user != undefined){ //If there is a user logged in
-			var name = req.session.user.name;
-			var isfollowing = follow.isFollowing(req.session.user.username, u);
-			}
-			else{ //If there is not a user logged in
-			var name = undefined;
-			var isfollowing = undefined;
-			}
-		//Renders searchresults page, which is a copy of the Me page but with a modified subject.
-		res.render('searchresults', { title: 'Search Results',
-									   following: following,
-									   followers: followers,
-									   nchirps: nchirps,
-									   chirpdata: chirpdata,
-									   user: name,
-									   isfollowing: isfollowing,
-									   u: u,
-									   nameOfSearchedUser: nameOfSearchedUser
-									});
-		}
-
-	else{ //If the user does not exist, inform the searcher and give them an opportunity to create it.
-		req.flash('auth','That user doesn\'t exist.  Would you like to create that user?');
-		res.redirect('/');
-		}
-}
-*/

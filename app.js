@@ -93,24 +93,6 @@ app.post('/new-user',function(req,res){
 });
 
 
-/*
-// # Is this deprecated now that we have sockets.io?
-//#### Runs when a new chirp is made by a user (via the home page).
-app.post('/new-chirp',function(req,res){
-
-//Parameters set based on currently logged in user.
-	var username = req.session.user.username;
-	var uid = user.idlookup(username);
-//Parameter set based on field in form.
-	var data=req.body.chirp;
-//Runs the addChirp function from the *chirps* library file.
-	sql.addChirp(data,uid);
-//Redirects a user back to home after the chirp has been made.
-	res.redirect('/home');
-});
-*/
-
-
 //#### Runs when a user enters a search in the search box
 app.get('/search/:query', sql.autocomplete);
 
