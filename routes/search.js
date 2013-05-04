@@ -1,8 +1,5 @@
-var follow = require('../lib/follow.js');
-var chirps = require('../lib/chirps.js');
 var sql = require('../lib/sql.js');
 var async = require('async');
-var userlib = require('../lib/user.js');
 
 
 // ##list
