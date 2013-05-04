@@ -96,7 +96,7 @@
     html = "<br /><span><span class=\"identifier\">" + "<%= name %>" + "</span> <a href=\"/<%= username %>\">@";
     html += "<%= username %></a> " + new Date(Date.now()).toString().slice(0, -18) + "</span>";
     html += "<div class=\"chirper\">";
-    html += "<p>" + data.chirp + "</p>";
+    html += "<p>" + chirp + "</p>";
     html += "</div>";
 
     return html;
@@ -111,8 +111,7 @@
   }
 
   socket.on('updateView', function (data) {
-    //addChirpToView(data["chirp"]);
-    addChirpToView(data);
+    addChirpToView(data["chirp"]);
   });
 </script>
 
