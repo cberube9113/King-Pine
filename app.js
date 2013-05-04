@@ -13,15 +13,16 @@ var express = require('express')
   , me = require('./routes/me')
   , signup = require('./routes/signup')
   , auth = require('./routes/user-sessions')
+  , search = require('./routes/search')
+  , follow = require('./routes/follow')
   , http = require('http')
   , path = require('path')
   , flash = require('connect-flash')
   , user = require('./lib/user')
   , chirps = require('./lib/chirps')
-  , follow = require('./lib/follow')
   , sql = require('./lib/sql.js')
   , Sequelize = require('sequelize')
-  , test = require('./routes/test'); //***MAKE SURE THIS IS DELETED BEFORE PUBLISHING***
+  , test = require('./routes/test');
 
 var app = express();
 
@@ -120,64 +121,16 @@ app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
 });
 
+app.get('/test', test.test);
 
-// *******TEST ROUTES*******
-// *******REMOVE THESE BEFORE PUBLISHING*******
-app.get('/test2', test.getAll);
-
-app.get('/test3', function(req,res){
-	test.createRob();
-	res.send('Created.');
-});
 
 //### Individual User Pages
 
 //#### Individual page, like Me page, for each user.
 // *This request must be below all other one-directory routes.*
-app.get('/:user', function (req,res) {
+app.get('/:user', search.list);
 
-	if(user.exists(req.params.user) == 1){ //If the user exists in the database, load their page.
-		//Sets parameters based on the username in the page URL.
-			var u = req.params.user;
-			var nameOfSearchedUser = user.nameFromUsername(req.params.user);
-			var following = follow.numfollowing(u);
-			var followers = follow.numfollowers(u);
-			var nchirps = chirps.numchirps(u);
-			var chirpdata = chirps.info(u);
-			if(req.session.user != undefined){ //If there is a user logged in
-			var name = req.session.user.name;
-			var isfollowing = follow.isFollowing(req.session.user.username, u);
-			}
-			else{ //If there is not a user logged in
-			var name = undefined;
-			var isfollowing = undefined;
-			}
-		//Renders searchresults page, which is a copy of the Me page but with a modified subject.
-		res.render('searchresults', { title: 'Search Results',
-									   following: following,
-									   followers: followers,
-									   nchirps: nchirps,
-									   chirpdata: chirpdata,
-									   user: name,
-									   isfollowing: isfollowing,
-									   u: u,
-									   nameOfSearchedUser: nameOfSearchedUser
-									});
-		}
-
-	else{ //If the user does not exist, inform the searcher and give them an opportunity to create it.
-		req.flash('auth','That user doesn\'t exist.  Would you like to create that user?');
-		res.redirect('/');
-		}
-});
-
-app.get('/follow/:user',function(req,res){
-	var u = req.params.user;
-	var uid = req.session.user.id;
-	var fid = user.idlookup(u);
-	follow.followdbUpdate(uid,fid);
-	res.redirect('/'+u);
-});
+app.get('/follow/:user', follow.list);
 
 // ### Logic to render the 404 page if anything unexpected is visited.  
 // THIS MUST BE THE VERY LAST CODE BEFORE THE SERVER IS STARTED  
