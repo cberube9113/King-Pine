@@ -53,15 +53,29 @@ exports.list = function (req,res) {
 		// Get number of people the searched for user is following
 		function(callback){
 			sql.getNumFollowing(searchedUser.uid, function(err, countObject){
-				locals.following = countObject.count;
+				locals.numfollowing = countObject.count;
 				callback();
 			})
 		},
 
+        function(callback){
+            sql.getFolloweesForUser(searchedUser.uid, function(err, followees) {
+                locals.followees = followees;
+                callback();
+            });
+        },
+
+        function(callback){
+            sql.getFollowersForUser(searchedUser.uid, function(err, followers) {
+                locals.followers = followers;
+                callback();
+            });
+        },
+
 		// Get number of people following the searched user
 		function(callback){
 			sql.getNumFollowers(searchedUser.uid, function(err, countObject){
-				locals.followers = countObject.count;
+				locals.numfollowers = countObject.count;
 				callback();
 			});
 		},

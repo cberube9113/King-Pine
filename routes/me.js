@@ -16,7 +16,7 @@ exports.list = function(req,res) {
             // Get number of people you're following
             function(callback){
                 sql.getNumFollowing(session.uid, function(err, countObject){
-                    locals.following = countObject.count;
+                    locals.numfollowing = countObject.count;
                     callback();
                 })
             },
@@ -24,7 +24,21 @@ exports.list = function(req,res) {
             // Get number of people following you
             function(callback){
                 sql.getNumFollowers(session.uid, function(err, countObject){
-                    locals.followers = countObject.count;
+                    locals.numfollowers = countObject.count;
+                    callback();
+                });
+            },
+
+            function(callback){
+                sql.getFolloweesForUser(session.uid, function(err, followees) {
+                    locals.followees = followees;
+                    callback();
+                });
+            },
+
+            function(callback){
+                sql.getFollowersForUser(session.uid, function(err, followers) {
+                    locals.followers = followers;
                     callback();
                 });
             },
