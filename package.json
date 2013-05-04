@@ -10,7 +10,6 @@
     "ejs": "*",
     "socket.io": "0.9.14",
     "connect-flash": "0.1.0",
-    "sequelize": "1.6.0",
     "sqlite3": ">= 2.1.7",
     "async": "*"
   }

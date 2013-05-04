@@ -11,7 +11,8 @@ Note you must have the required modules which are not included in git:
 + ejs
 + express
 + socket.io
-+ sequelize
++ sqlite3
++ async
 
 Run 'npm install' in the root directory to install the above modules.
 
@@ -24,11 +25,59 @@ This section contains the updates we made to the project, separated as the indiv
 2. Implement our "new feature" - Hashtag searching and ordering.
 3. Other miscellaneous bugfixes and code cleanup.
 
-#### user.js
-- Fixed a bug that only allowed searching in lower case.
+#### 326.sqlite.db
+- Created four new tables in an SQLite database:
+	chirps(id integer primary key, data text, uid integer, timestamp integer, username text, name text)
+	follow(uid int, fid int)
+	hashtag(data string, id integer, foreign key(id) references chirps(id))
+	users(uid integer primary key, name text, email text, username text, password text)
 
+#### user.js, follow.js, chirps.js
+- All deprecated after implementing SQLite. All functionality moved into sql.js.
 
+#### sql.js
+- Implemented all functions in user.js, follow.js, and chirps.js in SQLite.
 
+#### chirp-socket.js
+- added name input into new chirp function
+
+#### discover.js
+- Require sql.js
+- Call 'sql.discoveryChirps' to do all of the work pulling chirps for the view
+
+#### follow.js
+- Require sql and async
+- Rework the logic and use database functions to start/stop following
+
+#### home.js
+- Almost an entire rewrite to implement databases
+- Construct database call dynamically within this route to handle variable number of those you're following
+
+#### index.js
+- Similar changes to home.js to implement databases
+
+#### me.js
+- Use async and database calls to pull necessary information to populate the views
+
+#### me.ejs
+- Implement actual buttons for following and followers, which pops up a window to list them and allow clicking  
+
+#### search.js
+- Almost complete rewrite to implement async and databases 
+- Do some checking within async to render differently whether a session exists
+
+#### searchresults.ejs
+- Implement actual buttons for following and followers, which pops up a window to list them and allow clicking  
+
+#### user-sessions.js
+- Make login function call from the database
+
+#### app.js
+- Remove 'new-chirp' route, which was deprecated after socket.io
+- Pull out follow and search routes into separate route files
+- Change 'new-user' to save the new user to a real database
+
+- - -
 
 ### Project Assignment 04
 This section contains the update we made to the project, separated as the individual files.
