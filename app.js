@@ -18,11 +18,8 @@ var express = require('express')
   , http = require('http')
   , path = require('path')
   , flash = require('connect-flash')
-  , user = require('./lib/user')
-  , chirps = require('./lib/chirps')
   , sql = require('./lib/sql.js')
   , Sequelize = require('sequelize')
-  , test = require('./routes/test');
 
 var app = express();
 
@@ -97,6 +94,7 @@ app.post('/new-user',function(req,res){
 });
 
 
+/*
 // # Is this deprecated now that we have sockets.io?
 //#### Runs when a new chirp is made by a user (via the home page).
 app.post('/new-chirp',function(req,res){
@@ -111,6 +109,7 @@ app.post('/new-chirp',function(req,res){
 //Redirects a user back to home after the chirp has been made.
 	res.redirect('/home');
 });
+*/
 
 
 //#### Runs when a user enters a search in the search box
@@ -120,9 +119,6 @@ app.get('/search/:query', sql.autocomplete);
 app.get('/spec', function(req,res){
 	res.redirect('docs/funcspec.pdf');
 });
-
-app.get('/test', test.test);
-
 
 //### Individual User Pages
 
