@@ -19,7 +19,6 @@ var express = require('express')
   , path = require('path')
   , flash = require('connect-flash')
   , sql = require('./lib/sql.js')
-  , Sequelize = require('sequelize')
 
 var app = express();
 
@@ -85,7 +84,7 @@ app.post('/new-user',function(req,res){
 	if (name.length > 0 && username.length > 0 && email.length > 0 && password.length > 0) {
 	//If they were, adds the user to the database and informs them that they were created.
 	  req.flash('authsucc','User ' + name + ' was successfully created. You can now log in as ' + username); 
-	  user.addUser(name,email,password,username);
+	  sql.addUser(name,email,username,password);
 	} else {
 	//Otherwise fails the creation and informs the user to fill in all the fields.
 	  req.flash('auth', 'Please make sure you have filled out all fields of the Join form'); 
