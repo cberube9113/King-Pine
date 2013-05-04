@@ -1,6 +1,4 @@
-var chirps = require('../lib/chirps.js');
 var sql = require('../lib/sql.js');
-var user = require('../lib/user.js');
 
 
 // ##list
