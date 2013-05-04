@@ -84,7 +84,7 @@
         <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
                 <span class="nx">sql</span><span class="p">.</span><span class="nx">getNumFollowing</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">uid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">countObject</span><span class="p">){</span>
-                    <span class="nx">locals</span><span class="p">.</span><span class="nx">following</span> <span class="o">=</span> <span class="nx">countObject</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+                    <span class="nx">locals</span><span class="p">.</span><span class="nx">numfollowing</span> <span class="o">=</span> <span class="nx">countObject</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
                     <span class="nx">callback</span><span class="p">();</span>
                 <span class="p">})</span>
             <span class="p">},</span>
@@ -103,7 +103,28 @@
         <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
                 <span class="nx">sql</span><span class="p">.</span><span class="nx">getNumFollowers</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">uid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">countObject</span><span class="p">){</span>
-                    <span class="nx">locals</span><span class="p">.</span><span class="nx">followers</span> <span class="o">=</span> <span class="nx">countObject</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">countObject</span><span class="p">);</span>
+                    <span class="nx">locals</span><span class="p">.</span><span class="nx">numfollowers</span> <span class="o">=</span> <span class="nx">countObject</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+                    <span class="nx">callback</span><span class="p">();</span>
+                <span class="p">});</span>
+            <span class="p">},</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Get people you are following</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
+                <span class="nx">sql</span><span class="p">.</span><span class="nx">getFolloweesForUser</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">uid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">followees</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">locals</span><span class="p">.</span><span class="nx">followees</span> <span class="o">=</span> <span class="nx">followees</span><span class="p">;</span>
                     <span class="nx">callback</span><span class="p">();</span>
                 <span class="p">});</span>
             <span class="p">},</span>
@@ -115,7 +136,26 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Get people following you</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
+                <span class="nx">sql</span><span class="p">.</span><span class="nx">getFollowersForUser</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">uid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">followers</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">locals</span><span class="p">.</span><span class="nx">followers</span> <span class="o">=</span> <span class="nx">followers</span><span class="p">;</span>
+                    <span class="nx">callback</span><span class="p">();</span>
+                <span class="p">});</span>
+            <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
 </div>
 <p>Get number of chirps</p>
         </td>
@@ -134,7 +174,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
 </div>
 <p>Get array of chirps</p>
         </td>
@@ -153,7 +193,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
 </div>
 <p>Final callback after all parallel calls</p>
         </td>
@@ -168,40 +208,6 @@
             <span class="p">}</span>
 
             <span class="p">);</span>
-
-        
-
-
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
-</div>
-<div class="dox">
-  <div class="summary"><p>var subject = req.session.user;
-var following = follow.numfollowing(subject.username);
-var followers = follow.numfollowers(subject.username);
-var nchirps = chirps.numchirps(subject.username);
-var chirpdata = chirps.info(subject.username);
-res.render('me', { title: 'Me',
-following: following,
-followers: followers,
-nchirps: nchirps,
-chirpdata: chirpdata,
-user: req.session.user.name,
-username: req.session.user.username
-});</p>
-  </div>
-  <div class="body">
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
     <span class="p">}</span>
     
     <span class="k">else</span><span class="p">{</span> <span class="c1">//If there isn&#39;t a user logged in, redirect to /index with a message.</span>

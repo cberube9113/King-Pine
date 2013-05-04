@@ -99,17 +99,13 @@
         <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
                 <span class="nx">sql</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span> <span class="c1">// Callback; &#39;user&#39; is an object returned from the database.</span>
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;got here 1.5&#39;</span><span class="p">);</span>
-
                     <span class="nx">locals</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
                     <span class="nx">locals</span><span class="p">.</span><span class="nx">email</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">email</span><span class="p">;</span>
                     <span class="nx">locals</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
                     <span class="nx">locals</span><span class="p">.</span><span class="nx">userid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">uid</span><span class="p">;</span>
                     <span class="nx">locals</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
 
-                    <span class="nx">userid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">uid</span><span class="p">;</span>
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">userid</span><span class="p">);</span>
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;got here 2&#39;</span><span class="p">);</span>
+                    <span class="nx">userid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">uid</span><span class="p">;</span> <span class="c1">// To be used later in getFollowing</span>
                     <span class="nx">callback</span><span class="p">();</span>
 
                 <span class="p">});</span>
@@ -128,11 +124,8 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
             <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
-                <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Calling getNumFollowing...&#39;</span><span class="p">);</span>
-                <span class="nx">sql</span><span class="p">.</span><span class="nx">getNumFollowing</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">countObject</span><span class="p">){</span>
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">countObject</span><span class="p">);</span>
+                <span class="nx">sql</span><span class="p">.</span><span class="nx">getNumFollowing</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">countObject</span><span class="p">){</span> <span class="c1">// countObject is an object with one property: the count  </span>
                     <span class="nx">count</span> <span class="o">=</span> <span class="nx">countObject</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">count</span><span class="p">);</span>
                     <span class="nx">callback</span><span class="p">();</span>
                 <span class="p">});</span>
             <span class="p">},</span>
@@ -152,8 +145,6 @@
             <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
                 <span class="nx">sql</span><span class="p">.</span><span class="nx">getFollowing</span><span class="p">(</span><span class="nx">userid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">fArray</span><span class="p">){</span> <span class="c1">// fArray is an array of objects for each person you&#39;re following. The &#39;fid&#39; property is the object&#39;s fid.</span>
 
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">fArray</span><span class="p">);</span>
-
 
 </pre></div>
         </td>
@@ -167,7 +158,6 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
                     <span class="nx">dbInput</span> <span class="o">=</span> <span class="s1">&#39;SELECT * FROM chirps WHERE uid IN (&#39;</span> <span class="o">+</span> <span class="nx">userid</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="p">;</span>
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dbInput</span><span class="p">);</span>
 
 
 </pre></div>
@@ -185,17 +175,11 @@
                         <span class="nx">dbInput</span> <span class="o">=</span> <span class="nx">dbInput</span> <span class="o">+</span> <span class="nx">value</span><span class="p">.</span><span class="nx">fid</span> <span class="o">+</span> <span class="s1">&#39;,&#39;</span><span class="p">;</span>
                     <span class="p">});</span>
 
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dbInput</span><span class="p">);</span>
-
                     <span class="nx">dbInput</span> <span class="o">=</span> <span class="nx">dbInput</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span> <span class="c1">// Remove the last character, i.e. the comma</span>
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dbInput</span><span class="p">);</span>
 
                     <span class="nx">dbInput</span> <span class="o">=</span> <span class="nx">dbInput</span> <span class="o">+</span> <span class="s1">&#39;) ORDER BY timestamp DESC LIMIT 5&#39;</span><span class="p">;</span> <span class="c1">// Most recent first, choose first (most recent) five</span>
 
-                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">dbInput</span><span class="p">);</span>
-
-                    <span class="nx">sql</span><span class="p">.</span><span class="nx">homeChirps</span><span class="p">(</span><span class="nx">dbInput</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">Chirps</span><span class="p">){</span>
-                        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">Chirps</span><span class="p">);</span>
+                    <span class="nx">sql</span><span class="p">.</span><span class="nx">homeChirps</span><span class="p">(</span><span class="nx">dbInput</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">Chirps</span><span class="p">){</span> <span class="c1">// Chirps is the array of chirps to show on the home page  </span>
                         <span class="nx">locals</span><span class="p">.</span><span class="nx">chirps</span> <span class="o">=</span> <span class="nx">Chirps</span><span class="p">;</span>
                         <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;home&#39;</span><span class="p">,</span> <span class="nx">locals</span><span class="p">);</span>
                     <span class="p">});</span>
@@ -209,50 +193,10 @@
                     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;ERROR!&#39;</span><span class="p">);</span>
                 <span class="p">}</span>           
             <span class="p">});</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
-</div>
-<p>===========================================================================</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
-</div>
-<div class="dox">
-  <div class="summary"><p>var userdata = user.info(username);
-var fids = sql.isFollowing(username);
-var homeChirps = sql.homeChirps(fids, username);</p>
-  </div>
-  <div class="body"><p>res.render('home', { title: 'Chirper',
-name: userdata.name,
-email: userdata.email,
-chirps: homeChirps,
-user: req.session.user.name,
-userid: req.session.user.id,
-username: userdata.username,
-message: req.flash('auth')
-});</p>
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-<span class="p">}</span>
+    <span class="p">}</span>
     <span class="k">else</span><span class="p">{</span> <span class="c1">//If there isn&#39;t a user logged in, redirect to /index with a message.</span>
       <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
-<span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
         </td>

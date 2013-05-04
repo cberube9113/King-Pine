@@ -367,36 +367,6 @@
       </tr>
       <tr>
         <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
-</div>
-<div class="dox">
-  <div class="summary"><p>// # Is this deprecated now that we have sockets.io?
-//#### Runs when a new chirp is made by a user (via the home page).
-app.post('/new-chirp',function(req,res){</p>
-  </div>
-  <div class="body"><p>//Parameters set based on currently logged in user.
-var username = req.session.user.username;
-var uid = user.idlookup(username);
-//Parameter set based on field in form.
-var data=req.body.chirp;
-//Runs the addChirp function from the <em>chirps</em> library file.
-sql.addChirp(data,uid);
-//Redirects a user back to home after the chirp has been made.
-res.redirect('/home');
-});</p>
-  </div>
-</div>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-
-
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
 <div class="pilwrap" id="runs-when-a-user-enters-a-search-in-the-search-box">
   <h4>
     <a href="#runs-when-a-user-enters-a-search-in-the-search-box" class="pilcrow">&#182;</a>
@@ -495,7 +465,7 @@ res.redirect('/home');
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
 </div>
 <p>Create server.</p>
         </td>
@@ -509,7 +479,7 @@ res.redirect('/home');
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
 </div>
 <p>WebSockets/Socket.IO</p>
         </td>

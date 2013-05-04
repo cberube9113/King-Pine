@@ -58,6 +58,8 @@ exports.list = function (req,res) {
 			})
 		},
 
+
+        // Get people you are following
         function(callback){
             sql.getFolloweesForUser(searchedUser.uid, function(err, followees) {
                 locals.followees = followees;
@@ -65,6 +67,7 @@ exports.list = function (req,res) {
             });
         },
 
+        // Get people following you
         function(callback){
             sql.getFollowersForUser(searchedUser.uid, function(err, followers) {
                 locals.followers = followers;

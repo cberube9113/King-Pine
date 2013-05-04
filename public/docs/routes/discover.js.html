@@ -63,23 +63,11 @@
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">list</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span> <span class="c1">//If req.session.user is a value other than undefined, there is a user logged in.</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
-</div>
-<p>var discoveryChirps = chirps.discoveryChirps();</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-    <span class="kd">var</span> <span class="nx">locals</span> <span class="o">=</span> <span class="p">{};</span>
+    <span class="kd">var</span> <span class="nx">locals</span> <span class="o">=</span> <span class="p">{};</span> <span class="c1">// To be fed into the view  </span>
     <span class="nx">locals</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;Discover&#39;</span><span class="p">;</span>
     <span class="nx">locals</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
 
-    <span class="nx">sql</span><span class="p">.</span><span class="nx">discoveryChirps</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">chirps</span><span class="p">){</span>
+    <span class="nx">sql</span><span class="p">.</span><span class="nx">discoveryChirps</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">chirps</span><span class="p">){</span> <span class="c1">// &#39;chirps&#39; is an array of appropriate chirp objects  </span>
       <span class="nx">locals</span><span class="p">.</span><span class="nx">discoveryChirps</span> <span class="o">=</span> <span class="nx">chirps</span><span class="p">;</span>
       <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;discover&#39;</span><span class="p">,</span> <span class="nx">locals</span><span class="p">);</span>
     <span class="p">});</span>

@@ -34,7 +34,46 @@
         <a href="#project-assignment-05">Project Assignment 05</a>
       </div>
       <div class="heading h4">
-        <a href="#user.js">user.js</a>
+        <a href="#326.sqlite.db">326.sqlite.db</a>
+      </div>
+      <div class="heading h4">
+        <a href="#user.js--follow.js--chirps.js">user.js, follow.js, chirps.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#sql.js">sql.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#chirp-socket.js">chirp-socket.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#discover.js">discover.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#follow.js">follow.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#home.js">home.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#index.js">index.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#me.js">me.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#me.ejs">me.ejs</a>
+      </div>
+      <div class="heading h4">
+        <a href="#search.js">search.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#searchresults.ejs">searchresults.ejs</a>
+      </div>
+      <div class="heading h4">
+        <a href="#user-sessions.js">user-sessions.js</a>
+      </div>
+      <div class="heading h4">
+        <a href="#app.js">app.js</a>
       </div>
       <div class="heading h3">
         <a href="#project-assignment-04">Project Assignment 04</a>
@@ -177,7 +216,8 @@ Note you must have the required modules which are not included in git:
 + ejs
 + express
 + socket.io
-+ sequelize</p>
++ sqlite3
++ async</p>
 
 <p>Run 'npm install' in the root directory to install the above modules.</p>
 
@@ -201,17 +241,198 @@ Note you must have the required modules which are not included in git:
 </ol>
 
 
-<div class="pilwrap" id="user.js">
+<div class="pilwrap" id="326.sqlite.db">
   <h4>
-    <a href="#user.js" class="pilcrow">&#182;</a>
-    user.js
+    <a href="#326.sqlite.db" class="pilcrow">&#182;</a>
+    326.sqlite.db
   </h4>
 </div>
 
 
 <ul>
-<li>Fixed a bug that only allowed searching in lower case.</li>
+<li>Created four new tables in an SQLite database: <br />
+chirps(id integer primary key, data text, uid integer, timestamp integer, username text, name text) <br />
+follow(uid int, fid int) <br />
+hashtag(data string, id integer, foreign key(id) references chirps(id)) <br />
+users(uid integer primary key, name text, email text, username text, password text)  </li>
 </ul>
+
+
+<div class="pilwrap" id="user.js--follow.js--chirps.js">
+  <h4>
+    <a href="#user.js--follow.js--chirps.js" class="pilcrow">&#182;</a>
+    user.js, follow.js, chirps.js
+  </h4>
+</div>
+
+
+<ul>
+<li>All deprecated after implementing SQLite. All functionality moved into sql.js.</li>
+</ul>
+
+
+<div class="pilwrap" id="sql.js">
+  <h4>
+    <a href="#sql.js" class="pilcrow">&#182;</a>
+    sql.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Implemented all functions in user.js, follow.js, and chirps.js in SQLite.</li>
+</ul>
+
+
+<div class="pilwrap" id="chirp-socket.js">
+  <h4>
+    <a href="#chirp-socket.js" class="pilcrow">&#182;</a>
+    chirp-socket.js
+  </h4>
+</div>
+
+
+<ul>
+<li>added name input into new chirp function</li>
+</ul>
+
+
+<div class="pilwrap" id="discover.js">
+  <h4>
+    <a href="#discover.js" class="pilcrow">&#182;</a>
+    discover.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Require sql.js</li>
+<li>Call 'sql.discoveryChirps' to do all of the work pulling chirps for the view</li>
+</ul>
+
+
+<div class="pilwrap" id="follow.js">
+  <h4>
+    <a href="#follow.js" class="pilcrow">&#182;</a>
+    follow.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Require sql and async</li>
+<li>Rework the logic and use database functions to start/stop following</li>
+</ul>
+
+
+<div class="pilwrap" id="home.js">
+  <h4>
+    <a href="#home.js" class="pilcrow">&#182;</a>
+    home.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Almost an entire rewrite to implement databases</li>
+<li>Construct database call dynamically within this route to handle variable number of those you're following</li>
+</ul>
+
+
+<div class="pilwrap" id="index.js">
+  <h4>
+    <a href="#index.js" class="pilcrow">&#182;</a>
+    index.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Similar changes to home.js to implement databases</li>
+</ul>
+
+
+<div class="pilwrap" id="me.js">
+  <h4>
+    <a href="#me.js" class="pilcrow">&#182;</a>
+    me.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Use async and database calls to pull necessary information to populate the views</li>
+</ul>
+
+
+<div class="pilwrap" id="me.ejs">
+  <h4>
+    <a href="#me.ejs" class="pilcrow">&#182;</a>
+    me.ejs
+  </h4>
+</div>
+
+
+<ul>
+<li>Implement actual buttons for following and followers, which pops up a window to list them and allow clicking  </li>
+</ul>
+
+
+<div class="pilwrap" id="search.js">
+  <h4>
+    <a href="#search.js" class="pilcrow">&#182;</a>
+    search.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Almost complete rewrite to implement async and databases </li>
+<li>Do some checking within async to render differently whether a session exists</li>
+</ul>
+
+
+<div class="pilwrap" id="searchresults.ejs">
+  <h4>
+    <a href="#searchresults.ejs" class="pilcrow">&#182;</a>
+    searchresults.ejs
+  </h4>
+</div>
+
+
+<ul>
+<li>Implement actual buttons for following and followers, which pops up a window to list them and allow clicking  </li>
+</ul>
+
+
+<div class="pilwrap" id="user-sessions.js">
+  <h4>
+    <a href="#user-sessions.js" class="pilcrow">&#182;</a>
+    user-sessions.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Make login function call from the database</li>
+</ul>
+
+
+<div class="pilwrap" id="app.js">
+  <h4>
+    <a href="#app.js" class="pilcrow">&#182;</a>
+    app.js
+  </h4>
+</div>
+
+
+<ul>
+<li>Remove 'new-chirp' route, which was deprecated after socket.io</li>
+<li>Pull out follow and search routes into separate route files</li>
+<li>Change 'new-user' to save the new user to a real database</li>
+</ul>
+
+<hr />
 
 
 <div class="pilwrap" id="project-assignment-04">

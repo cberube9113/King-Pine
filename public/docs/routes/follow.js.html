@@ -45,7 +45,7 @@
   <span class="kd">var</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
   <span class="kd">var</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">uid</span><span class="p">;</span>
   <span class="kd">var</span> <span class="nx">fid</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">isfollowing</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">isfollowing</span><span class="p">;</span> <span class="c1">// 1 if uid is following fid; 0 otherwise</span>
 
   <span class="nx">async</span><span class="p">.</span><span class="nx">series</span><span class="p">([</span>
 
@@ -62,7 +62,6 @@
         <td class="code highlight"><div class="highlight"><pre>
     <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
       <span class="nx">sql</span><span class="p">.</span><span class="nx">getUser</span><span class="p">(</span><span class="nx">u</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">user</span><span class="p">);</span>
         <span class="nx">fid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">uid</span><span class="p">;</span>
         <span class="nx">callback</span><span class="p">();</span>
       <span class="p">})</span>
@@ -81,11 +80,8 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
     <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Got 1&#39;</span><span class="p">);</span>
-      <span class="nx">sql</span><span class="p">.</span><span class="nx">isFollowing</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span> <span class="nx">fid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">resultBoolean</span><span class="p">){</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;got 2&#39;</span><span class="p">);</span>
+      <span class="nx">sql</span><span class="p">.</span><span class="nx">isFollowing</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span> <span class="nx">fid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">resultBoolean</span><span class="p">){</span> <span class="c1">// resultBoolean has one property which is either 0 or 1  </span>
         <span class="nx">isfollowing</span> <span class="o">=</span> <span class="nx">resultBoolean</span><span class="p">[</span><span class="s1">&#39;EXISTS (SELECT 1 FROM follow WHERE uid=? AND fid=?)&#39;</span><span class="p">];</span>
-        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">isfollowing</span><span class="p">);</span>
         <span class="nx">callback</span><span class="p">();</span>
       <span class="p">})</span>
     <span class="p">},</span>
@@ -105,7 +101,6 @@
     <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
       <span class="k">if</span><span class="p">(</span><span class="nx">isfollowing</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
         <span class="nx">sql</span><span class="p">.</span><span class="nx">addFollow</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span> <span class="nx">fid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ran addFollow!&#39;</span><span class="p">);</span>
           <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;SQLite error in addFollow!&#39;</span><span class="p">);</span>
           <span class="p">}</span>
@@ -114,7 +109,6 @@
       <span class="p">}</span>
       <span class="k">else</span><span class="p">{</span>
         <span class="nx">sql</span><span class="p">.</span><span class="nx">delFollow</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span> <span class="nx">fid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
-          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;Ran delFollow!&#39;</span><span class="p">);</span>
           <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
             <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;SQLite error in addFollow!&#39;</span><span class="p">);</span>
           <span class="p">}</span>

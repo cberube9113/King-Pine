@@ -114,7 +114,7 @@
 <p>Perform a lookup.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-    <span class="nx">sql</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span><span class="nx">password</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">sql</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span><span class="nx">password</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// &#39;user&#39; is the userobject if the login is successful  </span>
 
       <span class="k">if</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span> <span class="c1">//If the login fails, flash a message and go back to login screen.</span>
         <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span><span class="nx">error</span><span class="p">);</span>
