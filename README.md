@@ -27,10 +27,10 @@ This section contains the updates we made to the project, separated as the indiv
 
 #### 326.sqlite.db
 - Created four new tables in an SQLite database:  
-	chirps(id integer primary key, data text, uid integer, timestamp integer, username text, name text)
-	follow(uid int, fid int)
-	hashtag(data string, id integer, foreign key(id) references chirps(id))
-	users(uid integer primary key, name text, email text, username text, password text)
+	chirps(id integer primary key, data text, uid integer, timestamp integer, username text, name text)  
+	follow(uid int, fid int)  
+	hashtag(data string, id integer, foreign key(id) references chirps(id))  
+	users(uid integer primary key, name text, email text, username text, password text)  
 
 #### user.js, follow.js, chirps.js
 - All deprecated after implementing SQLite. All functionality moved into sql.js.
