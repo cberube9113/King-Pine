@@ -1,1 +1,1 @@
-var tree={"files":["README.md","app.js"],"dirs":{"lib":{"files":["chirps.js","follow.js","user.js"]},"routes":{"files":["chirp-socket.js","connect.js","discover.js","home.js","index.js","login.js","me.js","signup.js","user-sessions.js"]}}};
+var tree={"files":["README.md","app.js"],"dirs":{"lib":{"files":["sql.js"]},"routes":{"files":["chirp-socket.js","connect.js","discover.js","follow.js","home.js","index.js","login.js","me.js","search.js","signup.js","user-sessions.js"]}}};

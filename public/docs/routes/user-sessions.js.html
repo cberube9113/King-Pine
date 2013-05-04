@@ -43,7 +43,7 @@
 </div>
 
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">userlib</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/user&#39;</span><span class="p">);</span>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">sql</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/sql.js&#39;</span><span class="p">);</span>
 
 
 </pre></div>
@@ -98,6 +98,7 @@
   <span class="p">}</span>
   
   <span class="k">else</span><span class="p">{</span> <span class="c1">//Get the username and password from form.</span>
+
     <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
     <span class="kd">var</span> <span class="nx">password</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">password</span><span class="p">;</span>
     
@@ -113,16 +114,19 @@
 <p>Perform a lookup.</p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-    <span class="nx">userlib</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span><span class="nx">password</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">sql</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span><span class="nx">password</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">,</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+
       <span class="k">if</span><span class="p">(</span><span class="nx">error</span><span class="p">){</span> <span class="c1">//If the login fails, flash a message and go back to login screen.</span>
         <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span><span class="nx">error</span><span class="p">);</span>
         <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
       <span class="p">}</span>
       
       <span class="k">else</span><span class="p">{</span> <span class="c1">//If the login succeeds, redirect to main and set the user to logged in.</span>
+
         <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
         <span class="nx">online</span><span class="p">[</span><span class="nx">user</span><span class="p">.</span><span class="nx">uid</span><span class="p">]</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
         <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39; was successfully logged in&#39;</span><span class="p">);</span>
+
         <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">})</span>

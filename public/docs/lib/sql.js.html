@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>sql.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" media="all" href="../doc-style.css" />
+  <script src="../doc-filelist.js"></script>
+  <script>
+    var relativeDir = "../", thisFile = "lib/sql.js", defaultSidebar = true;
+  </script>
+  <script src="../doc-script.js"></script>
+</head>
+<body>
+  <div id="sidebar_wrapper">
+    <div id="sidebar_switch">
+      <span class="tree">Files</span>
+      <span class="headings">Headings</span>
+    </div>
+    <div id="tree"></div>
+    <div id="headings">
+      <div class="heading h1">
+        <a href="#user-database-functions">User Database Functions</a>
+      </div>
+      <div class="heading h1">
+        <a href="#chirp-database-functions">Chirp database functions</a>
+      </div>
+      <div class="heading h1">
+        <a href="#follow-database-functions">Follow database functions</a>
+      </div>
+      <div class="heading h2">
+        <a href="#followdbupdate">followdbUpdate</a>
+      </div>
+      <div class="heading h2">
+        <a href="#numfollowing">numfollowing</a>
+      </div>
+      <div class="heading h1">
+        <a href="#users">Users</a>
+      </div>
+      <div class="heading h2">
+        <a href="#login">login</a>
+      </div>
+    </div>
+  </div>
+  <div id="sidebar-toggle"></div>
+  <div id="container"><div class="background highlight"></div>
+<table cellpadding="0" cellspacing="0">
+  <tbody>
+      <tr>
+        <td class="docs">
+          <h1>sql.js</h1>
+        </td>
+        <td class="code highlight"></td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-1" id="section-1">&#182;</a>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre><span class="nx">sqlite3</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;sqlite3&#39;</span><span class="p">);</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-2" id="section-2">&#182;</a>
+</div>
+<p>var user = require('../lib/user.js');
+var follow = require('../lib/follow.js');</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Connect to the database which has already been created.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">sqlite3</span><span class="p">.</span><span class="nx">Database</span><span class="p">(</span><span class="s1">&#39;./data/326.sqlite.db&#39;</span><span class="p">);</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="user-database-functions">
+  <h1>
+    <a href="#user-database-functions" class="pilcrow">&#182;</a>
+    User Database Functions
+  </h1>
+</div>
+
+
+<p>Add user to the <strong>users</strong> table
+<div class="highlight">
+<strong>Parameters</strong>
+&nbsp;&nbsp; <strong>uid</strong> User's uid.  By setting this to NULL, the uid will be set to the next available uid.
+&nbsp;&nbsp; <strong>name</strong> User's full name
+&nbsp;&nbsp; <strong>email</strong> User's email address
+&nbsp;&nbsp; <strong>username</strong> User's username
+&nbsp;&nbsp; <strong>password</strong> User's password
+<strong>Returns</strong>
+&nbsp;&nbsp; No return, but the table in the database is updated.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">addUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s1">&#39;INSERT INTO users VALUES (NULL,?,?,?,?)&#39;</span><span class="p">,[</span><span class="nx">name</span><span class="p">,</span> <span class="nx">email</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">]);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Delete user from <strong>users</strong> table
+This is not currently implemented, but may be in the future.
+<div class="highlight">
+<strong>Parameters</strong>
+&nbsp;&nbsp; <strong>uid</strong> User's uid.
+<strong>Returns</strong>
+&nbsp;&nbsp; No return, the user is deleted from the database.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">delUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">uid</span><span class="p">)</span>
+<span class="p">{</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s1">&#39;DELETE FROM users WHERE uid=?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">uid</span><span class="p">]);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>getUser function</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getUser</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM users where username=?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">username</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">doesUserExist</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;SELECT EXISTS (SELECT 1 FROM users WHERE username=?)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">username</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Autocomplete function
+To be used with our AJAX functionality for user search
+<strong>Parameters</strong>
+&nbsp;&nbsp; <strong>req and res</strong> Standard reqest/response parameters.
+&nbsp;&nbsp; <strong>cb</strong> Callback function.
+<strong>Returns</strong>
+&nbsp;&nbsp; <strong>res.send(names)</strong>  Sends the array made in the function.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">autocomplete</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">cb</span><span class="p">)</span> <span class="p">{</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<p>Set the global variables.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="kd">var</span> <span class="nx">query</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">query</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">names</span> <span class="o">=</span> <span class="p">[];</span>
+  <span class="kd">var</span> <span class="nx">tableLength</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">curname</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">curusername</span><span class="p">;</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-9" id="section-9">&#182;</a>
+</div>
+<p>Set tableLength to be the number of users registered.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(uid) AS count FROM users&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">tl</span><span class="p">){</span>
+      <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+        <span class="nx">cb</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="k">else</span><span class="p">{</span>
+        <span class="nx">tableLength</span> <span class="o">=</span> <span class="nx">tl</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">count</span><span class="p">;</span>
+        
+      <span class="p">}</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-10" id="section-10">&#182;</a>
+</div>
+<p>Pull all usernames and names from the table, then do the comparison on each row.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+        <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;SELECT name,username FROM users&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">){</span>
+          <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+            <span class="nx">cb</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+          <span class="p">}</span>
+          <span class="k">else</span><span class="p">{</span>
+            <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">tableLength</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">){</span> <span class="c1">//For each element in the table, set the two variables</span>
+              <span class="nx">curname</span> <span class="o">=</span> <span class="nx">user</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">name</span><span class="p">;</span>
+              <span class="nx">curusername</span> <span class="o">=</span> <span class="nx">user</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">username</span><span class="p">;</span>
+
+              <span class="k">if</span><span class="p">(</span><span class="nx">curname</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">().</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">query</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="c1">//If we have a match, push that match to the global array names.</span>
+                <span class="nx">names</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">curname</span><span class="p">);</span>
+                <span class="nx">names</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">curusername</span><span class="p">);</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="nx">res</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">names</span><span class="p">);</span>
+          
+        <span class="p">}</span> 
+      <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span> 
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="chirp-database-functions">
+  <h1>
+    <a href="#chirp-database-functions" class="pilcrow">&#182;</a>
+    Chirp database functions
+  </h1>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-12" id="section-12">&#182;</a>
+</div>
+<p>Add chirp function
+Takes in the data of a chirp and adds it to the chirp table.
+<strong>Parameters</strong>
+&nbsp;&nbsp; <strong>data</strong> The content of the chirp.
+&nbsp;&nbsp; <strong>uid</strong> the User ID of the user who made the chirp.
+&nbsp;&nbsp; <strong>date</strong> The timestamp of the chirp.
+&nbsp;&nbsp; <strong>cb</strong> Callback function.
+<strong>Returns</strong>
+&nbsp;&nbsp; No return, inserts chirp into database.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">addChirp</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">uid</span><span class="p">,</span> <span class="nx">date</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">name</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s1">&#39;INSERT INTO chirps VALUES(NULL,?,?,?,?,?)&#39;</span><span class="p">,[</span><span class="nx">data</span><span class="p">,</span> <span class="nx">uid</span><span class="p">,</span> <span class="nx">date</span><span class="p">,</span> <span class="nx">username</span><span class="p">,</span> <span class="nx">name</span><span class="p">],</span><span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;SQLite error!&quot;</span><span class="p">);</span>   
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getNumChirps</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userid</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(uid) AS count FROM chirps WHERE uid=?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">userid</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-13" id="section-13">&#182;</a>
+</div>
+<p>Chirp table function
+Returns the chirp table to the calling function to be searched.
+<strong>Parameters</strong>
+&nbsp;&nbsp; <strong>fids</strong> An array of uids of users that the person is following.
+&nbsp;&nbsp; <strong>uid</strong> The uid of the user himself.
+&nbsp;&nbsp; <strong>cb</strong> Callback function.
+<strong>Returns</strong></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">homeChirps</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">dbInput</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">dbInput</span><span class="p">,</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-14" id="section-14">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>exports.homeChirps = function(fids, uid, cb){
+var homeChirps = [];
+var recent = 0;
+var max = 5;</p>
+  </div>
+  <div class="body"><p>db.all('SELECT * FROM chirps WHERE uid=ANY(?) OR uid=?', [fids, uid], function(err, specchirps){
+if(err){
+console.log("SQLite error!");
+}
+else{
+db.all('SELECT COUNT(uid) AS count FROM ?', [specchirps], function(err, tl){
+if(err){
+console.log("SQLite error!");
+}
+else{
+for(var i = tl[0].count; i >= 0; i--){
+if(recent == max){ //If recent is equal to max, we have the number of chirps we need.
+break; //Break out of the for loop early.
+}</p>
+
+<p>homeChirps.push(specchirps[i]);
+}
+}
+});
+}
+});
+}</p>
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">discoveryChirps</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM chirps ORDER BY timestamp DESC LIMIT 5&#39;</span><span class="p">,</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">meChirps</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userid</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM chirps WHERE uid=? ORDER BY timestamp DESC&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">userid</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="follow-database-functions">
+  <h1>
+    <a href="#follow-database-functions" class="pilcrow">&#182;</a>
+    Follow database functions
+  </h1>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getFollowing</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userid</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;SELECT fid FROM follow WHERE uid=?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">userid</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
+</div>
+<p>isFollowing function
+Given two userids, see if the first is following the second.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">isFollowing</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span> <span class="nx">fid</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;SELECT EXISTS (SELECT 1 FROM follow WHERE uid=? AND fid=?)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">uid</span><span class="p">,</span> <span class="nx">fid</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>var fids = [];
+var flag = false;
+db.all('SELECT uid FROM users WHERE username=?', [username], function(err, uid){ //Find the UID of the selected username.
+if(err){
+console.log("SQLite error!")
+}
+else{
+db.all('SELECT COUNT(uid) AS count FROM follow WHERE uid=?', [uid], function(err, tl){ //Get the number of people the user is following.
+db.all('SELECT * FROM follow WHERE uid=?', [uid], function(err, follow){ //Get the table of all uid-fid matches on uid.
+for(var i = 0; i &lt; tl.count; i++){
+fids.push(follow.fid);
+}
+flag = true;
+});
+});
+}
+});
+while(!flag){
+}
+return fids;
+}</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            
+    
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="followdbupdate">
+  <h2>
+    <a href="#followdbupdate" class="pilcrow">&#182;</a>
+    followdbUpdate
+  </h2>
+</div>
+
+
+<p>Updates the follower database, deleting or adding a relationship.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
+</div>
+<p>This function is called when a user chooses the "follow" option.
+If the user is already following the person, they will stop following them.
+If the user is not following the person, they will start following them.</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
+</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>uid</strong> <em>var</em> ID of Interacting User <br />
+&nbsp;&nbsp;<strong>fid</strong> <em>var</em> ID of User being interacted with <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>void</em> Adds follower to the <em>followdb</em> virtual database
+   </div></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>exports.followdbUpdate = function(uid,fid){
+if(db.all('SELECT EXISTS (SELECT 1 FROM follow WHERE uid=? AND fid=?', [uid,fid])){
+console.log('FollowDB entry exists, removing...');
+db.run('DELETE FROM follow WHERE uid=? AND fid=?', [uid,fid]);
+}
+else{
+console.log('FollowDB entry does not exist, adding...');
+db.run('INSERT INTO follow VALUES (?,?)', [uid,fid]);
+}
+}    </p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">addFollow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span> <span class="nx">fid</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s1">&#39;INSERT INTO follow VALUES (?,?)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">uid</span><span class="p">,</span><span class="nx">fid</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">delFollow</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span> <span class="nx">fid</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">run</span><span class="p">(</span><span class="s1">&#39;DELETE FROM follow WHERE uid=? AND fid=?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">uid</span><span class="p">,</span><span class="nx">fid</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="numfollowing">
+  <h2>
+    <a href="#numfollowing" class="pilcrow">&#182;</a>
+    numfollowing
+  </h2>
+</div>
+
+
+<p>Number of users subject is following</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
+</div>
+<p><div class="highlight">
+<strong>Params</strong> <br />
+&nbsp;&nbsp;<strong>username</strong> <em>string</em> Username of user <br />
+<strong>Returns</strong> <br />
+&nbsp;&nbsp;<em>integer</em> Number of users <strong>username</strong> is following
+   </div></p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getNumFollowing</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userid</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(uid) AS count FROM follow WHERE uid=?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">userid</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nx">exports</span><span class="p">.</span><span class="nx">getNumFollowers</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">userid</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;SELECT COUNT(uid) AS count FROM follow WHERE fid=?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">userid</span><span class="p">],</span> <span class="nx">cb</span><span class="p">);</span>
+<span class="p">}</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="users">
+  <h1>
+    <a href="#users" class="pilcrow">&#182;</a>
+    Users
+  </h1>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap" id="login">
+  <h2>
+    <a href="#login" class="pilcrow">&#182;</a>
+    login
+  </h2>
+</div>
+
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+<span class="nx">exports</span><span class="p">.</span><span class="nx">login</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">cb</span><span class="p">){</span>
+  <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM users WHERE username=?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">username</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">users</span><span class="p">){</span>
+    <span class="k">if</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+      <span class="nx">cb</span><span class="p">(</span><span class="s1">&#39;User not found!&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span><span class="p">{</span>
+      <span class="nx">db</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="s1">&#39;SELECT * FROM users WHERE username=? AND password=?&#39;</span><span class="p">,</span> <span class="p">[</span><span class="nx">username</span><span class="p">,</span> <span class="nx">password</span><span class="p">],</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">users</span><span class="p">){</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
+          <span class="nx">cb</span><span class="p">(</span><span class="s1">&#39;Password is incorrect.&#39;</span><span class="p">,</span> <span class="kc">undefined</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="k">else</span><span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">users</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+          <span class="nx">cb</span><span class="p">(</span><span class="kc">undefined</span><span class="p">,</span> <span class="nx">users</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="p">}</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+        </td>
+      </tr>
+  </tbody>
+</table>
+  </div>
+</body>
+</html>

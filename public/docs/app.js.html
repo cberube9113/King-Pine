@@ -52,9 +52,6 @@
         <a href="#runs-when-a-new-user-is-created--on-the-index-page-.">Runs when a new user is created (on the index page).</a>
       </div>
       <div class="heading h4">
-        <a href="#runs-when-a-new-chirp-is-made-by-a-user--via-the-home-page-.">Runs when a new chirp is made by a user (via the home page).</a>
-      </div>
-      <div class="heading h4">
         <a href="#runs-when-a-user-enters-a-search-in-the-search-box">Runs when a user enters a search in the search box</a>
       </div>
       <div class="heading h4">
@@ -128,13 +125,12 @@
   <span class="p">,</span> <span class="nx">me</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/me&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">signup</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/signup&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">auth</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/user-sessions&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">search</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/search&#39;</span><span class="p">)</span>
+  <span class="p">,</span> <span class="nx">follow</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/follow&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">http</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">)</span>
   <span class="p">,</span> <span class="nx">flash</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;connect-flash&#39;</span><span class="p">)</span>
-  <span class="p">,</span> <span class="nx">user</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./lib/user&#39;</span><span class="p">)</span>
-  <span class="p">,</span> <span class="nx">chirps</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./lib/chirps&#39;</span><span class="p">)</span>
-  <span class="p">,</span> <span class="nx">follow</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./lib/follow&#39;</span><span class="p">)</span>
-  <span class="p">,</span> <span class="nx">Sequelize</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;sequelize&#39;</span><span class="p">);</span>
+  <span class="p">,</span> <span class="nx">sql</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./lib/sql.js&#39;</span><span class="p">)</span>
 
 <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
 
@@ -345,7 +341,7 @@
         </td>
         <td class="code highlight"><div class="highlight"><pre>
     <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;authsucc&#39;</span><span class="p">,</span><span class="s1">&#39;User &#39;</span> <span class="o">+</span> <span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39; was successfully created. You can now log in as &#39;</span> <span class="o">+</span> <span class="nx">username</span><span class="p">);</span> 
-    <span class="nx">user</span><span class="p">.</span><span class="nx">addUser</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">email</span><span class="p">,</span><span class="nx">password</span><span class="p">,</span><span class="nx">username</span><span class="p">);</span>
+    <span class="nx">sql</span><span class="p">.</span><span class="nx">addUser</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span><span class="nx">email</span><span class="p">,</span><span class="nx">username</span><span class="p">,</span><span class="nx">password</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
 
 </pre></div>
@@ -365,22 +361,6 @@
 <span class="p">});</span>
 
 
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap" id="runs-when-a-new-chirp-is-made-by-a-user--via-the-home-page-.">
-  <h4>
-    <a href="#runs-when-a-new-chirp-is-made-by-a-user--via-the-home-page-." class="pilcrow">&#182;</a>
-    Runs when a new chirp is made by a user (via the home page).
-  </h4>
-</div>
-
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-<span class="nx">app</span><span class="p">.</span><span class="nx">post</span><span class="p">(</span><span class="s1">&#39;/new-chirp&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
-
 
 </pre></div>
         </td>
@@ -388,66 +368,27 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-17" id="section-17">&#182;</a>
+  <a class="pilcrow" href="#section-16" id="section-16">&#182;</a>
 </div>
-<p>Parameters set based on currently logged in user.</p>
+<div class="dox">
+  <div class="summary"><p>// # Is this deprecated now that we have sockets.io?
+//#### Runs when a new chirp is made by a user (via the home page).
+app.post('/new-chirp',function(req,res){</p>
+  </div>
+  <div class="body"><p>//Parameters set based on currently logged in user.
+var username = req.session.user.username;
+var uid = user.idlookup(username);
+//Parameter set based on field in form.
+var data=req.body.chirp;
+//Runs the addChirp function from the <em>chirps</em> library file.
+sql.addChirp(data,uid);
+//Redirects a user back to home after the chirp has been made.
+res.redirect('/home');
+});</p>
+  </div>
+</div>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-  <span class="kd">var</span> <span class="nx">username</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">username</span><span class="p">);</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-18" id="section-18">&#182;</a>
-</div>
-<p>Parameter set based on field in form.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-  <span class="kd">var</span> <span class="nx">data</span><span class="o">=</span><span class="nx">req</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">chirp</span><span class="p">;</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-19" id="section-19">&#182;</a>
-</div>
-<p>Parameter to be set based on current date in future.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-  <span class="kd">var</span> <span class="nx">date</span><span class="o">=</span><span class="s2">&quot;Just now.&quot;</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-20" id="section-20">&#182;</a>
-</div>
-<p>Runs the addChirp function from the <em>chirps</em> library file.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-  <span class="nx">chirps</span><span class="p">.</span><span class="nx">addChirp</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span><span class="nx">date</span><span class="p">,</span><span class="nx">uid</span><span class="p">);</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-21" id="section-21">&#182;</a>
-</div>
-<p>Redirects a user back to home after the chirp has been made.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/home&#39;</span><span class="p">);</span>
-<span class="p">});</span>
 
 
 
@@ -465,7 +406,7 @@
 
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/search/:query&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">autocomplete</span><span class="p">);</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/search/:query&#39;</span><span class="p">,</span> <span class="nx">sql</span><span class="p">.</span><span class="nx">autocomplete</span><span class="p">);</span>
 
 
 </pre></div>
@@ -519,72 +460,9 @@
 <p><em>This request must be below all other one-directory routes.</em></p>
         </td>
         <td class="code highlight"><div class="highlight"><pre>
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:user&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/:user&#39;</span><span class="p">,</span> <span class="nx">search</span><span class="p">.</span><span class="nx">list</span><span class="p">);</span>
 
-  <span class="k">if</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">exists</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">user</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span> <span class="c1">//If the user exists in the database, load their page.</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-26" id="section-26">&#182;</a>
-</div>
-<p>Sets parameters based on the username in the page URL.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-      <span class="kd">var</span> <span class="nx">u</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
-      <span class="kd">var</span> <span class="nx">nameOfSearchedUser</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">nameFromUsername</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">user</span><span class="p">);</span>
-      <span class="kd">var</span> <span class="nx">following</span> <span class="o">=</span> <span class="nx">follow</span><span class="p">.</span><span class="nx">numfollowing</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
-      <span class="kd">var</span> <span class="nx">followers</span> <span class="o">=</span> <span class="nx">follow</span><span class="p">.</span><span class="nx">numfollowers</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
-      <span class="kd">var</span> <span class="nx">nchirps</span> <span class="o">=</span> <span class="nx">chirps</span><span class="p">.</span><span class="nx">numchirps</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
-      <span class="kd">var</span> <span class="nx">chirpdata</span> <span class="o">=</span> <span class="nx">chirps</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
-      <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span> <span class="c1">//If there is a user logged in</span>
-      <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
-      <span class="kd">var</span> <span class="nx">isfollowing</span> <span class="o">=</span> <span class="nx">follow</span><span class="p">.</span><span class="nx">isFollowing</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span><span class="p">,</span> <span class="nx">u</span><span class="p">);</span>
-      <span class="p">}</span>
-      <span class="k">else</span><span class="p">{</span> <span class="c1">//If there is not a user logged in</span>
-      <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
-      <span class="kd">var</span> <span class="nx">isfollowing</span> <span class="o">=</span> <span class="kc">undefined</span><span class="p">;</span>
-      <span class="p">}</span>
-
-</pre></div>
-        </td>
-      </tr>
-      <tr>
-        <td class="docs">
-<div class="pilwrap">
-  <a class="pilcrow" href="#section-27" id="section-27">&#182;</a>
-</div>
-<p>Renders searchresults page, which is a copy of the Me page but with a modified subject.</p>
-        </td>
-        <td class="code highlight"><div class="highlight"><pre>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;searchresults&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Search Results&#39;</span><span class="p">,</span>
-                     <span class="nx">following</span><span class="o">:</span> <span class="nx">following</span><span class="p">,</span>
-                     <span class="nx">followers</span><span class="o">:</span> <span class="nx">followers</span><span class="p">,</span>
-                     <span class="nx">nchirps</span><span class="o">:</span> <span class="nx">nchirps</span><span class="p">,</span>
-                     <span class="nx">chirpdata</span><span class="o">:</span> <span class="nx">chirpdata</span><span class="p">,</span>
-                     <span class="nx">user</span><span class="o">:</span> <span class="nx">name</span><span class="p">,</span>
-                     <span class="nx">isfollowing</span><span class="o">:</span> <span class="nx">isfollowing</span><span class="p">,</span>
-                     <span class="nx">u</span><span class="o">:</span> <span class="nx">u</span><span class="p">,</span>
-                     <span class="nx">nameOfSearchedUser</span><span class="o">:</span> <span class="nx">nameOfSearchedUser</span>
-                  <span class="p">});</span>
-    <span class="p">}</span>
-
-  <span class="k">else</span><span class="p">{</span> <span class="c1">//If the user does not exist, inform the searcher and give them an opportunity to create it.</span>
-    <span class="nx">req</span><span class="p">.</span><span class="nx">flash</span><span class="p">(</span><span class="s1">&#39;auth&#39;</span><span class="p">,</span><span class="s1">&#39;That user doesn\&#39;t exist.  Would you like to create that user?&#39;</span><span class="p">);</span>
-    <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">});</span>
-
-<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/follow/:user&#39;</span><span class="p">,</span><span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">){</span>
-  <span class="kd">var</span> <span class="nx">u</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">uid</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">fid</span> <span class="o">=</span> <span class="nx">user</span><span class="p">.</span><span class="nx">idlookup</span><span class="p">(</span><span class="nx">u</span><span class="p">);</span>
-  <span class="nx">follow</span><span class="p">.</span><span class="nx">followdbUpdate</span><span class="p">(</span><span class="nx">uid</span><span class="p">,</span><span class="nx">fid</span><span class="p">);</span>
-  <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="nx">u</span><span class="p">);</span>
-<span class="p">});</span>
+<span class="nx">app</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/follow/:user&#39;</span><span class="p">,</span> <span class="nx">follow</span><span class="p">.</span><span class="nx">list</span><span class="p">);</span>
 
 
 </pre></div>
@@ -617,7 +495,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-29" id="section-29">&#182;</a>
+  <a class="pilcrow" href="#section-22" id="section-22">&#182;</a>
 </div>
 <p>Create server.</p>
         </td>
@@ -631,7 +509,7 @@
       <tr>
         <td class="docs">
 <div class="pilwrap">
-  <a class="pilcrow" href="#section-30" id="section-30">&#182;</a>
+  <a class="pilcrow" href="#section-23" id="section-23">&#182;</a>
 </div>
 <p>WebSockets/Socket.IO</p>
         </td>
@@ -640,7 +518,7 @@
 <span class="kd">var</span> <span class="nx">chirpApp</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/chirp-socket&#39;</span><span class="p">);</span>
 
 <span class="nx">io</span><span class="p">.</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">socket</span><span class="p">){</span>
-  <span class="nx">chirpApp</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">socket</span><span class="p">);</span>
+  <span class="nx">chirpApp</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">socket</span><span class="p">,</span> <span class="nx">io</span><span class="p">);</span>
 <span class="p">});</span>
   
 

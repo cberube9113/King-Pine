@@ -40,8 +40,8 @@
 </div>
 
         </td>
-        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">follow</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/follow.js&#39;</span><span class="p">);</span>
-<span class="kd">var</span> <span class="nx">chirps</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/chirps.js&#39;</span><span class="p">);</span>
+        <td class="code highlight"><div class="highlight"><pre><span class="kd">var</span> <span class="nx">sql</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../lib/sql.js&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">async</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;async&#39;</span><span class="p">);</span>
 
 
 </pre></div>
@@ -62,20 +62,146 @@
         <td class="code highlight"><div class="highlight"><pre>
 
 <span class="nx">exports</span><span class="p">.</span><span class="nx">list</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span><span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
-  <span class="k">if</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span> <span class="c1">//If req.session.user is a value other than undefined, there is a user logged in.</span>
-    <span class="kd">var</span> <span class="nx">subject</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
-    <span class="kd">var</span> <span class="nx">following</span> <span class="o">=</span> <span class="nx">follow</span><span class="p">.</span><span class="nx">numfollowing</span><span class="p">(</span><span class="nx">subject</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">followers</span> <span class="o">=</span> <span class="nx">follow</span><span class="p">.</span><span class="nx">numfollowers</span><span class="p">(</span><span class="nx">subject</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">nchirps</span> <span class="o">=</span> <span class="nx">chirps</span><span class="p">.</span><span class="nx">numchirps</span><span class="p">(</span><span class="nx">subject</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
-    <span class="kd">var</span> <span class="nx">chirpdata</span> <span class="o">=</span> <span class="nx">chirps</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="nx">subject</span><span class="p">.</span><span class="nx">username</span><span class="p">);</span>
-      <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;me&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Me&#39;</span><span class="p">,</span>
-               <span class="nx">following</span><span class="o">:</span> <span class="nx">following</span><span class="p">,</span>
-               <span class="nx">followers</span><span class="o">:</span> <span class="nx">followers</span><span class="p">,</span>
-               <span class="nx">nchirps</span><span class="o">:</span> <span class="nx">nchirps</span><span class="p">,</span>
-               <span class="nx">chirpdata</span><span class="o">:</span> <span class="nx">chirpdata</span><span class="p">,</span>
-               <span class="nx">user</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
-                       <span class="nx">username</span><span class="o">:</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">.</span><span class="nx">username</span>
-                    <span class="p">});</span>
+    <span class="kd">var</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">session</span> <span class="o">!=</span> <span class="kc">undefined</span><span class="p">){</span> <span class="c1">//If req.session.user is a value other than undefined, there is a user logged in.</span>
+    <span class="kd">var</span> <span class="nx">locals</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="nx">locals</span><span class="p">.</span><span class="nx">title</span> <span class="o">=</span> <span class="s1">&#39;Me&#39;</span><span class="p">;</span>
+        <span class="nx">locals</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+        <span class="nx">locals</span><span class="p">.</span><span class="nx">username</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">username</span><span class="p">;</span>
+
+        <span class="nx">async</span><span class="p">.</span><span class="nx">parallel</span><span class="p">([</span>
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-3" id="section-3">&#182;</a>
+</div>
+<p>Get number of people you're following</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
+                <span class="nx">sql</span><span class="p">.</span><span class="nx">getNumFollowing</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">uid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">countObject</span><span class="p">){</span>
+                    <span class="nx">locals</span><span class="p">.</span><span class="nx">following</span> <span class="o">=</span> <span class="nx">countObject</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+                    <span class="nx">callback</span><span class="p">();</span>
+                <span class="p">})</span>
+            <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-4" id="section-4">&#182;</a>
+</div>
+<p>Get number of people following you</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
+                <span class="nx">sql</span><span class="p">.</span><span class="nx">getNumFollowers</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">uid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">countObject</span><span class="p">){</span>
+                    <span class="nx">locals</span><span class="p">.</span><span class="nx">followers</span> <span class="o">=</span> <span class="nx">countObject</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+                    <span class="nx">callback</span><span class="p">();</span>
+                <span class="p">});</span>
+            <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-5" id="section-5">&#182;</a>
+</div>
+<p>Get number of chirps</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
+                <span class="nx">sql</span><span class="p">.</span><span class="nx">getNumChirps</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">uid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">countObject</span><span class="p">){</span>
+                    <span class="nx">locals</span><span class="p">.</span><span class="nx">nchirps</span> <span class="o">=</span> <span class="nx">countObject</span><span class="p">.</span><span class="nx">count</span><span class="p">;</span>
+                    <span class="nx">callback</span><span class="p">();</span>
+                <span class="p">})</span>
+            <span class="p">},</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-6" id="section-6">&#182;</a>
+</div>
+<p>Get array of chirps</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="kd">function</span><span class="p">(</span><span class="nx">callback</span><span class="p">){</span>
+                <span class="nx">sql</span><span class="p">.</span><span class="nx">meChirps</span><span class="p">(</span><span class="nx">session</span><span class="p">.</span><span class="nx">uid</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">arrayOfChirps</span><span class="p">){</span>
+                    <span class="nx">locals</span><span class="p">.</span><span class="nx">chirpdata</span> <span class="o">=</span> <span class="nx">arrayOfChirps</span><span class="p">;</span>
+                    <span class="nx">callback</span><span class="p">();</span>
+                <span class="p">})</span>
+            <span class="p">}],</span>
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-7" id="section-7">&#182;</a>
+</div>
+<p>Final callback after all parallel calls</p>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
+            <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+                <span class="k">if</span><span class="p">(</span><span class="nx">err</span><span class="p">){</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;ERROR!&#39;</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="k">else</span><span class="p">{</span>
+                    <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;me&#39;</span><span class="p">,</span> <span class="nx">locals</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="p">);</span>
+
+        
+
+
+
+
+</pre></div>
+        </td>
+      </tr>
+      <tr>
+        <td class="docs">
+<div class="pilwrap">
+  <a class="pilcrow" href="#section-8" id="section-8">&#182;</a>
+</div>
+<div class="dox">
+  <div class="summary"><p>var subject = req.session.user;
+var following = follow.numfollowing(subject.username);
+var followers = follow.numfollowers(subject.username);
+var nchirps = chirps.numchirps(subject.username);
+var chirpdata = chirps.info(subject.username);
+res.render('me', { title: 'Me',
+following: following,
+followers: followers,
+nchirps: nchirps,
+chirpdata: chirpdata,
+user: req.session.user.name,
+username: req.session.user.username
+});</p>
+  </div>
+  <div class="body">
+  </div>
+</div>
+        </td>
+        <td class="code highlight"><div class="highlight"><pre>
     <span class="p">}</span>
     
     <span class="k">else</span><span class="p">{</span> <span class="c1">//If there isn&#39;t a user logged in, redirect to /index with a message.</span>
